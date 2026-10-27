@@ -1,0 +1,292 @@
+/* CHRONICLES V15.7 — refonte VISUELLE de la fenêtre Donjon uniquement.
+   La simulation, les données d'équipes, les taux et les décisions IA sont inchangés.
+   À la différence des styles historiques V13, les six rangs et les trois portraits
+   n'ont plus de sous-panneaux déroulants. Un seul défilement : la fenêtre. */
+
+body.desktop-mode .main-content > #page-association.cw-open {
+  display:flex!important;
+  flex-direction:column;
+  width:min(1750px,calc(100vw - 54px));
+  height:calc(100dvh - 165px);
+  padding:0 26px 23px;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:thin;
+  scrollbar-color:#6585a7 #102035;
+  overscroll-behavior-y:contain;
+}
+body.desktop-mode #page-association .cw-titlebar {
+  flex:0 0 auto;
+  min-height:73px;
+  margin:0 -26px 21px;
+  padding:13px 23px 10px;
+  position:sticky;top:0;z-index:14;
+}
+/* Ce titre est déjà dans la barre système ; les instructions se trouvent ailleurs dans le jeu. */
+body.desktop-mode #page-association .page-intro,
+body.desktop-mode #page-association .guild-quest,
+body.desktop-mode #page-association .association-banner,
+body.desktop-mode #page-association #rewardExplanation {display:none!important}
+/* Ancien bloc d'activité autonome, superflu dans la préparation d'un raid. */
+body.desktop-mode #page-association .association-world {display:none!important}
+body.desktop-mode #page-association .guild-raid-overview {display:none!important}
+
+body.desktop-mode #page-association .raid-layout,
+body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:22px;
+  align-items:stretch;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  flex:0 0 auto!important;
+  overflow:visible!important;
+  margin:0;
+}
+body.desktop-mode #page-association .raid-layout>.panel {
+  min-height:0;min-width:0;
+  overflow:visible!important;
+  padding:19px 21px 18px;
+  margin:0;
+  border-radius:12px;
+  background:#12243a;
+  border:1px solid #36516b;
+}
+body.desktop-mode #page-association .raid-layout .panel-heading {
+  min-height:33px;
+  margin-bottom:13px;
+  display:flex;align-items:center;
+}
+/* Nom/rang déjà visibles dans la sélection. */
+body.desktop-mode #page-association .raid-panel .panel-heading h3,
+body.desktop-mode #page-association .raid-panel #dungeonBadge {display:none!important}
+body.desktop-mode #page-association #portalPanelHeading,
+body.desktop-mode #page-association .expedition-panel .panel-heading h3 {
+  font-size:16px;font-weight:800;letter-spacing:.025em;
+  color:#eaf2fa;margin:0;
+}
+body.desktop-mode #page-association .expedition-panel .panel-heading .eyebrow {display:none}
+body.desktop-mode #page-association .expedition-panel .panel-heading {justify-content:space-between}
+body.desktop-mode #page-association .expedition-panel #raidStatus {font-size:10px}
+
+/* Afficher les SIX rangs sans sous-défilement, même lorsque le rang n'est pas accessible. */
+body.desktop-mode #page-association .dungeon-switch {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:9px;
+  margin:0;
+  padding:0;
+  height:auto;min-height:0!important;max-height:none!important;
+  overflow:visible!important;
+  flex:0 0 auto!important;
+}
+body.desktop-mode #page-association .dungeon-choice {
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) 72px;
+  gap:16px;
+  width:100%;min-height:72px;
+  padding:11px 15px;
+  align-items:center;
+  border-radius:10px;
+  text-align:left;
+}
+body.desktop-mode #page-association .dungeon-rank-token {
+  width:38px;height:38px;border-radius:9px;font-size:18px;
+}
+body.desktop-mode #page-association .dungeon-choice .dungeon-card-text strong {
+  font-size:14px;font-weight:800;color:#edf4fc;
+}
+body.desktop-mode #page-association .dungeon-choice .dungeon-card-text small {
+  font-size:11px;line-height:1.45;margin-top:3px;
+  white-space:normal;overflow-wrap:anywhere;
+}
+body.desktop-mode #page-association .dungeon-choice .dungeon-card-reward {font-size:11px;margin-top:2px}
+body.desktop-mode #page-association .dungeon-choice .dungeon-card-chance {
+  font-size:17px;text-align:right;color:#f3d39d;
+}
+body.desktop-mode #page-association .dungeon-choice:disabled:not(.selected) {opacity:.60}
+body.desktop-mode #page-association .dungeon-choice:focus-visible {outline:2px solid #e2bc82;outline-offset:2px}
+
+/* Équipe : trois portraits lisibles immédiatement, pas de défilement à l'intérieur. */
+body.desktop-mode #page-association .expedition-panel {
+  display:flex;flex-direction:column;gap:0;
+}
+body.desktop-mode #page-association .dungeon-team-scroll-area {
+  display:block;
+  height:auto;min-height:0!important;max-height:none!important;
+  flex:0 0 auto!important;
+  padding:0;
+  overflow:visible!important;
+}
+body.desktop-mode #page-association .dungeon-team-scroll-area .team-preview {
+  display:flex;flex-direction:column;
+  margin:0;
+  padding:18px 17px;
+  min-height:0;
+  border-color:#38536e;
+  background:#0e1e30;
+  border-radius:11px;
+}
+body.desktop-mode #page-association .team-heading {
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+  margin-bottom:17px;font-size:12px;
+}
+body.desktop-mode #page-association .team-heading>span {
+  margin-left:auto;font-size:11px;line-height:1.45;text-align:right;
+}
+body.desktop-mode #page-association .dungeon-team-scroll-area .team-members {
+  display:grid;
+  gap:10px;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  overflow:visible!important;
+  padding:0;
+}
+body.desktop-mode #page-association .expedition-panel .team-member {
+  display:flex;align-items:center;gap:13px;
+  min-height:77px;
+  padding:10px 13px;
+  font-size:13px;
+  border:1px solid #2b435e;
+  border-radius:9px;
+  background:#172c43;
+}
+body.desktop-mode #page-association .team-member .team-portrait {
+  width:48px;height:48px;flex:0 0 48px;border-radius:8px;
+}
+body.desktop-mode #page-association .team-member-identity {
+  flex:1;min-width:0;
+}
+body.desktop-mode #page-association .team-member-identity strong{display:block;font-size:13px;color:#f3f6fa}
+body.desktop-mode #page-association .team-member-identity small{display:block;font-size:11px;color:#aec1d2;margin-top:4px}
+body.desktop-mode #page-association .team-member-stats {
+  flex:0 0 auto;display:flex;align-items:center;gap:12px;
+}
+body.desktop-mode #page-association .team-member-stats b{font-size:14px;white-space:nowrap}
+body.desktop-mode #page-association .team-footer {
+  align-items:center;
+  margin-top:19px;padding-top:16px;font-size:12px;
+}
+body.desktop-mode #page-association .team-footer strong{font-size:18px}
+/* Texte facultatif sur la disponibilité, conservé (contrairement aux consignes répétées). */
+body.desktop-mode #page-association #teamAvailability{
+  margin:14px 0 0;padding:0;
+  font-size:11px;line-height:1.55;color:#97b4ce;
+}
+body.desktop-mode #page-association #guildRaidDetails:empty{display:none}
+body.desktop-mode #page-association #guildRaidDetails {max-height:none!important;overflow:visible!important}
+
+/* Bandeau de lancement : choix, probabilité et commande, sans paragraphe-tutoriel. */
+body.desktop-mode #page-association .dungeon-action-bar {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(250px,27%);
+  gap:20px;align-items:center;
+  flex:0 0 auto;
+  margin:17px 0 0;
+  padding:15px 20px;
+  min-height:82px;
+  border:1px solid #47698a;
+  border-radius:12px;
+  background:linear-gradient(100deg,#18334c,#142c43);
+}
+body.desktop-mode #page-association .dungeon-action-status .dungeon-summary-head strong{font-size:15px}
+body.desktop-mode #page-association .dungeon-action-status #dungeonSummaryDetails{
+  font-size:12px;line-height:1.5;color:#b9cde0;
+}
+body.desktop-mode #page-association .dungeon-action-controls #launchBtn {
+  margin:0;min-height:49px;
+  font-size:13px;white-space:normal;
+}
+
+/* Missions en cours : plusieurs cartes dans la largeur, sans double défilement. */
+body.desktop-mode #page-association .ongoing-expeditions {
+  display:flex;flex-direction:column;
+  flex:0 0 auto!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  margin:19px 0 0;
+  overflow:visible!important;
+}
+body.desktop-mode #page-association .ongoing-expeditions-head{margin:0 0 10px}
+body.desktop-mode #page-association .ongoing-expeditions-head h3{font-size:16px;color:#e5effa}
+body.desktop-mode #page-association .ongoing-expeditions-list{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;
+  flex:0 0 auto!important;
+  min-height:0!important;max-height:none!important;
+  overflow:visible!important;
+  padding:0;
+}
+body.desktop-mode #page-association .ongoing-raid-card {
+  display:flex;flex-direction:column;
+  width:auto;min-width:0;max-width:none;
+  height:auto;min-height:140px;
+  padding:13px 15px;
+  overflow:visible!important;
+  border-radius:10px;
+}
+body.desktop-mode #page-association .ongoing-raid-top{gap:7px;font-size:12px}
+body.desktop-mode #page-association .ongoing-raid-sub{font-size:11px;line-height:1.45}
+body.desktop-mode #page-association .ongoing-members{gap:6px;margin:11px 0 auto;padding:9px 0}
+body.desktop-mode #page-association .ongoing-member{font-size:10px;line-height:1.4;padding:5px 8px}
+body.desktop-mode #page-association .ongoing-raid-card>small{font-size:11px;margin-top:8px}
+body.desktop-mode #page-association .ongoing-empty {
+  grid-column:1/-1;min-height:85px;
+  display:grid;place-items:center;
+  text-align:center;font-size:12px;
+}
+/* Full width and column reflow depending on the window, not the monitor marketing size. */
+@media(max-width:1540px) {
+  body.desktop-mode #page-association .raid-layout,
+  body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout {gap:15px}
+  body.desktop-mode #page-association .ongoing-expeditions-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1080px) {
+  body.desktop-mode .main-content > #page-association.cw-open {padding:0 18px 19px;width:calc(100vw - 30px)}
+  body.desktop-mode #page-association .cw-titlebar {margin:0 -18px 17px}
+  body.desktop-mode #page-association .raid-layout,
+  body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout {grid-template-columns:minmax(0,1fr);gap:15px}
+  body.desktop-mode #page-association .raid-layout>.panel {padding:15px 17px}
+  body.desktop-mode #page-association .dungeon-choice {min-height:66px}
+  body.desktop-mode #page-association .dungeon-switch {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.desktop-mode #page-association .dungeon-action-bar{grid-template-columns:1fr}
+}
+@media(max-width:620px) {
+  body.desktop-mode .main-content > #page-association.cw-open {width:calc(100vw - 12px);height:calc(100dvh - 152px);padding:0 12px 14px}
+  body.desktop-mode #page-association .cw-titlebar{margin:0 -12px 15px;padding:12px 15px}
+  body.desktop-mode #page-association .dungeon-switch{grid-template-columns:1fr}
+  body.desktop-mode #page-association .dungeon-choice {grid-template-columns:29px minmax(0,1fr) 40px;gap:8px;padding:10px;min-height:68px}
+  body.desktop-mode #page-association .dungeon-rank-token{width:29px;height:29px;font-size:14px}
+  body.desktop-mode #page-association .dungeon-choice .dungeon-card-text small{font-size:10px}
+  body.desktop-mode #page-association .dungeon-choice .dungeon-card-chance{font-size:13px}
+  body.desktop-mode #page-association .team-heading>span {text-align:left;margin-left:0}
+  body.desktop-mode #page-association .ongoing-expeditions-list{grid-template-columns:minmax(0,1fr)}
+  body.desktop-mode #page-association .dungeon-action-bar{padding:13px}
+}
+
+/* Sur écran PC large, deux colonnes de rangs : les six donjons restent lisibles,
+   mais libèrent toute la hauteur nécessaire au suivi des raids en cours. */
+@media(min-width:1180px) {
+  body.desktop-mode #page-association .dungeon-switch {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:12px;row-gap:12px;
+  }
+  body.desktop-mode #page-association .dungeon-choice {
+    min-height:114px;
+    grid-template-columns:36px minmax(0,1fr) 43px;
+    gap:11px;
+    padding:13px 12px;
+  }
+  body.desktop-mode #page-association .dungeon-choice .dungeon-card-chance{font-size:15px}
+  body.desktop-mode #page-association .dungeon-choice .dungeon-card-text small{font-size:10.5px;line-height:1.4}
+}
+/* Selon le nombre de raids, utiliser tout l'espace, sans colonnes vides imposées. */
+@media(min-width:1541px) {
+  body.desktop-mode #page-association .ongoing-expeditions-list:has(>.ongoing-raid-card:only-child) {
+    grid-template-columns:minmax(0,1fr);
+  }
+  body.desktop-mode #page-association .ongoing-expeditions-list:has(>.ongoing-raid-card:nth-child(2):last-child) {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+/* Le bandeau de pause global chevauche la croix de fermeture ; l'état Pause
+   reste indiqué et actionnable dans la barre supérieure du jeu. */
+body.desktop-mode .main-content:has(>#page-association.cw-open)>.pause-notice {display:none!important}

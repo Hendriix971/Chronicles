@@ -1,0 +1,835 @@
+
+/* V11 — modes de jeu et écran de fin de saison */
+.season-tracker{margin-top:22px;border-color:#6a5949;background:linear-gradient(115deg,#192638,#202f40)}
+.season-tracker .panel-heading strong{color:#efd2a3;font-size:16px}
+.season-tracker p{line-height:1.5}
+.season-track{margin:14px 0 8px;height:11px}
+.season-track>span{display:block;height:100%;background:linear-gradient(90deg,#a98a59,#e8c892);border-radius:99px}
+#characterForm select,#characterForm input:not([type=radio]){max-width:100%}
+#modeHelp{margin:6px 0 10px;line-height:1.6}
+#seasonObjectiveWrap{border:1px solid #4f4950;background:#1e283a;border-radius:11px;padding:13px 15px;margin:10px 0 16px}
+#seasonObjectiveWrap select{width:100%;margin-top:6px}
+#seasonObjectiveWrap p{line-height:1.5;margin-bottom:0}
+.season-end-overlay .season-end-panel{border-color:#c6a16c;max-height:93vh;overflow-y:auto}
+.season-final-score{border:1px solid #a38555;background:#283341;padding:14px;border-radius:12px;margin:22px 0;display:grid;gap:7px}
+.season-final-score span,.season-final-score small{color:#c9d6e0;font-size:12px}
+.season-final-score strong{font-size:32px;color:#f1d4a1}
+.season-end-panel h3{color:#ecd1a0;text-align:left;margin:16px 0 10px}
+.season-podium{display:grid;gap:6px;text-align:left;margin-bottom:20px}
+.season-podium-entry{display:grid;grid-template-columns:27px 1fr auto;gap:9px;align-items:center;border:1px solid #465568;background:#1a293b;border-radius:8px;padding:10px;font-size:12px}
+.season-podium-entry.is-player{background:#383529;border-color:#aa8c55}
+.season-podium-entry>span:last-child{color:#e3bf87}
+@media(max-width:540px){.season-podium-entry{grid-template-columns:20px 1fr}.season-podium-entry>span:last-child{grid-column:2}}
+:root{color-scheme:dark;--bg:#0a101a;--sidebar:#0d1421;--panel:#141e2d;--panel2:#192536;--line:#2a394a;--text:#edf2f7;--muted:#9eacbc;--gold:#e0b876;--gold2:#bd9253;--green:#7ad6b1;--red:#e49a90;--font:Inter,'Segoe UI',system-ui,sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.56}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}[hidden]{display:none!important}.app-shell{display:flex;min-height:100vh}.sidebar{width:245px;flex-shrink:0;background:linear-gradient(160deg,#111b2a,#0c1320 85%);border-right:1px solid #273346;display:flex;flex-direction:column;padding:25px 16px 18px;min-height:100vh}.brand{display:flex;align-items:center;gap:11px;padding:0 8px 38px}.brand-mark{display:grid;place-items:center;width:39px;height:39px;background:linear-gradient(130deg,#9b7646,#d9b676);color:#172231;transform:rotate(45deg);border-radius:8px;font-size:26px;flex-shrink:0}.brand-mark::first-letter{transform:rotate(-45deg)}.brand-mark.big{width:49px;height:49px;margin:0 auto 30px}.brand strong{font-size:13px;letter-spacing:2px;display:block}.brand small{font-size:9px;letter-spacing:1.7px;color:#adbdcc;display:block;margin-top:3px}.brand em{font-style:normal;color:var(--gold)}.section-label,.eyebrow{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--gold);margin:0 0 10px}.section-label{color:#778aa1;padding-left:15px;margin:0 0 13px}.nav-group{display:flex;flex-direction:column;gap:6px}.nav-btn{border:1px solid transparent;color:#adbbcc;background:none;border-radius:10px;text-align:left;padding:12px 14px;display:flex;align-items:center;gap:12px;font-weight:650}.nav-btn:hover{color:white;background:#1b2838}.nav-btn.active{background:#253446;border-color:#34475d;color:#fff}.nav-icon{font-size:21px;width:24px;text-align:center;color:var(--gold)}.sidebar-spacer{flex:1}.sidebar-profile{border:1px solid #324255;background:#172333;border-radius:13px;padding:10px;display:flex;gap:9px;align-items:center;margin-bottom:12px}.avatar{border-radius:9px;background:linear-gradient(135deg,#665136,#b58b51);width:40px;height:40px;display:grid;place-items:center;color:#fff;font-weight:850;font-size:17px}.sidebar-profile strong,.sidebar-profile span{display:block;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sidebar-profile strong{font-size:12px}.sidebar-profile span{font-size:11px;color:#abbccc;margin-top:3px}.online-dot{height:8px;width:8px;background:#70d9ad;border-radius:50%;margin-left:auto}.sidebar-actions{display:grid;gap:4px}.sidebar-action{color:#a9b8c8;background:none;border:0;text-align:left;padding:10px;border-radius:8px;font-weight:600;display:flex;gap:10px;align-items:center}.sidebar-action:hover{background:#203046;color:white}.sidebar-note{text-align:center;color:#728298;font-size:10px;margin:15px 0 0}.main-content{flex:1;min-width:0;max-width:1600px;margin:auto;padding:0 48px 45px}.topbar{height:77px;border-bottom:1px solid #243044;display:flex;align-items:center;justify-content:space-between}.breadcrumbs{font-size:10px;letter-spacing:1.6px;color:#7c8fa3;font-weight:750}.breadcrumbs span{margin:0 14px;color:#46576a}.breadcrumbs b{color:#c9d4df}.clock-pill{border:1px solid #334154;background:#172333;color:#d7e0ea;font-size:12px;border-radius:30px;padding:9px 15px}.clock-sun{font-size:16px;color:var(--gold);vertical-align:middle}.page{display:none;max-width:1240px}.page.active{display:block}.page-intro{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:38px 0 28px}.page-intro h1{font-size:clamp(27px,3vw,40px);letter-spacing:-1.7px;margin:0 0 7px}.gold-dot{color:var(--gold)}.page-intro p:last-child{color:var(--muted);margin:0}.version-tag{border:1px solid #465065;border-radius:30px;padding:9px 12px;color:#b8c8d8;white-space:nowrap;font-weight:750;font-size:10px;letter-spacing:1.3px}.hero-panel{border:1px solid #384555;border-radius:18px;background:linear-gradient(115deg,#213048 0%,#273c50 51%,#1c2c42 100%);min-height:222px;position:relative;overflow:hidden;display:flex;justify-content:space-between}.hero-glow{position:absolute;width:330px;height:330px;right:-90px;top:-105px;border-radius:50%;background:radial-gradient(ellipse,#b58c4a36,transparent 69%)}.hero-left{padding:29px 35px;display:flex;flex-direction:column;flex:1;z-index:1}.hero-identity{display:flex;align-items:center;gap:21px;margin:15px 0 22px}.hero-badge{width:80px;height:80px;background:linear-gradient(145deg,#39475b,#1c2636);border:2px solid #bc9a61;border-radius:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 28px #04060a44}.hero-badge span{font-family:Georgia,serif;font-size:49px;line-height:.9;color:#f5d497}.hero-badge small{font-size:9px;letter-spacing:3px;color:#d6c09f;margin-top:8px}.hero-prelabel{font-size:10px;letter-spacing:1.8px;color:#c4d0dd;font-weight:800;margin:0 0 9px}.hero-identity h2{font-size:clamp(23px,2.8vw,35px);margin:0 0 5px;letter-spacing:-.6px}.hero-identity p:last-child{color:#d1dce7;margin:0}.hero-foot{font-size:11px;color:#c6d1dd;margin-top:auto}.hero-foot span{color:var(--gold);padding:0 10px}.hero-right{width:265px;display:grid;place-items:center;position:relative;flex-shrink:0}.shield-figure{width:180px;height:187px;clip-path:polygon(50% 0,92% 19%,90% 65%,50% 100%,10% 65%,8% 19%);background:linear-gradient(150deg,#9e7e4e,#d5ac6d,#8a6c40);display:flex;align-items:center;flex-direction:column;justify-content:center;padding-bottom:19px;box-shadow:0 2px 32px #000}.shield-ornament{font-size:20px;color:#3a2a18}.shield-letter{color:#162336;font-family:Georgia,serif;font-size:72px;line-height:1}.shield-caption{font-size:9px;letter-spacing:1px;font-weight:900;color:#3f3020}.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:20px 0}.stat-card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:20px}.stat-top{display:flex;align-items:center;justify-content:space-between;color:#aabbcb;font-size:10px;font-weight:800;letter-spacing:1.2px}.stat-top i{font-style:normal;color:var(--gold);font-size:20px}.stat-card>strong{display:block;font-size:32px;letter-spacing:-1px;margin:10px 0 1px}.stat-card>strong small{font-size:17px;color:var(--gold);font-weight:700}.stat-card>small{font-size:11px;color:#8194a7}.columns-bottom{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}.panel{border:1px solid var(--line);background:var(--panel);border-radius:15px;padding:23px}.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px}.panel-heading .eyebrow{margin-bottom:8px}.panel h3{font-size:18px;letter-spacing:-.4px;margin:0}.small-tag{background:#243347;color:#b3c5d7;font-size:9px;font-weight:900;letter-spacing:1.2px;padding:7px 10px;border-radius:7px;white-space:nowrap}.small-tag.green{background:#183e3a;color:#94e0c8}.action-content{display:flex;gap:17px;align-items:flex-start;margin-bottom:22px}.quest-symbol{width:58px;height:58px;display:grid;place-items:center;border-radius:12px;background:#3b3531;color:#e4bf85;font-size:29px;flex-shrink:0}.quest-text strong,.home-display strong{font-size:14px}.quest-text p{color:var(--muted);line-height:1.65;font-size:12px;margin:7px 0 13px}.meta-line{display:flex;gap:16px;flex-wrap:wrap;color:#b9c6d5;font-size:11px}.primary-btn,.secondary-btn{padding:13px 17px;border-radius:9px;border:1px solid #b89358;font-weight:800;display:flex;gap:20px;align-items:center;justify-content:center}.primary-btn{background:linear-gradient(130deg,#e5c18c,#c49c62);color:#17202c}.primary-btn:hover:not(:disabled){background:linear-gradient(130deg,#f3d4a5,#d6a76d);transform:translateY(-1px)}.secondary-btn{background:#1a2637;border-color:#3f5065;color:#edf2f7}.secondary-btn:hover{background:#2b3a4c}.full-width{width:100%}.primary-btn span{margin-left:auto}.home-display{display:flex;align-items:center;gap:15px;margin:14px 0 22px}.home-icon{width:60px;height:60px;display:grid;place-items:center;color:#f0ca8e;background:#332f2d;border:1px solid #66553d;border-radius:12px;font-size:35px}.home-display p{font-size:11px;color:var(--muted);margin:6px 0 0}.home-rule,.raid-info-row{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #2d3b4b;font-size:12px}.home-rule span,.raid-info-row span{color:#a6b6c9}.home-rule strong,.raid-info-row strong{color:#e3e9f0}.muted{color:var(--muted)!important}.tiny{font-size:11px!important;line-height:1.6}.home-explainer{margin:12px 0 0}.footer-hint{color:#9baebe;border:1px dashed #384c60;border-radius:9px;font-size:11px;margin-top:20px;padding:14px;display:flex;gap:10px}.footer-hint:first-letter{color:var(--gold)}.association-banner{display:flex;gap:22px;align-items:center;background:linear-gradient(100deg,#1b2b40,#182435);border:1px solid #3b5065;border-radius:15px;padding:22px 27px;margin-bottom:22px}.association-emblem{width:74px;height:74px;display:grid;place-items:center;background:#304257;border:1px solid #7d7b69;border-radius:15px;font-size:40px;color:var(--gold);flex-shrink:0}.association-banner h2{font-size:22px;margin:3px 0 8px}.association-banner p:last-child{margin:0;color:#afbfce;font-size:12px;line-height:1.5}.raid-layout{display:grid;grid-template-columns:minmax(330px,.88fr) minmax(350px,1.12fr);gap:20px}.rank-badge{display:grid;place-items:center;border:1px solid #c39a60;background:#3b362d;color:#eacb93;height:44px;width:44px;border-radius:9px;font-family:Georgia,serif;font-size:25px}.dungeon-illustration{height:225px;border-radius:12px;background:radial-gradient(ellipse at 50% 48%,#3f5c78 0%,#253a51 22%,#162536 62%,#131d2e 100%);border:1px solid #394b61;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:12px}.dungeon-door{height:136px;width:105px;background:radial-gradient(ellipse at center,#77c2ca77,#183144 74%);border:9px solid #586d7b;border-bottom:0;border-radius:52px 52px 0 0;box-shadow:0 0 40px #538d9b55,inset 0 0 35px #80d6c955;display:grid;place-items:center;font-size:58px;color:#a9e7d6;position:relative;z-index:2}.dungeon-ground{height:48px;width:250px;border-top:2px solid #56798b;background:linear-gradient(#30435755,transparent);position:absolute;bottom:15px;transform:perspective(140px) rotateX(45deg)}.dungeon-caption{position:absolute;bottom:10px;left:13px;color:#bbc9d6;font-size:9px;letter-spacing:2px;font-weight:800}.raid-info-row{padding:12px 0}.positive{color:var(--green)!important}.raid-panel .primary-btn{margin-top:19px}.centered{text-align:center}.raid-status-illustration{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:255px;text-align:center}.mission-ring{width:116px;height:116px;border:2px dashed #50637a;border-radius:50%;display:grid;place-items:center;color:#c9c6ac;font-size:44px;margin-bottom:19px;background:#1a2a3b}.mission-ring.running{border-color:var(--gold);animation:throb 1.8s ease-in-out infinite;box-shadow:0 0 35px #c9ab6860}.mission-ring.completed{border-color:var(--green)}@keyframes throb{50%{box-shadow:0 0 45px #c9ab6880;transform:scale(1.025)}}.raid-status-illustration strong{font-size:18px}.raid-status-illustration p{color:#a7b8c9;line-height:1.6;font-size:12px;max-width:370px}.progress-meta,.progress-bottom{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#b0bfcf;margin-bottom:9px}.progress-meta{font-size:10px;font-weight:800;letter-spacing:1px}.progress-track{height:12px;background:#2d3a4b;border-radius:30px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#997748,#eac88f);border-radius:30px;transition:width .12s linear}.progress-bottom{margin-top:12px}.result-box{border:1px solid #527a70;background:#153b35;border-radius:10px;padding:16px;margin:22px 0;color:#d2f2e7}.result-box.fail{border-color:#8e645a;background:#412b2a;color:#f9d5ce}.result-box strong{display:block;margin-bottom:6px}.result-box p{margin:0;line-height:1.55;font-size:12px}.info-note{border-top:1px solid #2b3a4d;margin-top:23px;padding-top:17px;color:#8fa3b8;line-height:1.6;font-size:11px;display:flex;gap:8px}.info-note span{color:var(--gold);font-size:16px}.events{display:grid;gap:0}.event{display:flex;gap:13px;padding:17px 5px;border-top:1px solid #2c3a4d}.event-icon{width:36px;height:36px;background:#2a384a;display:grid;place-items:center;border-radius:9px;color:var(--gold);flex-shrink:0;font-size:18px}.event strong{font-size:13px}.event p{font-size:12px;color:#a9b9c8;line-height:1.6;margin:5px 0 0}.event time{font-size:10px;color:#8192a7;display:block;margin-top:7px}.empty-events{color:#a4b4c4;padding:32px 12px}.welcome-overlay{position:fixed;inset:0;background:radial-gradient(ellipse at 20% 30%,#273e53,#0c1422 63%);display:grid;place-items:center;padding:24px;z-index:30;overflow:auto}.welcome-background{position:fixed;inset:0;pointer-events:none;overflow:hidden}.orb{position:absolute;border:1px solid #89724c38;border-radius:50%}.o1{height:620px;width:620px;left:-210px;top:-120px;box-shadow:0 0 0 90px #d3b27a05,0 0 0 180px #d3b27a05}.o2{height:470px;width:470px;right:-120px;bottom:-160px;box-shadow:0 0 0 95px #d3b27a04}.welcome-card{background:#142031e8;border:1px solid #42536a;border-radius:20px;box-shadow:0 20px 100px #02060eb3;max-width:460px;width:100%;padding:38px;z-index:1;position:relative}.welcome-title{text-align:center}.welcome-title h1{font-family:Georgia,serif;font-size:clamp(36px,4vw,49px);letter-spacing:-1.1px;font-weight:500;line-height:1.08;margin:16px 0}.welcome-title h1 em{font-style:normal;color:var(--gold)}.welcome-title>p:last-child{line-height:1.6;color:#b2c2d0;font-size:13px}.welcome-actions{margin-top:28px;display:grid;gap:12px}.welcome-copy{position:fixed;bottom:15px;z-index:1;color:#8297a8;font-size:10px;text-align:center}.welcome-card form{margin-top:30px}.welcome-card form h2{font-size:22px;margin:0 0 8px}.welcome-card form p{font-size:12px;line-height:1.5}.welcome-card form label:not(.gender-options label){font-weight:800;font-size:12px;display:block;margin:18px 0 8px}.welcome-card form input[type=text],.welcome-card form select{background:#0d1928;border:1px solid #405269;border-radius:9px;width:100%;color:white;padding:12px}.gender-options{display:flex;gap:15px}.gender-options label{border:1px solid #405269;border-radius:8px;padding:10px 14px;cursor:pointer;flex:1;text-align:center;color:#d5dfea}.gender-options input{accent-color:#e0b876}.form-buttons{display:flex;gap:10px;margin-top:25px}.form-buttons button:first-child{flex:.65}.form-buttons button:last-child{flex:1.35}.toast{position:fixed;bottom:24px;right:25px;background:#233b38;border:1px solid #70b1a0;padding:13px 17px;border-radius:10px;z-index:45;box-shadow:0 8px 30px #0008;color:#e1f8ec;font-size:12px;font-weight:750;max-width:340px;display:none}.toast.show{display:block}@media(max-width:1120px){.main-content{padding:0 27px 35px}.sidebar{width:215px}.columns-bottom{grid-template-columns:1fr}.hero-right{width:210px}.raid-layout{grid-template-columns:1fr 1fr}}@media(max-width:800px){.app-shell{flex-direction:column}.sidebar{width:100%;min-height:auto;padding:10px 15px}.brand{padding:4px 4px 15px}.nav-group{flex-direction:row;overflow-x:auto}.nav-group .section-label{display:none}.nav-btn{font-size:12px;padding:10px;white-space:nowrap}.sidebar-spacer,.sidebar-profile,.sidebar-actions,.sidebar-note{display:none}.main-content{padding:0 17px 25px;width:100%}.topbar{height:58px}.page-intro{margin:23px 0}.stat-grid{grid-template-columns:repeat(2,1fr);gap:10px}.raid-layout{grid-template-columns:1fr}.hero-right{width:145px}.shield-figure{transform:scale(.7)}.hero-left{padding:20px}.hero-badge{width:60px;height:60px}.hero-badge span{font-size:39px}.hero-identity{gap:12px}.hero-identity h2{font-size:23px}.hero-foot{font-size:10px}}@media(max-width:480px){.hero-right{display:none}.breadcrumbs{font-size:9px;letter-spacing:.3px}.clock-pill{font-size:10px}.version-tag{display:none}.stat-card{padding:14px}.stat-card>strong{font-size:25px}.panel{padding:17px}.welcome-card{padding:22px}.form-buttons{flex-direction:column}}
+
+/* V1.1 — gestion des univers de sauvegarde */
+.welcome-card-wide{max-width:660px;margin:32px auto}.welcome-card-wide .welcome-title h1{font-size:clamp(34px,3.5vw,44px)}
+.save-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:7px}.save-head h2{font-size:17px;margin:0}
+.save-list{display:grid;gap:11px;max-height:42vh;overflow:auto;padding:2px 4px 2px 1px}
+.save-empty{padding:23px 15px;text-align:center;border:1px dashed #41556c;border-radius:12px;background:#101c2a;color:#9eb1c3;font-size:13px;line-height:1.6}
+.save-card{background:#111c2b;border:1px solid #3c4e62;border-radius:12px;padding:16px;display:grid;gap:12px}
+.save-card:hover{border-color:#8f7b5a}.save-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.save-card h3{margin:0;color:#f1eadc;font-size:16px;overflow-wrap:anywhere}.save-card p{color:#9cacc0;font-size:12px;margin:6px 0 0;line-height:1.5}
+.save-time{flex-shrink:0;font-size:11px;color:#edd5a8;background:#302d2a;border:1px solid #66543e;border-radius:7px;padding:6px 9px;font-weight:800}
+.save-card-bottom{display:flex;flex-wrap:wrap;gap:7px}.save-card button{font-size:11px;padding:9px 12px;border-radius:8px;border:1px solid #4b5e72;background:#1d2b3d;color:#edf2f7;font-weight:700}
+.save-card button:hover{background:#2d3d52}.save-card button.load-world{color:#1c2330;background:#dfbb82;border-color:#dfbb82}
+.save-card button.load-world:hover{background:#f0ce99}.save-card button.delete-world{border-color:#704e55;color:#efb1b0;margin-left:auto}
+.import-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.import-actions button{font-size:12px;gap:7px;padding:11px 8px}
+.import-paste{background:#101a29;border:1px solid #45566a;border-radius:12px;padding:14px;display:grid;gap:8px}
+.import-paste label{font-size:12px;color:#b7c9d9}.import-paste textarea{width:100%;border:1px solid #50627b;background:#091422;color:#ecf2fa;padding:11px;border-radius:8px;min-height:90px;font:12px monospace;resize:vertical}
+.import-paste .form-buttons{margin:0}.legacy-help{border-top:1px solid #33465b;padding-top:13px;color:#a8bbcf;font-size:11px;line-height:1.65}
+.legacy-help summary{cursor:pointer;color:#e0c093;font-weight:750}.legacy-help code{color:#eee3ca;overflow-wrap:anywhere}
+.storage-warning{border:1px solid #bb685d;color:#ffc9bf;background:#402c2d;padding:11px;border-radius:10px;font-size:12px}
+@media(max-width:640px){.welcome-card-wide{padding:23px 17px}.save-card-top{display:block}.save-time{display:inline-block;margin-top:10px}.import-actions{grid-template-columns:1fr}.save-card button.delete-world{margin-left:0}}
+
+/* V2 — donjons et convalescence */
+.dungeon-switch{display:flex;gap:8px;margin:12px 0 17px}.dungeon-choice{flex:1;text-align:left;border-radius:9px;padding:12px;background:#101d2c;border:1px solid #43546a;color:#c3d0dd;font-size:14px;font-weight:800;cursor:pointer}.dungeon-choice small{display:block;font-size:10px;font-weight:600;opacity:.75;margin-top:2px}.dungeon-choice.selected{border-color:#dbb980;color:#f4e1b9;background:#3b322b}.dungeon-choice:disabled{opacity:.55;cursor:not-allowed}.team-preview{margin:14px 0;background:#101b2b;border:1px solid #354961;padding:13px;border-radius:11px}.team-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;margin-bottom:10px}.team-heading span{font-size:10px;color:#dfc48b}.team-members{display:grid;gap:6px}.team-member{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 9px;background:#192639;border-radius:6px;font-size:11px}.team-member b{color:#e9d6b4}.team-footer{border-top:1px solid #35475d;padding-top:10px;margin-top:10px;display:flex;justify-content:space-between;color:#b6c7d9;font-size:11px}.team-footer strong{color:#e7cda0}.raid-injury,.injury-panel{border:1px solid #aa806a;border-radius:11px;background:#352a2b;padding:15px;margin:15px 0;color:#ffdfce}.raid-injury strong{display:block;font-size:13px}.raid-injury span{display:block;font-size:12px;margin-top:6px}.injury-panel{display:grid;grid-template-columns:1fr auto;gap:8px 15px;margin:0 0 21px}.injury-panel p{margin:6px 0 0;font-size:11px;color:#e6bdb2}.injury-timer{font-size:21px;font-weight:800}.injury-track{grid-column:1/-1;width:100%;height:8px;border-radius:10px;background:#583d3b;overflow:hidden;margin-top:4px}.injury-fill{height:100%;width:0;background:linear-gradient(90deg,#d37f66,#f6b98a)}.migration-tip{border:1px solid #48566b;border-radius:8px;padding:10px;margin-top:0;color:#b8c9d8}.save-card .save-injury{color:#ffc5ab;font-weight:700}
+
+[hidden]{display:none!important}
+
+/* V3 — Boutique, inventaire, promotion et classement */
+.stat-progress{height:5px;background:#27384b;border-radius:5px;margin-top:12px;overflow:hidden}.stat-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,#9b7e4e,#ecc88d)}
+.quick-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:20px}.quick-card{background:#152234;border:1px solid #354960;color:#ecf2f8;padding:16px 20px;border-radius:13px;text-align:left;display:flex;align-items:center;gap:14px}.quick-card:hover{background:#1d3046;border-color:#b19162}.quick-card>span:nth-child(2){flex:1}.quick-card b{display:block;font-size:13px}.quick-card small{display:block;color:#9badc2;margin-top:5px;font-size:11px}.quick-icon{font-size:25px;color:#d6b57c}
+.equipment-top{display:grid;grid-template-columns:1fr 1fr;gap:19px;margin-bottom:19px;align-items:stretch}.equip-slots{display:grid;gap:9px}.equip-slot{border:1px solid #34475b;background:#0d1927;border-radius:10px;padding:13px;display:flex;align-items:center;gap:13px}.equip-symbol{display:grid;place-items:center;font-size:26px;background:#293346;color:#e0bd82;width:42px;height:42px;border-radius:9px;flex-shrink:0}.equip-slot>span:nth-child(2){min-width:0;flex:1}.equip-slot small,.equip-slot strong,.equip-slot em{display:block}.equip-slot small{font-size:9px;letter-spacing:1px;font-weight:800;color:#a7b9ca}.equip-slot strong{font-size:13px;margin:5px 0}.equip-slot em{font-style:normal;color:#dec8a8;font-size:10px}.equip-summary{margin-top:17px;display:grid;gap:10px}.equip-summary>span{display:flex;justify-content:space-between;font-size:12px;color:#c5d0df}.equip-summary strong{color:#ead1a4}.equip-summary .equip-total{border-top:1px solid #3b4b5a;padding-top:11px;color:white;font-weight:800}.equip-total strong{font-size:21px}
+.inventory-list{display:grid;gap:7px;max-height:290px;overflow:auto}.inventory-item{border:1px solid #324459;background:#0e1b2a;padding:10px;border-radius:9px;display:flex;gap:9px;align-items:center;justify-content:space-between}.inventory-item strong,.inventory-item small{display:block}.inventory-item strong{font-size:12px}.inventory-item small{font-size:10px;color:#9fb1c4;margin-top:6px}.inventory-actions{display:flex;flex-wrap:wrap;gap:5px}.small-action{border:1px solid #887653;background:#b59a66;color:#0f1c29;font-size:10px;font-weight:850;border-radius:6px;padding:7px 9px}.small-action.secondary{background:#23354a;color:#d5e0eb;border-color:#4d5a69}.small-action.active{background:#29493e;color:#a5e5d1;border-color:#5e987c}.shop-empty{color:#9bb0c4;font-size:12px;padding:15px 6px;line-height:1.6}.shop-select-label{display:flex;align-items:center;gap:10px;color:#b6c6d5;font-size:11px;white-space:nowrap}.shop-select-label select{background:#0e1928;border:1px solid #485b70;color:#f5f7fa;padding:8px 11px;border-radius:8px;max-width:180px}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.shop-item{border:1px solid #35475c;background:#0e1a29;border-radius:12px;padding:15px;display:flex;flex-direction:column;min-height:180px}.shop-item.locked{opacity:.72}.shop-item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.shop-category{font-size:10px;color:#a8b7c7}.shop-item>strong{font-size:14px;line-height:1.45}.shop-item p{margin:8px 0 auto;color:#e5c387;font-size:12px}.shop-price{border-top:1px solid #2a3a4b;display:flex;gap:9px;justify-content:space-between;align-items:center;margin-top:16px;padding-top:13px}.shop-price b{font-size:12px;color:#edd6aa;white-space:nowrap}.shop-price button{font-size:10px;background:#d8b477;color:#172031;border:1px solid #c9a46c;border-radius:7px;padding:8px 11px;font-weight:850}.rank-token{display:inline-grid;place-items:center;min-width:30px;height:27px;font-weight:900;font-size:13px;border-radius:7px;color:#eee;border:1px solid #64748b;background:#394b62}.rank-E{background:#34445a}.rank-D{background:#235c49;border-color:#499779}.rank-C{background:#234c72;border-color:#4884af}.rank-B{background:#673064;border-color:#ac66af}.rank-A{background:#7b3e32;border-color:#c87b66}.rank-S{background:#513d82;border-color:#977bd5}
+.ranking-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}.ranking-intro>div{border:1px solid #33455b;background:#172336;border-radius:13px;padding:18px}.ranking-intro span,.ranking-intro small{display:block;font-size:10px;letter-spacing:1px;color:#b2c4d5}.ranking-intro strong{font-size:31px;display:block;margin:11px 0 7px}.ranking-intro small{letter-spacing:0}.ranking-head,.ranking-row{display:grid;grid-template-columns:1fr 65px 105px;align-items:center;gap:14px}.ranking-head{padding:10px 15px;border-bottom:1px solid #48556b;font-size:9px;color:#8fa5bb;font-weight:850;letter-spacing:1px}.ranking-head>:nth-child(2),.ranking-head>:nth-child(3){text-align:center}.ranking-row{padding:11px 15px;border-bottom:1px solid #253749}.ranking-row:nth-child(even){background:#192639}.ranking-row.me{background:#413727;border:1px solid #8e7651;border-radius:9px}.ranking-identity{display:flex;gap:16px;align-items:center;min-width:0}.ranking-identity strong,.ranking-identity small{display:block}.ranking-identity strong{font-size:12px}.ranking-identity small{font-size:10px;color:#9eafc0;margin-top:4px}.ranking-place{font-size:14px;color:#e4c284;width:34px;flex-shrink:0}.ranking-row>.rank-token{justify-self:center}.rank-power{text-align:center;color:#eacb91}.you-label{background:#cba56c;color:#152035;font-size:9px;padding:3px 6px;border-radius:5px;margin-left:5px}.ranking-note{margin:19px 0 0;line-height:1.65}
+@media(max-width:1160px){.shop-grid{grid-template-columns:repeat(2,1fr)}.equipment-top{grid-template-columns:1fr}}@media(max-width:650px){.quick-cards{grid-template-columns:1fr}.shop-grid{grid-template-columns:1fr}.ranking-intro{grid-template-columns:1fr 1fr}.shop-select-label{flex-wrap:wrap}.ranking-row,.ranking-head{grid-template-columns:1fr 42px 65px;gap:5px}.ranking-row{padding:11px 6px}.ranking-head{padding:10px 6px}.ranking-identity{gap:5px}.ranking-identity strong{font-size:11px}.rank-power{font-size:12px}.you-label{font-size:8px}}
+
+/* V4 — Les guildes autonomes */
+.guild-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:18px}
+.guild-stats>div{background:#172336;border:1px solid #35465b;border-radius:13px;padding:17px}
+.guild-stats small,.guild-detail-metrics small{display:block;font-size:10px;letter-spacing:1.1px;color:#a8bbcf;font-weight:750}
+.guild-stats strong{display:block;font-size:29px;margin-top:9px;color:#f6e8ce}
+.guild-directory{margin-bottom:20px}.guild-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.guild-card{color:#e8eff7;text-align:left;background:#111e2e;border:1px solid #354b63;border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:7px;transition:background .18s,border-color .18s}
+.guild-card:hover{background:#1b3046;border-color:#b99a70}.guild-card.selected{border-color:#dbb57b;background:#262b35;box-shadow:0 0 0 1px #7e6443 inset}
+.guild-card-top{display:flex;align-items:center;justify-content:space-between}.guild-crest,.guild-detail-crest{display:grid;place-items:center;background:#353d4d;border:1px solid #84714f;color:#e8c78c;border-radius:11px;font-size:23px;width:43px;height:43px;flex-shrink:0}
+.guild-style{font-size:10px;color:#a9bed0;text-transform:capitalize}.guild-card>strong{font-size:14px;margin-top:5px}.guild-card>small{font-size:11px;color:#a3b6c8}
+.guild-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.guild-card-grid em,.guild-card-grid b{display:block;font-style:normal}.guild-card-grid em{font-size:10px;color:#91a8bc}.guild-card-grid b{margin-top:5px;font-size:14px}
+.guild-card-footer{margin-top:8px;padding-top:12px;border-top:1px solid #39495a;display:flex;justify-content:space-between;gap:6px;color:#e4be88;font-size:11px}
+.guild-details-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start;margin-bottom:20px}.guild-detail-header{display:flex;gap:15px;align-items:center;margin-bottom:18px}
+.guild-detail-header h3{font-size:21px;margin:0 0 4px}.guild-detail-header small{color:#9eb2c7}.guild-detail-crest{width:59px;height:59px;font-size:32px}
+.guild-detail-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0 18px}.guild-detail-metrics>div{padding:13px;background:#101b29;border:1px solid #33485b;border-radius:9px}.guild-detail-metrics strong{display:block;margin-top:8px;font-size:17px;color:#edd0a1}
+.guild-inspector h4{color:#e8d3b7;margin:22px 0 12px;font-size:13px}.guild-current-raid{display:grid;gap:6px;background:#1c2b3a;border:1px solid #36536c;padding:12px;border-radius:9px;font-size:12px;color:#b9c9db}
+.guild-current-raid strong{color:#ead4af}.guild-progress-track{height:7px;border-radius:10px;background:#32465a;overflow:hidden;margin-top:5px}.guild-progress-track>div{height:100%;background:#cfad79}
+.guild-roster{display:grid;gap:7px}.guild-member{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:11px;background:#0e1c2c;border-radius:8px;border:1px solid #2d4358}.guild-member strong,.guild-member small{display:block}.guild-member strong{font-size:12px}.guild-member small{margin-top:6px;font-size:10px;color:#9cb0c3}
+.guild-finance{display:grid;gap:9px}.guild-finance>div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #33455a;padding-bottom:9px;font-size:11px;color:#b5c6d7}.guild-finance b{color:#f1d3a5;text-align:right}
+.guild-activity,.guild-world-feed{max-height:640px;overflow:auto;display:grid;gap:8px}.guild-activity-row,.guild-news-line{border-bottom:1px solid #2b4055;padding:10px 0}.guild-activity-row small,.guild-news-line small{color:#9bacbd;font-size:10px}.guild-activity-row p,.guild-news-line p{margin:7px 0 0;line-height:1.55;font-size:12px}.guild-news-line p b{color:#e8d3b0}.guild-explainer{background:#222b37;border:1px solid #4f5360;border-radius:9px;padding:13px;color:#a9bbd0;font-size:11px;line-height:1.6;margin-top:20px}.guild-empty{color:#a4b4c7;font-size:12px;line-height:1.5}
+@media(max-width:1200px){.guild-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.guild-details-grid{grid-template-columns:1fr}}
+@media(max-width:750px){.guild-cards{grid-template-columns:1fr}.guild-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.guild-directory .panel-heading{flex-direction:column;align-items:flex-start;gap:12px}}
+
+/* V5 — Carrière et compagnons permanents */
+.guild-career{background:linear-gradient(130deg,#14283b,#16202f);border:1px solid #415772;border-radius:11px;padding:16px;color:#d8e5f1;font-size:12px;line-height:1.65}
+.guild-career strong{color:#f0d3a0}.guild-career p{margin:5px 0 12px;color:#b4c7db}
+.guild-career .career-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.guild-career .primary-btn{padding:10px 17px;min-width:175px}
+.guild-career .career-result{margin:10px 0 0;padding:10px;border-radius:7px;background:#203247;border:1px solid #435b70}
+.guild-career .career-accepted{color:#91e0c6}.guild-career .career-rejected{color:#ebaf9b}
+.guild-player-banner{border:1px solid #6d8e73;background:#19362f;padding:10px 13px;border-radius:9px;color:#c6f3db;font-size:12px;margin-bottom:11px}
+.guild-member.is-player{background:#2e332a;border-color:#b39362}
+.association-world{border:1px solid #3b5168;background:#112337;border-radius:9px;margin:13px 0 2px;padding:12px;color:#b6c9db;font-size:11px;line-height:1.55}
+.association-world strong{color:#e7d1ab;display:block;margin-bottom:5px}
+.association-world .npc-status{padding:6px 0;border-top:1px solid #2a4055}
+.team-absent{color:#e5ae9c;font-size:12px;padding:12px 4px;line-height:1.6}
+.affiliation-small{color:#dfc18f;font-weight:700}
+@media(max-width:650px){.guild-career .career-actions{flex-direction:column;align-items:stretch}}
+
+
+/* V5.1 — Organisation desktop en bandeaux/onglets : direction graphique propre au projet. */
+.app-shell{display:block;min-height:100vh}
+.desktop-header{position:sticky;top:0;z-index:30;background:linear-gradient(135deg,#111b2b,#172637 72%,#101b2a);border-bottom:1px solid #415063;box-shadow:0 9px 25px #0006}
+.header-upper{min-height:85px;display:flex;align-items:center;gap:25px;padding:13px clamp(16px,3vw,48px)}
+.game-wordmark{display:flex;align-items:center;gap:13px;min-width:275px}.wordmark-symbol{color:#e0b876;font-size:31px}.game-wordmark strong{display:block;font-size:clamp(15px,1.3vw,20px);font-weight:900;letter-spacing:1.1px;color:#f0d5a4}.game-wordmark small{display:block;font-size:9px;letter-spacing:1.5px;color:#9daebe;margin-top:5px}
+.head-indicators{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:13px 19px;flex:1}.head-indicators>div{padding-left:15px;border-left:1px solid #465264;min-width:78px}.head-indicators small{display:block;color:#9aafc2;font-size:9px;font-weight:850;letter-spacing:.9px;margin-bottom:4px}.head-indicators strong{display:block;font-size:12px;color:#eef2f5;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis}.head-indicators .header-guild strong{color:#e0c18c}
+.header-tools{display:flex;gap:8px;align-items:center;flex-shrink:0}.header-tool{background:#243448;border:1px solid #44576d;border-radius:8px;color:#e3edf4;padding:9px 11px;font-weight:750;font-size:11px}.header-tool:hover{background:#354962}.clock-pill{font-size:11px;white-space:nowrap}
+.tab-ribbon{display:flex;overflow-x:auto;scrollbar-width:thin;gap:4px;padding:0 clamp(10px,3vw,45px);border-top:1px solid #35455b;background:#101c2c}.tab-ribbon .nav-btn{white-space:nowrap;flex:0 0 auto;border-radius:9px 9px 0 0;padding:15px 13px 14px;font-size:12px;font-weight:800;color:#b8c7d8;gap:3px}.tab-ribbon .nav-btn:hover{background:#233750}.tab-ribbon .nav-btn.active{background:#223850;color:#f0d4a5;border-color:#51607b;border-bottom:3px solid #e0b876;padding-bottom:12px}.tab-count{background:#a76751;color:white;border-radius:20px;padding:2px 5px;font-size:9px;margin-left:4px}
+.main-content{max-width:1540px;margin:0 auto;padding:0 clamp(16px,3.8vw,55px) 55px}.page{max-width:100%}.page-intro{margin:29px 0 23px}.page-intro h1{font-size:clamp(24px,2.8vw,34px)}
+.profile-loadout{margin:18px 0 22px}.profile-gear-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.profile-gear-slot{min-width:0;background:#1c2a3b;border:1px solid #344960;border-radius:11px;padding:15px}.profile-gear-slot small{display:block;letter-spacing:1px;color:#a4bbca;font-size:10px;font-weight:800}.profile-gear-slot strong{display:block;margin:9px 0 5px;font-size:14px}.profile-gear-slot em{display:block;font-size:12px;color:#e6c287;font-style:normal;margin-bottom:11px}.profile-gear-slot button{background:#283b51;border:1px solid #677389;color:#f1f2f4;border-radius:7px;padding:8px 12px;font-size:11px}.profile-power-summary{display:flex;justify-content:flex-end;gap:20px;flex-wrap:wrap;margin-top:14px;color:#bbcbd8;font-size:12px}.profile-power-summary strong{color:#e9c991}
+.guild-quest{border:1px solid #6e654d;background:linear-gradient(110deg,#332e2a,#282f37);border-radius:13px;padding:17px 20px;margin-bottom:17px}.guild-quest strong{color:#efcb92;font-size:14px}.guild-quest p{margin:7px 0 0;color:#cdd8e1;line-height:1.6;font-size:12px}
+.mail-layout{display:grid;grid-template-columns:minmax(260px,.82fr) minmax(360px,1.18fr);gap:18px}.mail-list{display:grid;gap:8px}.mail-item{background:#1b2b3d;color:#f0f4f8;text-align:left;border:1px solid #36485d;border-radius:9px;padding:13px;display:block}.mail-item.active{border-color:#c8a36a;background:#2a3747}.mail-item small{color:#9db2c6;display:block;margin-bottom:5px}.mail-item strong{display:block}.mail-item em{font-style:normal;font-size:11px;color:#aebdcc;display:block;margin-top:6px}.mail-reader{min-height:275px}.mail-content h3{font-size:20px;margin:5px 0 15px}.mail-content p{line-height:1.7;color:#c5d1dc}.mail-content time{font-size:11px;color:#8ba1b6}.mail-sender{font-size:12px;color:#e1bf89}.future-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.guild-directory .guild-card{cursor:pointer}.guild-card-description{line-height:1.45;margin:9px 0;font-size:11px;color:#b4c4d5}.guild-card-criteria{font-size:10px;color:#dfc192}.directory-apply{border:1px solid #aa8a5b;border-radius:6px;background:#384251;color:#f9dfa7;padding:7px 12px;font-size:11px;font-weight:800;cursor:pointer;margin-top:8px}.directory-apply:disabled{opacity:.5;cursor:not-allowed}.guild-details-grid{margin-top:18px}
+@media(max-width:1100px){.header-upper{flex-wrap:wrap;gap:14px}.game-wordmark{min-width:200px}.head-indicators{order:3;width:100%;justify-content:flex-start}.header-tools{margin-left:auto}.header-guild{flex:1}}
+@media(max-width:760px){.profile-gear-grid,.future-grid,.mail-layout{grid-template-columns:1fr}.header-upper{padding:11px 14px}.head-indicators{gap:9px}.head-indicators>div{padding-left:8px}.tab-ribbon .nav-btn{padding:11px 10px;font-size:11px}.tab-ribbon .nav-btn.active{padding-bottom:8px}.main-content{padding:0 12px 30px}.page-intro{margin:22px 0 16px}}
+/* V5.1.1 — Indicateur permanent d'état, séparé de l'affiliation de guilde. */
+@media(min-width:1101px){.header-upper{gap:13px;padding-left:25px;padding-right:25px}.head-indicators{flex-wrap:nowrap;gap:9px}.head-indicators>div{min-width:0;padding-left:10px}.head-indicators strong{font-size:11px;max-width:140px}.head-indicators .header-condition{min-width:133px}}
+.head-indicators .header-condition{min-width:133px}
+.head-indicators .header-condition .condition-pill{display:inline-flex;align-items:center;gap:6px;max-width:none;width:max-content;min-height:28px;padding:6px 10px;border-radius:7px;border:1px solid transparent;font-size:11px;font-weight:850;line-height:1.25;white-space:nowrap}
+.condition-pill.ready{color:#9ce7c8!important;background:#193c35;border-color:#356c5b!important}
+.condition-pill.expedition{color:#f4d39d!important;background:#463923;border-color:#856338!important}
+.condition-pill.injured{color:#ffb5af!important;background:#49292b;border-color:#925357!important}
+@media(max-width:760px){.head-indicators .header-condition{min-width:0}.head-indicators .header-condition .condition-pill{font-size:10px}}
+.dungeon-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dungeon-switch>.dungeon-choice{min-width:0}
+@media(max-width:700px){.dungeon-switch{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* V6 · contrats de guilde et carrière */
+.career-contract{display:grid;grid-template-columns:1fr auto;gap:8px 15px;margin:14px 0;padding:13px 15px;border:1px solid rgba(196,157,83,.30);background:rgba(189,149,68,.06);border-radius:10px}
+.career-contract span{font-size:12px;color:#a9b6ca}.career-contract strong{font-size:13px;color:#efcf8f}
+.career-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:13px}
+.career-actions button:disabled{opacity:.5;cursor:not-allowed}
+.contract-paper{--ink:#29323b;--paper:#f5efdf;--gold:#a57639;color:var(--ink);background:var(--paper);border:1px solid #dfd0ae;border-radius:6px;padding:26px clamp(18px,3vw,35px);margin-top:20px;box-shadow:0 6px 32px rgba(0,0,0,.21);font-family:Georgia,'Times New Roman',serif}
+.contract-head{display:flex;gap:17px;align-items:center;border-bottom:2px solid #c3ab7f;padding-bottom:16px}.contract-head .contract-seal{flex:0 0 auto;width:60px;height:60px;border-radius:50%;border:2px solid #ae854a;display:grid;place-items:center;font-size:28px;color:#92612b}.contract-head small{font-family:system-ui,sans-serif;letter-spacing:.11em;font-size:10px;font-weight:700;color:#876f4e}.contract-head h3{color:#28323d!important;font-size:26px;margin:5px 0 3px}.contract-head p{margin:0!important;color:#57616c!important}.contract-folio{padding:10px 0;font:11px system-ui,sans-serif;letter-spacing:.07em;color:#817157;text-align:right}
+.contract-section{padding:11px 0;border-bottom:1px solid #dfd4ba}.contract-section b{font-size:15px;color:#5d4629}.contract-section p{line-height:1.58!important;margin:5px 0!important;color:#36414b!important;font-size:13px!important}.contract-section strong{color:#4b3620}
+.contract-signatures{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:23px}.contract-signatures>div{border-top:1px solid #bfab88;padding-top:12px;display:grid;gap:6px}.contract-signatures small{font:10px system-ui,sans-serif;color:#82725d;letter-spacing:.1em}.contract-signatures strong{font-family:cursive;font-size:22px;color:#6b5539}.contract-signatures span{font:11px system-ui,sans-serif;color:#887861}
+.contract-status{margin-top:15px;font-size:12px;color:#d9b97a;font-weight:700}.contract-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.contract-actions button{flex:1;min-width:150px}.mail-content{overflow-wrap:anywhere}.mail-reader{min-width:0}
+@media(max-width:660px){.contract-signatures{grid-template-columns:1fr}.contract-head h3{font-size:21px}.contract-paper{padding:17px}.contract-actions{display:grid}}
+
+/* === V7 · Ambitions et résidences === */
+.ambition-panel { margin-top: 22px; }
+.ambition-buttons { display:flex;flex-wrap:wrap;gap:10px;margin:18px 0; }
+.ambition-button { border:1px solid var(--border,#34425a); border-radius:10px;background:rgba(20,32,50,.65);color:var(--text,#eef3ff);padding:11px 16px;font:inherit;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s; }
+.ambition-button:hover { border-color:#d7b775; }
+.ambition-button.selected { color:#f6d58d;border-color:#d6ae68;background:rgba(162,118,47,.19);box-shadow:inset 0 0 0 1px rgba(234,197,114,.17); }
+.ambition-detail { display:flex;gap:14px;justify-content:space-between;align-items:center;background:rgba(12,22,36,.36);padding:18px;border-radius:12px;border:1px solid rgba(167,191,226,.13); }
+.ambition-detail h3 { margin:2px 0 4px; }.ambition-detail p { margin:4px 0;color:var(--muted,#b0bcd0); }
+.ambition-detail > strong { color:#f1d293;font-size:25px;white-space:nowrap; }
+.ambition-track { margin-top:16px; }.ambition-track > span { display:block;background:linear-gradient(90deg,#c38d43,#f0cd81); }
+.ranking-metric-buttons { margin:0 0 18px; }
+.housing-summary-grid { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-bottom:20px; }
+.housing-summary-grid h2 { font-size:clamp(22px,2.5vw,32px);margin:8px 0 5px; }
+.housing-current .home-rule { margin-top:13px; }
+.housing-catalog { display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px;padding:8px 0 2px; }
+.housing-card { border:1px solid rgba(151,170,202,.22);padding:19px;border-radius:13px;background:rgba(18,29,45,.56);display:flex;flex-direction:column;gap:12px; }
+.housing-card.current { border-color:rgba(220,183,110,.9);background:rgba(130,102,48,.13); }
+.housing-card h3 { margin:0;font-size:19px; }.housing-card p { color:#adbace;font-size:13px;line-height:1.5;margin:0 0 8px;min-height:40px; }
+.housing-card-top { display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px; }
+.housing-details { display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(156,178,208,.14);padding-top:9px;font-size:13px; }
+.housing-details > span {color:#b7c2d2;}.housing-details > strong { color:#f2d18d;text-align:right; }
+.housing-card button {margin-top:auto;}
+@media (max-width:800px) {.housing-summary-grid {grid-template-columns:1fr;}.ambition-detail {align-items:flex-start;}}
+
+/* V8 — Charges, échéances et petits boulots */
+.charge-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.charge-summary .panel h2{font-size:clamp(19px,2vw,26px);margin:10px 0;color:#edcd8d}
+.charge-summary .panel p:last-child{font-size:12px}
+.bill-list,.bill-history,.job-list{display:grid;gap:12px}
+.bill-card,.job-card{border:1px solid rgba(156,178,208,.22);border-radius:12px;padding:18px;background:rgba(19,29,45,.65);display:flex;align-items:center;justify-content:space-between;gap:18px}
+.bill-card.late{border-color:rgba(224,112,105,.7);background:rgba(111,44,48,.18)}
+.bill-card h3,.job-card h3{margin:8px 0 6px;font-size:17px}.bill-card p,.job-card p{margin:0 0 7px;color:#b8c4d4;font-size:13px}
+.bill-card small,.job-card small{font-size:12px;color:#d8b981}
+.bill-actions,.job-reward{display:grid;justify-items:end;gap:12px;white-space:nowrap}
+.bill-actions strong,.job-reward b{color:#eac57f;font-size:18px}
+.history-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(156,178,208,.15);padding:12px 2px}
+.history-row span{display:grid;gap:3px}.history-row small{font-size:11px;color:#9eadc5}.history-row strong{color:#a1d3b3}
+.jobs-panel{margin-top:20px}.job-list{margin-top:20px}.job-symbol{width:48px;flex:0 0 48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#f2d191;background:rgba(202,162,96,.15);font-size:23px}
+.job-text{flex:1;min-width:0}.job-progress{border:1px solid rgba(225,193,126,.36);border-radius:12px;background:rgba(203,159,80,.10);padding:16px;margin:15px 0}
+.job-progress-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:12px}.job-progress .stat-progress span{display:block;background:#dcaf69}
+@media(max-width:830px){.charge-summary{grid-template-columns:1fr}.bill-card,.job-card{align-items:flex-start;flex-wrap:wrap}.bill-actions,.job-reward{justify-items:start}}
+
+/* V9 — patrimoine de rapport (aucun impact sur le temps de convalescence). */
+.investment-section{margin-bottom:20px}
+.investment-section>.muted{font-size:13px;line-height:1.65;margin:-6px 0 20px}
+.investment-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0 23px}
+.investment-metrics>div{border:1px solid #344557;background:#1b2b3d;border-radius:11px;padding:16px;display:grid;gap:9px}
+.investment-metrics small{color:#a5b6c8;font-size:10px;letter-spacing:1px;font-weight:800}
+.investment-metrics strong{font-size:22px;color:#f0d097}
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:15px}
+.asset-card{border:1px solid #364b5b;border-radius:12px;background:#152338;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.asset-card-title{display:flex;gap:13px;align-items:flex-start;min-height:88px}
+.asset-symbol{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;background:#4b3b2b;border-radius:11px;font-size:23px;color:#edcb8d}
+.asset-card h3{margin:9px 0 7px;font-size:17px}
+.asset-card p{font-size:12px;line-height:1.45;color:#a7b8c8;margin:4px 0}
+.asset-facts{display:flex;justify-content:space-between;gap:9px;border-top:1px solid #2f4356;padding-top:10px;font-size:12px;color:#b6c5d3}
+.asset-facts strong{font-size:13px;color:#e7cb94;text-align:right}
+.asset-card button{margin-top:auto}
+.investment-section .history-row strong.expense{color:#e49a90}
+@media(max-width:1000px){.investment-metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.investment-metrics{grid-template-columns:1fr}.asset-grid{grid-template-columns:1fr}}
+
+/* V10 — Banque, remboursement et procédure de surendettement */
+.banking-panel,.enforcement-panel{margin-top:18px}
+.bank-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:19px 0}
+.bank-metrics>div{border:1px solid #3c5062;background:#172b3c;border-radius:11px;padding:13px;display:grid;gap:9px}
+.bank-metrics small{color:#b3c3d0;font-size:10px;font-weight:700;letter-spacing:1px}
+.bank-metrics strong{font-size:19px;color:#ecca89;overflow-wrap:anywhere}
+.bank-transfer{margin:15px 0;padding:16px;border:1px solid #3b4e60;background:#172638;border-radius:12px}
+.bank-transfer label{display:block;color:#dce6f1;font-weight:600;margin-bottom:10px}
+.bank-transfer-row{display:flex;gap:9px;align-items:center}
+.bank-transfer-row input{flex:1;min-width:0;padding:12px;border-radius:8px;background:#0d1726;color:#f3e8d4;border:1px solid #486078}
+.bank-button-row{display:flex;gap:8px;flex-wrap:wrap}
+.bank-subtitle{margin-top:25px}
+.bank-offers{display:grid;gap:10px;margin-top:12px}
+.bank-offer{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid #35485d;background:#16273b;border-radius:10px;padding:14px}
+.bank-offer>div{display:grid;gap:7px}.bank-offer small{color:#a8bed1;font-size:12px}.bank-offer button{flex-shrink:0}
+.bank-loan-repay{padding:17px;border:1px solid #95764f;border-radius:12px;margin-top:15px;background:#332a24}
+.bank-loan-repay strong,.bank-loan-repay small{display:block;margin-bottom:11px;color:#f4ddae}
+.debt-loan-summary{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:13px 0;border-top:1px solid #3a4e63}
+.debt-loan-summary strong{color:#f1d19e}.debt-loan-summary small{width:100%;color:#b6c5d5}
+.gameover-overlay:not([hidden]){position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:rgba(4,8,17,.94);padding:20px}
+.gameover-panel{width:min(100%,560px);border:1px solid #96674a;border-radius:18px;background:#182334;color:#e6e9f0;text-align:center;padding:38px;box-shadow:0 20px 90px #05070c}
+.gameover-icon{font-size:52px;color:#ddac70}.gameover-panel h2{font-size:32px;color:#f0d1a0;margin:16px 0}.gameover-panel p{line-height:1.6;color:#bac9d7}
+.gameover-facts{display:flex;justify-content:space-between;gap:10px;border:1px solid #614d4a;padding:16px;border-radius:9px;margin:19px 0}.gameover-facts strong{color:#f0b49f}
+@media(max-width:950px){.bank-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.bank-metrics{grid-template-columns:1fr}.bank-transfer-row,.bank-offer{flex-direction:column;align-items:stretch}.gameover-panel{padding:20px}}
+
+/* V11.1 — Clauses de risque sur les cartes d'annuaire conservées telles quelles. */
+.guild-card-terms{margin-top:6px;border:1px solid #40546a;background:#12263a;border-radius:7px;padding:9px;display:grid;gap:5px;line-height:1.45;font-size:11px}
+.guild-card-terms strong{font-size:11px;color:#f2d9ab}
+.guild-card-terms span{color:#c4d6e7}
+.guild-card-terms.guild-risk{background:#332923;border-color:#a7784a}
+.guild-card-terms.guild-risk span{color:#ffd3a4}
+.guild-card-terms.guild-protected span{color:#9de2c9}
+
+/* V11.1.1 — Les indépendants consultent uniquement l'annuaire compact. */
+#page-guilds.guild-independent .guild-details-grid,
+#page-guilds.guild-independent .guild-world-news { display: none !important; }
+#page-guilds.guild-independent .guild-directory .guild-card { cursor: default; }
+
+/* V11.3 — Escouades persistantes et bonus de composition */
+.guild-squad-card{border:1px solid #455a72;border-radius:9px;padding:12px 14px;background:#1c2f42;display:grid;gap:6px;margin:4px 0 8px}
+.guild-squad-card strong{font-size:12px;color:#f3d3a1}
+.guild-squad-card small{font-size:11px;color:#9ed4c7}
+.guild-squad-card div{font-size:12px;color:#dce5ed;line-height:1.6}
+
+/* V12.1 — Bouton de pause et indication persistante, sans refonte de l'interface. */
+.header-tool.pause-tool{border-color:#a88a5d;background:#3b332a;color:#f3d59a;min-width:92px}
+.header-tool.pause-tool:hover:not(:disabled){background:#514331}
+.header-tool.pause-tool.paused{border-color:#65b99d;background:#21453f;color:#c2f4e2}
+.header-tool.pause-tool.paused:hover:not(:disabled){background:#2c5a50}
+.pause-notice{padding:11px 16px;margin:17px 0 0;border:1px solid #94774e;border-radius:9px;background:#392f24;color:#f5dbaa;font-size:12px;line-height:1.5}
+.pause-notice strong{letter-spacing:.7px}
+.is-paused .mission-ring.running{animation-play-state:paused}
+.is-paused .progress-fill{transition:none}
+@media(max-width:570px){.header-tool.pause-tool{min-width:0}.pause-notice{font-size:11px}}
+
+/* V13 — Navigation RPG, rubriques courtes et fiche CV compacte */
+[hidden]{display:none!important}
+.tab-ribbon{gap:2px;padding-left:clamp(10px,2vw,30px);padding-right:10px}
+.tab-ribbon .nav-btn{padding:14px 10px 13px;font-size:11px}
+.legacy-dashboard{display:none!important}
+.cv-layout{width:min(100%,1010px);margin:12px auto 50px;padding:14px 14px 26px;color:#e8edf5}
+.cv-title{display:flex;align-items:center;gap:25px;padding:22px 0 24px;border-bottom:1px solid #314153}
+.cv-avatar{width:94px;height:94px;border-radius:17px;background:linear-gradient(135deg,#293c51,#1a2736);border:1px solid #53627a;display:grid;place-items:center;font-size:48px;color:#ebc98e;flex-shrink:0}
+.cv-heading h1{font-size:34px;margin:7px 0 6px;color:#f7ebdc;line-height:1.15}.cv-heading>p:not(.eyebrow){font-size:15px;color:#bfd0e0;margin:0 0 12px}.cv-affiliation{font-size:13px;color:#aabfce}.cv-affiliation strong{color:#ebd0a3;margin-left:5px}
+.cv-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;padding:26px 0 18px}.cv-facts>div{min-width:0}.cv-facts small,.cv-ranking-list small{display:block;color:#97aabe;font-size:10px;letter-spacing:1.25px;font-weight:800}.cv-facts strong{display:block;font-size:26px;color:#f3e5cc;margin:7px 0 0}
+.cv-xp{padding:8px 0 26px;border-bottom:1px solid #314153}.cv-xp-title{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#c6d4e4;margin-bottom:10px}.cv-xp-title strong{color:#ecd6b4}
+.cv-equipment,.cv-ranking{padding:26px 0 16px}.cv-section-title{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.cv-section-title h2,.cv-ranking h2{font-size:18px;margin:0 0 13px}.cv-section-title small{color:#a9bdce;font-size:12px}
+.cv-loadout,.cv-equipment .profile-loadout{background:transparent;border:0;box-shadow:none;padding:0;margin:0}
+.cv-equipment .profile-loadout>.panel-heading,.cv-equipment #profilePowerSummary{display:none}
+.cv-equipment .profile-gear-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.cv-equipment .profile-gear-slot{min-width:0;background:transparent;border:0;border-top:1px solid #314153;border-radius:0;padding:16px 14px 13px 0;margin:0}
+.cv-equipment .profile-gear-slot+ .profile-gear-slot{padding-left:14px;border-left:1px solid #314153}
+.cv-equipment .profile-gear-slot small{font-size:10px;color:#9fb2c6}
+.cv-equipment .profile-gear-slot strong{font-size:13px;color:#f3e1bd}
+.cv-equipment .profile-gear-slot em{font-size:12px}
+.cv-equipment .profile-gear-slot button{background:#20364a;border:1px solid #405971;border-radius:7px;color:#e8deca;font-size:11px;padding:7px 11px;cursor:pointer;margin-top:12px}
+.cv-ranking{border-top:1px solid #314153}.cv-ranking-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.cv-ranking-list>div{padding:7px 0}.cv-ranking-list strong{display:block;margin-top:7px;color:#ebd0a3;font-size:21px}
+#page-inventory .equipment-top{align-items:start}
+.merchant-switch{display:flex;gap:6px;align-items:center;margin:2px 0 22px;border-bottom:1px solid #37465a;flex-wrap:wrap}
+.merchant-tab{border:0;background:transparent;border-bottom:3px solid transparent;color:#abbdd0;font-weight:800;padding:14px 22px;cursor:pointer;font-size:13px}
+.merchant-tab.active{color:#f6d5a0;border-color:#dfad6b}.merchant-tab:hover{color:#fff}
+#merchantBalance{margin-left:auto;color:#e7cda2;font-size:12px;font-weight:800}
+.merchant-sell-list{display:grid;gap:3px}.merchant-sell-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #304256;gap:20px;padding:17px 3px}.merchant-sell-row strong{color:#eed2a6;font-size:13px}.merchant-sell-row small{display:block;color:#98acbf;margin-top:5px;font-size:11px}.merchant-sell-row>div:last-child{display:flex;align-items:center;gap:16px}
+#page-guilds .guild-inspector #guildDetailMoney[hidden]{display:none}
+#page-guilds .guild-roster{max-width:100%}
+#page-guilds .guild-activity-panel{min-height:210px}
+#guildRaidPanels{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:0 0 20px}
+#guildRaidPanels .panel{min-width:0}
+#guildRaidPanels .guild-current-raid{max-height:360px;overflow-y:auto}
+#guildRaidPanels .guild-roster{max-height:360px;overflow-y:auto}
+.mail-tools{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0 0 15px;padding-bottom:12px;border-bottom:1px solid #324258}
+.mail-tools label{display:flex;align-items:center;gap:6px;font-size:11px;color:#d6c7b4;margin-right:auto;cursor:pointer}
+.mail-tools button{font-size:10px;padding:7px 9px}
+.mail-row{display:flex;gap:8px;align-items:flex-start;margin:0 0 8px}
+.mail-row>input{flex-shrink:0;margin-top:17px;accent-color:#d4ac74;cursor:pointer}
+.mail-row>.mail-item{flex:1;min-width:0;margin:0}
+.mail-reader-tools{display:flex;justify-content:flex-end;gap:7px;margin-bottom:12px}
+.mail-reader-tools button{font-size:11px}
+.housing-how{border-bottom:1px solid #36465b;padding:15px 10px;color:#b3c5d7}.housing-how summary{cursor:pointer;font-weight:700;color:#dfc49e;font-size:13px}.housing-how p{font-size:12px;line-height:1.65}
+.finance-switch{margin-bottom:23px}
+@media(max-width:720px){.cv-layout{padding:5px 4px 20px}.cv-title{gap:13px}.cv-avatar{width:64px;height:64px;font-size:34px}.cv-heading h1{font-size:26px}.cv-facts{gap:11px}.cv-facts strong{font-size:18px}.cv-equipment .profile-gear-grid{grid-template-columns:1fr}.cv-equipment .profile-gear-slot+.profile-gear-slot{padding-left:0;border-left:0}#guildRaidPanels{grid-template-columns:1fr}.merchant-sell-row{flex-wrap:wrap}}
+
+/* V13.1 — Commandes audio compactes, utilisables même pendant la pause. */
+.audio-controls{position:relative;display:flex;align-items:center}
+.sound-tool{white-space:nowrap;min-width:78px}
+.audio-panel{position:absolute;top:calc(100% + 12px);right:0;width:256px;padding:17px;z-index:1100;border:1px solid #52637b;border-radius:13px;background:#162438;box-shadow:0 14px 36px #0009;color:#ebf0f5;display:grid;gap:13px}
+.audio-panel[hidden]{display:none!important}
+.audio-panel>strong{font-size:13px;color:#edcf96;letter-spacing:.4px}
+.audio-panel label{font-size:12px;display:flex;align-items:center;gap:10px}
+.audio-enable input{accent-color:#d6ad6e;width:16px;height:16px}
+.audio-volume-label{justify-content:space-between;color:#bdcbdc}
+.audio-volume-label output{font-weight:700;color:#eacf9e}
+.audio-panel input[type=range]{width:100%;accent-color:#e4bb79;cursor:pointer}
+.audio-panel input[type=range]:disabled{opacity:.45;cursor:not-allowed}
+.audio-preview{border:1px solid #6b7990;border-radius:8px;color:#f0ece5;background:#283e57;padding:9px;cursor:pointer;font-size:12px;font-weight:700}
+.audio-preview:hover{background:#395370}
+.audio-panel small{font-size:10px;line-height:1.45;color:#91a9c0}
+@media(max-width:540px){.audio-panel{right:-130px;max-width:calc(100vw - 25px)}.sound-tool{min-width:0}}
+
+
+/* V13.1 — Inventaire : deux rubriques verticales compactes, sans panneau imbriqué. */
+#page-inventory .inventory-workspace{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;max-width:1190px;margin:0 auto 45px}
+#page-inventory .inventory-section{min-width:0;padding:0 1px 21px;border-bottom:1px solid #324358}
+#page-inventory .inventory-section:last-child{border-bottom:0}
+#page-inventory .inventory-section .panel-heading{margin-bottom:15px}
+#page-inventory .inventory-section .panel-heading h3{font-size:19px;margin:0}
+#page-inventory .inventory-gear-panel .equip-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#page-inventory .inventory-gear-panel .equip-slot{min-width:0;min-height:106px;display:flex;flex-wrap:wrap;align-content:center;gap:8px 11px;padding:14px;border:1px solid #304458;background:#111e2e}
+#page-inventory .inventory-gear-panel .equip-symbol{width:35px;height:35px;font-size:22px;flex-shrink:0}
+#page-inventory .inventory-gear-panel .equip-slot>span:nth-child(2){flex:1 1 100px}
+#page-inventory .inventory-gear-panel .equip-slot button{margin-left:auto}
+#page-inventory .inventory-gear-panel .equip-summary{display:flex;justify-content:flex-start;flex-wrap:wrap;align-items:baseline;gap:12px 34px;margin-top:16px}
+#page-inventory .inventory-gear-panel .equip-summary>span{display:flex;gap:10px;align-items:baseline;font-size:12px}
+#page-inventory .inventory-gear-panel .equip-summary .equip-total{border:0;padding:0 0 0 20px;border-left:1px solid #46536a}
+#page-inventory .inventory-gear-panel .equip-summary .equip-total strong{font-size:20px}
+#page-inventory .inventory-bag-panel .inventory-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px;max-height:none;overflow:visible}
+#page-inventory .inventory-bag-panel .inventory-item{min-width:0;background:transparent;border:0;border-bottom:1px solid #2f4053;border-radius:0;padding:14px 3px}
+#page-inventory .inventory-bag-panel .inventory-list>.shop-empty{grid-column:1/-1;border:1px dashed #3b4c5d;border-radius:9px;padding:23px 18px;background:#111c29}
+#page-inventory .inventory-bag-panel>p{margin-top:14px}
+@media(max-width:900px){#page-inventory .inventory-gear-panel .equip-slots{grid-template-columns:1fr}#page-inventory .inventory-bag-panel .inventory-list{grid-template-columns:1fr}}
+
+/* V13.5 : négociation intégrée aux contrats sans changer la maquette de la messagerie. */
+.contract-bargaining{margin-top:14px;padding:14px;border:1px solid var(--border, #46465a);border-radius:10px;background:rgba(115,131,169,.07)}
+.contract-bargaining>strong{display:block;margin-bottom:6px}
+.contract-bargaining p{font-size:.86rem;margin:5px 0 12px;opacity:.82}
+.contract-bargaining-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px;margin-bottom:12px}
+.contract-bargaining-fields label{display:flex;flex-direction:column;gap:5px;font-size:.84rem}
+.contract-bargaining-fields input,.contract-bargaining-fields select{box-sizing:border-box;width:100%;min-height:36px;border-radius:7px;padding:6px 9px;color:inherit;background:var(--bg-card,#222735);border:1px solid var(--border,#626779)}
+
+/* V13.6 — Guild Master inspired compact desktop guild dashboard */
+#page-guilds:not(.guild-independent) .guild-details-grid{display:block;margin-top:10px}
+#page-guilds:not(.guild-independent) .guild-inspector{display:grid;grid-template-columns:1fr 1.8fr;column-gap:16px;align-items:start;padding:16px}
+#page-guilds:not(.guild-independent) .guild-detail-header{grid-column:1;margin:0 0 8px}
+#page-guilds:not(.guild-independent) .guild-detail-crest{width:44px;height:44px;font-size:23px}
+#page-guilds:not(.guild-independent) .guild-detail-metrics{grid-column:1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0}
+#page-guilds:not(.guild-independent) .guild-detail-metrics>div{padding:8px}
+#page-guilds:not(.guild-independent) .guild-detail-metrics strong{margin-top:3px;font-size:14px}
+#page-guilds:not(.guild-independent) .guild-compact-tabs{grid-column:2;grid-row:1;display:flex;gap:6px;align-self:end}
+.guild-compact-tab{padding:9px 12px;background:#14263a;color:#c7d5e3;border:1px solid #3b5065;border-radius:7px;cursor:pointer;font-weight:700}
+.guild-compact-tab.active{background:#2b4664;color:#fff;border-color:#c4a16b}
+#page-guilds:not(.guild-independent) .guild-compact-pane{display:none;grid-column:2;grid-row:2;min-width:0}
+#page-guilds:not(.guild-independent) .guild-compact-pane.active{display:block}
+#page-guilds:not(.guild-independent) .guild-roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:370px;overflow:auto;align-content:start}
+#page-guilds:not(.guild-independent) .guild-member{padding:9px;min-width:0}
+#page-guilds:not(.guild-independent) .guild-member small{line-height:1.35;margin-top:3px}
+#page-guilds:not(.guild-independent) .guild-activity-panel{display:none}
+#page-guilds:not(.guild-independent) .guild-activity-panel.active{display:block;grid-column:2;grid-row:2;padding:0;border:0;background:transparent;box-shadow:none}
+#page-guilds:not(.guild-independent) .guild-activity{max-height:350px;overflow:auto}
+#page-guilds:not(.guild-independent) .guild-explainer{display:none}
+#page-guilds:not(.guild-independent) .guild-career{max-height:365px;overflow:auto;padding:12px}
+#page-guilds:not(.guild-independent) .guild-finance{display:none}
+@media(max-width:850px){#page-guilds:not(.guild-independent) .guild-inspector{display:block}#page-guilds:not(.guild-independent) .guild-detail-metrics{margin:10px 0}#page-guilds:not(.guild-independent) .guild-compact-tabs{margin:12px 0}#page-guilds:not(.guild-independent) .guild-roster{grid-template-columns:1fr}}
+
+/* V13.8 — portraits locaux, persistants et non interactifs (sauf choix du joueur). */
+.adventurer-portrait{display:block;object-fit:cover;object-position:center;width:38px;height:38px;flex:0 0 38px;border-radius:9px;border:1px solid #60738c;background:#1c2c3d}
+.cv-portrait-control{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+.cv-avatar{overflow:hidden;padding:0}
+.cv-avatar .cv-portrait{width:100%;height:100%;border:0;border-radius:inherit;flex:none}
+.cv-portrait-buttons{display:flex;gap:5px}
+.cv-portrait-buttons button{border:1px solid #53627a;background:#1c2e43;color:#eed3a7;cursor:pointer;border-radius:5px;padding:0 10px;font-size:17px;line-height:22px}
+.cv-portrait-buttons button:hover{background:#344b63}
+.creation-portrait{display:flex;align-items:center;gap:14px;margin:10px 0 16px}
+.creation-portrait img{width:78px;height:78px;border-radius:11px;object-fit:cover;border:1px solid #667b93}
+.creation-portrait>div{flex:1;min-width:0}
+.creation-portrait label,.creation-portrait small{display:block}
+.creation-portrait select{width:100%;margin:5px 0}
+.creation-portrait small{font-size:11px;color:#aebdd0}
+.ranking-identity .ranking-portrait{width:36px;height:36px;flex-basis:36px}
+.guild-member .guild-portrait{width:42px;height:42px;flex-basis:42px}
+.guild-member>div{min-width:0;flex:1}
+.guild-member strong,.guild-member small{overflow-wrap:anywhere}
+.team-member .team-portrait{width:32px;height:32px;flex-basis:32px}
+.team-member span{flex:1}
+.world-ranking-entry .world-portrait{width:25px;height:25px;flex-basis:25px;border-radius:5px}
+.desktop-mode .world-ranking-entry{grid-template-columns:25px 25px minmax(0,1fr) 37px 71px;gap:5px}
+@media(max-width:720px){.cv-portrait-buttons button{font-size:15px;padding:0 8px}.ranking-identity .ranking-portrait{width:29px;height:29px;flex-basis:29px}}
+.desktop-mode .world-ranking-caption{grid-template-columns:25px 25px minmax(0,1fr) 37px 71px}
+.desktop-mode .world-ranking-caption span:nth-child(2){grid-column:2 / span 2}
+
+/* V13.9 — Fiches PNJ consultables, alignées sur la fiche du joueur. */
+[data-profile-id]{cursor:pointer;transition:background-color .15s ease,border-color .15s ease}
+[data-profile-id]:hover{background-color:#2b4057!important;border-color:#bfa06c!important}
+[data-profile-id]:focus-visible{outline:2px solid #e8c58b;outline-offset:-2px}
+.npc-profile-overlay{position:fixed;inset:0;z-index:360;display:grid;place-items:center;padding:18px;background:#030b18bb;backdrop-filter:blur(5px)}
+.npc-profile-overlay[hidden]{display:none!important}
+.npc-profile-dialog{width:min(800px,100%);max-height:min(780px,calc(100vh - 36px));overflow-y:auto;border:1px solid #6a839e;border-radius:15px;background:#0f1e30;color:#eaf1f9;box-shadow:0 30px 100px #000c;scrollbar-color:#55718c #14243a}
+.npc-profile-topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 17px;background:#14263a;border-bottom:1px solid #344d67;position:sticky;top:0;z-index:1}
+.npc-profile-topbar span{font-size:10px;letter-spacing:1.3px;font-weight:800;color:#d8b988}
+.npc-profile-topbar button{width:34px;height:34px;border:1px solid #a75b69;border-radius:7px;background:#973e4d;color:white;font-size:24px;cursor:pointer}
+.npc-profile-topbar button:hover{background:#c35060}
+#npcProfileContent{padding:24px 28px 27px}
+.npc-profile-identity{display:flex;gap:23px;align-items:center;margin-bottom:22px}
+.npc-profile-large-portrait{width:156px;height:156px;flex:0 0 156px;border-radius:16px;object-fit:cover;border:2px solid #8a9db1;box-shadow:0 9px 25px #0007}
+.npc-profile-heading{min-width:0}.npc-profile-heading .eyebrow{margin:0 0 7px;color:#d9b786}
+.npc-profile-heading h2{font-family:Georgia,serif;font-size:32px;line-height:1.2;margin:0 0 10px;overflow-wrap:anywhere}
+.npc-profile-heading p{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:14px;margin:0 0 9px;color:#cbd9e9}
+.npc-profile-affiliation{font-size:13px;color:#a9c0d5;margin-bottom:10px}
+.npc-profile-affiliation strong{color:#f1d09a}
+.npc-profile-status{display:inline-block;padding:5px 10px;border:1px solid #516d82;border-radius:18px;background:#19364a;color:#c6e1eb;font-size:11px}
+.npc-profile-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:16px 0;margin-bottom:22px;border-top:1px solid #344a60;border-bottom:1px solid #344a60}
+.npc-profile-facts>div{min-width:0}.npc-profile-facts small{display:block;color:#9aafc3;font-size:10px;font-weight:800;letter-spacing:.7px}
+.npc-profile-facts strong{display:block;margin-top:7px;color:#f1d49d;font-size:22px;overflow-wrap:anywhere}
+.npc-profile-section{margin:0 0 20px}.npc-profile-section h3{font-family:Georgia,serif;font-size:19px;margin:0 0 12px}
+.npc-profile-section-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.npc-profile-section-head small{color:#dbbf8e}
+.npc-profile-equipment{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid #334a60;border-bottom:1px solid #334a60;padding:14px 0}
+.npc-profile-slot{min-width:0;padding:2px 14px;border-right:1px solid #334a60}.npc-profile-slot:first-child{padding-left:0}.npc-profile-slot:last-child{border:0}
+.npc-profile-slot small,.npc-profile-slot span{display:block;color:#9fb4c8;font-size:11px;line-height:1.5}.npc-profile-slot strong{display:block;margin:7px 0 4px;font-size:13px;overflow-wrap:anywhere}
+.npc-profile-bottom{display:grid;grid-template-columns:1fr 1fr;gap:26px}.npc-profile-bottom .npc-profile-section{margin-bottom:0}
+.npc-profile-list>div{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:9px 0;border-bottom:1px solid #34475a;font-size:12px}
+.npc-profile-list span{color:#aabdd1}.npc-profile-list b{color:#f0d5a5;text-align:right}
+@media(max-width:620px){#npcProfileContent{padding:18px}.npc-profile-identity{gap:14px;align-items:flex-start}.npc-profile-large-portrait{width:96px;height:96px;flex-basis:96px}.npc-profile-heading h2{font-size:23px}.npc-profile-facts{gap:8px}.npc-profile-facts strong{font-size:16px}.npc-profile-equipment{grid-template-columns:1fr}.npc-profile-slot{padding:9px 0;border-right:0;border-bottom:1px solid #34475a}.npc-profile-slot:last-child{border:0}.npc-profile-bottom{grid-template-columns:1fr;gap:20px}}
+
+
+/* V13.11 — UI only. Inspiration: Guild Master V4.6.1. */
+/* Dungeon: two self-contained columns; guild squads remain under Donjon. */
+#page-association .page-intro{margin-bottom:12px}
+#page-association .guild-quest{padding:10px 13px;margin:0 0 10px;font-size:11px}
+#page-association .guild-quest p{margin:4px 0 0;line-height:1.35}
+#page-association .association-banner{display:none}
+#page-association .raid-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
+body.desktop-mode #page-association .raid-layout{height:clamp(260px,calc(100vh - 520px),430px);overflow:hidden}
+body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout{height:clamp(260px,calc(100vh - 560px),390px)}
+#page-association .raid-layout>.panel{min-width:0;padding:13px 14px;margin:0;overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain}
+#page-association .raid-layout .panel-heading{margin-bottom:9px}
+#page-association .raid-layout .panel-heading h3{font-size:16px}
+#page-association .dungeon-switch{display:grid;grid-template-columns:1fr;gap:6px;margin:8px 0 11px;max-height:330px;overflow-y:auto;scrollbar-width:thin}
+#page-association .dungeon-choice{display:grid;grid-template-columns:27px minmax(0,1fr) auto;gap:9px;align-items:center;min-height:49px;padding:7px 9px;font-size:12px;background:#101e31;border:1px solid #304b69;border-radius:9px;text-align:left}
+#page-association .dungeon-choice.selected{background:#1b3753;border-color:#81b0d3;box-shadow:inset 0 0 0 1px #6d9ac0;color:#f3f8ff}
+#page-association .dungeon-choice small{display:block;font-size:9px;font-weight:500;color:#a8bdd2;opacity:1;line-height:1.35;margin-top:3px}
+#page-association .dungeon-choice strong{font-size:12px}
+#page-association .dungeon-choice .dungeon-card-chance{font-size:13px;color:#f1d29e;white-space:nowrap}
+#page-association .dungeon-rank-token{width:27px;height:27px;border-radius:6px;display:grid;place-items:center;background:#62758a;color:#fff;font-size:14px;font-weight:900}
+#page-association .dungeon-rank-D{background:#3e9662}#page-association .dungeon-rank-C{background:#4384c4}#page-association .dungeon-rank-B{background:#b5439e}#page-association .dungeon-rank-A{background:#c35b4d}#page-association .dungeon-rank-S{background:#8862b6}
+#page-association .dungeon-illustration{display:none}
+#page-association .raid-info-row{padding:6px 0;font-size:11px}
+#page-association .raid-panel .primary-btn{margin-top:9px;padding:10px 13px}
+#page-association .raid-panel #rewardExplanation{font-size:10px!important;line-height:1.4}
+#page-association .expedition-panel{display:flex;flex-direction:column;gap:8px}
+#page-association .expedition-panel .team-preview{margin:0;padding:10px;flex-shrink:0}
+#page-association .expedition-panel .team-members{max-height:180px;overflow-y:auto}
+#page-association .expedition-panel .team-member{padding:6px 8px;font-size:10px;gap:5px}
+#page-association .expedition-panel .team-member b{white-space:nowrap}
+#page-association .expedition-panel .association-world{margin:0;padding:8px;font-size:10px;max-height:65px;overflow:auto}
+#page-association .raid-status-illustration{min-height:75px;flex:0 0 auto;padding:4px 0}
+#page-association .mission-ring{height:40px;width:40px;font-size:20px;margin-bottom:4px}
+#page-association .raid-status-illustration strong{font-size:12px}
+#page-association .raid-status-illustration p{font-size:10px;line-height:1.4;margin:5px 0;max-width:none}
+#page-association .expedition-panel .info-note{margin-top:3px;padding-top:7px;font-size:10px;line-height:1.35}
+#page-association .expedition-panel .result-box{margin:5px 0;padding:9px;font-size:11px}
+#page-association .dungeon-summary-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 13px;margin-top:10px;border:1px solid #496d8e;border-radius:10px;background:#172b42}
+#page-association .dungeon-summary-bar>div{display:grid;gap:3px;min-width:0}
+#page-association .dungeon-summary-bar strong{font-size:12px}
+#page-association .dungeon-summary-bar small{font-size:10px;color:#abc2d6;line-height:1.4}
+#page-association .dungeon-summary-bar>span{font-size:10px;font-weight:900;white-space:nowrap;color:#d6ba83}
+#page-association .guild-raid-details{margin:0 0 10px;border:1px solid #395a75;background:#102236;border-radius:10px}
+#page-association .guild-raid-details>summary{padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer;color:#d8e7f4;list-style-position:inside}
+#page-association .guild-raid-details>summary span{float:right;color:#9db5ca;font-weight:500}
+#page-association .guild-raid-details .guild-raid-overview{padding:8px;margin:0;max-height:265px;overflow-y:auto}
+#page-association .guild-raid-details .guild-raid-overview .panel{padding:12px}
+/* Colored notifications: matching the categories of the actual Chronicles event log. */
+#page-journal .notification-feed{display:grid;align-content:start;grid-auto-rows:max-content;gap:7px;max-height:490px;overflow-y:auto;scrollbar-width:thin;padding-right:5px}
+#page-journal .notification-feed .event{--event:#94a3b8;--event-bg:rgba(148,163,184,.08);display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;padding:9px 11px;margin:0;border:1px solid color-mix(in srgb,var(--event) 48%,#263c55);border-radius:9px;background:var(--event-bg);min-width:0}
+#page-journal .event .event-icon{height:30px;width:30px;background:color-mix(in srgb,var(--event) 18%,#13263a);color:#fff;border:1px solid var(--event);border-radius:8px;font-size:15px}
+#page-journal .event .event-copy{min-width:0}
+#page-journal .event .event-category{display:block;color:var(--event);font-size:9px;font-weight:900;letter-spacing:.35px;text-transform:uppercase;margin-bottom:3px}
+#page-journal .event strong{display:block;font-size:11px;color:#f0f5fc}
+#page-journal .event p{font-size:11px;line-height:1.4;margin:3px 0 0;color:#d0dce8}
+#page-journal .event time{white-space:nowrap;align-self:center;margin:0;font-size:9px;color:#a6b8cb;text-align:right}
+#page-journal .notification-feed .event.event-success{--event:#3ddc84;--event-bg:rgba(61,220,132,.12)}
+#page-journal .notification-feed .event.event-failure{--event:#ff626b;--event-bg:rgba(255,98,107,.12)}
+#page-journal .notification-feed .event.event-injury{--event:#ff9b54;--event-bg:rgba(255,155,84,.12)}
+#page-journal .notification-feed .event.event-recovery{--event:#55c6e9;--event-bg:rgba(85,198,233,.11)}
+#page-journal .notification-feed .event.event-depart{--event:#38bdf8;--event-bg:rgba(56,189,248,.11)}
+#page-journal .notification-feed .event.event-rank{--event:#b09afa;--event-bg:rgba(176,154,250,.13)}
+#page-journal .notification-feed .event.event-guild{--event:#a78bfa;--event-bg:rgba(167,139,250,.11)}
+#page-journal .notification-feed .event.event-shop{--event:#e3b66e;--event-bg:rgba(227,182,110,.10)}
+#page-journal .notification-feed .event.event-income{--event:#76e3af;--event-bg:rgba(118,227,175,.11)}
+#page-journal .notification-feed .event.event-debt{--event:#e76f51;--event-bg:rgba(231,111,81,.15)}
+#page-journal .notification-feed .event.event-finance{--event:#e0bf7e;--event-bg:rgba(224,191,126,.10)}
+/* Investments: 4 KPIs and 3-column catalog, bounded internal scrolling. */
+#page-finance .investment-section{margin-bottom:10px;padding:13px 15px}
+#page-finance .investment-section .panel-heading{margin-bottom:8px}
+#page-finance .investment-section>.muted{font-size:10px;line-height:1.4;margin:0 0 8px}
+#page-finance .investment-metrics{margin:8px 0 12px;gap:8px}
+#page-finance .investment-metrics>div{padding:10px;gap:4px;background:#142235;border-color:#455469}
+#page-finance .investment-metrics small{font-size:9px}
+#page-finance .investment-metrics strong{font-size:17px}
+#page-finance #investmentMarket{grid-template-columns:repeat(3,minmax(0,1fr));max-height:390px;overflow-y:auto;padding:3px;gap:9px;scrollbar-width:thin}
+#page-finance #investmentPortfolio{grid-template-columns:repeat(3,minmax(0,1fr));max-height:220px;overflow-y:auto;padding:3px;gap:9px;scrollbar-width:thin}
+#page-finance .asset-card{padding:10px;gap:5px;border-radius:9px}
+#page-finance .asset-card-title{gap:8px;min-height:0}
+#page-finance .asset-symbol{height:30px;width:30px;flex:0 0 30px;font-size:16px}
+#page-finance .asset-card h3{font-size:12px;margin:3px 0 4px}
+#page-finance .asset-card p{font-size:10px;line-height:1.35;margin:2px 0}
+#page-finance .asset-card .small-tag{font-size:8px}
+#page-finance .asset-facts{font-size:10px;padding-top:5px;gap:6px}
+#page-finance .asset-facts strong{font-size:10px}
+#page-finance .asset-card button{padding:8px 10px;font-size:10px}
+#page-finance .investment-history-section{padding:0}
+#page-finance .investment-history-section summary{cursor:pointer;padding:12px 15px;font-size:12px;font-weight:800;color:#d8e7f4}
+#page-finance .investment-history-section .bill-history{padding:0 15px 12px;max-height:160px;overflow:auto}
+@media(max-width:850px){#page-association .raid-layout{grid-template-columns:1fr}#page-finance #investmentMarket,#page-finance #investmentPortfolio{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){#page-association .dungeon-summary-bar{align-items:flex-start;flex-direction:column}#page-journal .notification-feed .event{grid-template-columns:30px minmax(0,1fr)}#page-journal .event time{grid-column:2;justify-self:start}#page-finance #investmentMarket,#page-finance #investmentPortfolio{grid-template-columns:1fr}}
+
+@media(min-width:851px) and (min-height:730px){
+ body.desktop-mode #page-association.cw-open{overflow-y:auto}
+ body.desktop-mode #page-association .raid-layout{min-height:0}
+ body.desktop-mode #page-journal.cw-open{overflow:hidden;display:flex!important;flex-direction:column}
+ body.desktop-mode #page-journal .panel{min-height:0;flex:1;display:flex;flex-direction:column;overflow:hidden}
+ body.desktop-mode #page-journal .notification-feed{min-height:0;max-height:none;flex:1}
+}
+
+/* V13.12 : catalogue de panoplies, compact et lisible. */
+#merchantCatalogPanel>.panel-heading{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#merchantCatalogPanel>.panel-heading .shop-select-label{margin-left:0}
+#merchantCatalogPanel>.panel-heading>div:first-child{margin-right:auto}
+.shop-sets-help{font-size:12px;color:#a8b7c7;margin:0 0 14px;line-height:1.5}
+.shop-set-label{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-top:7px;display:inline-flex;align-self:flex-start;padding:3px 7px;border-radius:5px;border:1px solid #50657c;color:#b8cfe3}
+.shop-set-label.set-duelliste{border-color:#b58261;color:#f3bf91}
+.shop-set-label.set-templier{border-color:#7294c6;color:#b5d2ff}
+.shop-set-label.set-arcaniste{border-color:#a58bd4;color:#d7c3ff}
+.npc-gear-personality{font-size:12px;line-height:1.5;color:#a8b7c7;margin:12px 0 0}
+.npc-gear-personality strong{color:#dce6ef}
+
+
+/* V13.12.2 — Fenêtre Donjon inspirée de Guild Master :
+   deux listes indépendantes et barre de départ toujours visible. */
+body.desktop-mode .main-content>#page-association.cw-open{
+  width:min(1110px,calc(100vw - 36px));
+  height:min(790px,calc(100vh - 148px));
+  display:flex!important;
+  flex-direction:column;
+  overflow:hidden;
+  padding-bottom:15px;
+}
+body.desktop-mode #page-association .cw-titlebar{flex:0 0 auto;margin-bottom:11px}
+body.desktop-mode #page-association .page-intro{flex:0 0 auto;margin:0 0 10px}
+body.desktop-mode #page-association .guild-quest{flex:0 0 auto;margin-bottom:9px}
+body.desktop-mode #page-association .raid-layout,
+body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout{
+  height:auto;min-height:0;max-height:none;flex:1 1 auto;overflow:hidden;
+}
+#page-association .raid-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;min-height:320px}
+#page-association .raid-layout>.panel{min-height:0;overflow:hidden;padding:12px 13px}
+#page-association .raid-panel{display:flex;flex-direction:column;min-height:0}
+#page-association .raid-panel>.panel-heading{flex:0 0 auto}
+#page-association .dungeon-switch{
+  flex:1 1 auto;min-height:125px;max-height:none;overflow-y:scroll;overflow-x:hidden;
+  scrollbar-width:thin;scrollbar-color:#7492b2 #12243a;
+  align-content:start;grid-auto-rows:max-content;padding-right:5px;
+  margin:5px 0 9px;
+}
+#page-association .dungeon-choice{min-height:54px;flex-shrink:0}
+#page-association .raid-info-row{flex:0 0 auto;padding:5px 0}
+#page-association .guild-raid-details{flex:0 0 auto;max-height:115px;overflow-y:auto;margin:7px 0 0}
+#page-association .expedition-panel{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:8px}
+#page-association .expedition-panel>.panel-heading{flex:0 0 auto;margin-bottom:1px}
+#page-association .dungeon-team-scroll-area{
+  flex:1 1 56%;min-height:155px;overflow-y:auto;overflow-x:hidden;
+  scrollbar-width:thin;scrollbar-color:#7492b2 #12243a;
+  display:flex;flex-direction:column;gap:7px;padding-right:5px;
+}
+#page-association .dungeon-team-scroll-area .team-preview{margin:0;padding:10px;flex:0 0 auto}
+#page-association .dungeon-team-scroll-area .team-members{
+  height:clamp(120px,18vh,190px);max-height:none;overflow-y:scroll;
+  scrollbar-width:thin;scrollbar-color:#7492b2 #12243a;
+  padding-right:3px;
+}
+#page-association .dungeon-team-scroll-area .association-world{max-height:80px;flex:0 0 auto;overflow-y:auto}
+#page-association .expedition-panel>.raid-status-illustration{flex:0 0 auto;min-height:54px;padding:0}
+#page-association .expedition-panel>.progress-meta,
+#page-association .expedition-panel>.progress-track,
+#page-association .expedition-panel>.progress-bottom{flex:0 0 auto}
+#page-association .expedition-panel>.info-note{flex:0 0 auto;margin:0;padding-top:5px}
+#page-association .expedition-panel>.result-box{flex:0 0 auto;max-height:75px;overflow:auto}
+#page-association .dungeon-action-bar{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(235px,32%);gap:12px;align-items:center;
+  flex:0 0 auto;margin-top:10px;padding:10px 12px;
+  border:1px solid #4b7293;border-radius:10px;background:#172d45;
+}
+#page-association .dungeon-action-status{min-width:0}
+#page-association .dungeon-action-status .dungeon-summary{margin:0;padding:0;border:0;background:transparent}
+#page-association .dungeon-action-status .dungeon-summary-head{margin:0 0 4px}
+#page-association .dungeon-action-status #dungeonSummaryDetails{margin:0;line-height:1.35;font-size:10px}
+#page-association .dungeon-action-status .raid-injury{margin:6px 0 0;padding:7px;font-size:11px}
+#page-association .dungeon-action-controls{display:flex;flex-direction:column;gap:4px;min-width:0}
+#page-association .dungeon-action-controls #launchBtn{
+  margin:0;min-height:43px;display:flex;justify-content:center;
+  font-size:13px;background:#3979ac;border-color:#548fb9;color:white;
+}
+#page-association .dungeon-action-controls #launchBtn:hover:not(:disabled){background:#4c92c7}
+#page-association .dungeon-action-controls #rewardExplanation{
+  margin:0;max-height:28px;overflow-y:auto;text-align:left;
+  font-size:9px!important;line-height:1.25;
+}
+@media(max-width:850px){
+ body.desktop-mode .main-content>#page-association.cw-open{height:calc(100vh - 148px);overflow-y:auto}
+ body.desktop-mode #page-association .raid-layout{flex:0 0 auto;min-height:510px}
+ #page-association .raid-layout{grid-template-columns:1fr;overflow:visible!important}
+ #page-association .raid-layout>.panel{min-height:240px}
+ #page-association .dungeon-action-bar{grid-template-columns:1fr}
+}
+/* Séparer visuellement le statut de la destination dans la barre fixe. */
+#page-association .dungeon-action-status .dungeon-summary-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#page-association .dungeon-action-status #dungeonSummaryState{color:#a9d8b8;font-size:10px;font-weight:800;letter-spacing:.04em}
+
+/* V13.12.3 — Donjon : disposition Guild Master, sans mélange équipe/suivi. */
+body.desktop-mode .main-content>#page-association.cw-open{
+  width:min(1120px,calc(100vw - 34px));
+  height:min(790px,calc(100vh - 148px));
+  padding-bottom:14px;
+}
+body.desktop-mode #page-association .guild-raid-overview{display:none!important}
+body.desktop-mode #page-association .raid-layout,
+body.desktop-mode #page-association:has(#guildRaidDetails:not([hidden])) .raid-layout{
+  flex:1 1 auto;min-height:230px;max-height:none;
+}
+#page-association .raid-layout{min-height:230px}
+#page-association .raid-layout>.panel{min-height:0}
+#page-association .expedition-panel{display:flex;flex-direction:column;min-height:0}
+#page-association .expedition-panel .dungeon-team-scroll-area{
+  flex:1 1 auto;min-height:0;overflow-y:scroll;overflow-x:hidden;
+  scrollbar-width:thin;scrollbar-color:#7492b2 #12243a;
+}
+#page-association .dungeon-team-scroll-area .team-members{
+  height:auto;max-height:none;overflow:visible;padding-right:0;
+}
+#page-association .dungeon-team-scroll-area .team-preview{min-height:0}
+#page-association .dungeon-team-scroll-area .association-world{max-height:none;overflow:visible}
+#page-association .dungeon-action-bar{margin-top:9px;flex:0 0 auto}
+#page-association .ongoing-expeditions{
+  flex:0 0 auto;min-height:96px;max-height:170px;margin-top:10px;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#page-association .ongoing-expeditions-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;flex:0 0 auto}
+#page-association .ongoing-expeditions-head h3{margin:0;font-size:14px;color:#d5e4f2}
+#page-association .ongoing-expeditions-head span{font-size:11px;color:#9cb7d0}
+#page-association .ongoing-expeditions-list{display:flex;gap:9px;overflow-x:auto;overflow-y:auto;min-height:0;flex:1 1 auto;scrollbar-width:thin;scrollbar-color:#7492b2 #12243a;padding-bottom:3px}
+#page-association .ongoing-empty{font-size:11px;color:#aabfd2;margin:0;padding:16px 12px;border:1px dashed #3a526c;border-radius:9px;flex:1}
+#page-association .ongoing-raid-card{min-width:300px;width:min(440px,100%);flex:0 0 auto;border:1px solid #3d5774;border-radius:9px;background:#112338;padding:10px 12px;overflow-y:auto;scrollbar-width:thin}
+#page-association .ongoing-raid-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e5effa;font-size:12px}
+#page-association .ongoing-raid-sub{font-size:10px;color:#a6bdd3;margin-top:5px}
+#page-association .ongoing-members{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+#page-association .ongoing-member{padding:4px 6px;border:1px solid #34506b;border-radius:5px;background:#0e1b2a;color:#d5e5f3;font-size:9px}
+#page-association .ongoing-progress-track{height:7px;background:#25384e;border-radius:8px;overflow:hidden}
+#page-association .ongoing-progress-fill{height:100%;width:0;background:#4d94d0;border-radius:8px}
+#page-association .ongoing-raid-card>small{display:block;margin-top:5px;color:#b0c6d9;font-size:9px}
+#page-association .dungeon-choice:disabled:not(.selected){opacity:.62}
+@media(max-width:850px){
+ body.desktop-mode .main-content>#page-association.cw-open{overflow-y:auto;height:calc(100vh - 148px)}
+ body.desktop-mode #page-association .raid-layout{flex:0 0 auto;min-height:550px}
+ #page-association .ongoing-expeditions{min-height:130px}
+}
+
+/* V13.12.4 — Les caractéristiques figurent dans chaque carte, sans doublon. */
+#page-association .dungeon-switch{margin-bottom:0;min-height:190px}
+#page-association .dungeon-choice{min-height:67px;grid-template-columns:27px minmax(0,1fr) auto;align-items:center}
+#page-association .dungeon-card-text{min-width:0}
+#page-association .dungeon-card-text small{white-space:normal;line-height:1.4}
+#page-association .dungeon-card-reward{color:#c3d5e5;opacity:1;margin-top:4px}
+#page-association .dungeon-card-reward b{color:#e6c993;font-weight:800}
+
+/* V13.12.6 — Repère visuel doré pour la véritable escouade du joueur. */
+#page-association .ongoing-raid-card.is-player-raid{
+  border:2px solid #d9ae5e;
+  background:linear-gradient(145deg,#353326 0%,#252e36 68%,#182c3f 100%);
+  box-shadow:inset 0 0 0 1px rgba(246,209,129,.15),0 0 14px rgba(222,177,84,.12);
+}
+#page-association .ongoing-raid-card.is-player-raid .ongoing-raid-top strong{color:#ffe3a9}
+#page-association .ongoing-raid-card.is-player-raid .ongoing-progress-fill{background:linear-gradient(90deg,#b68b46,#f1cc82)}
+#page-association .ongoing-raid-card.is-player-raid .ongoing-member{border-color:#987c50;background:#292d2d}
+#page-association .own-raid-badge{
+  display:inline-block;margin-left:7px;padding:3px 6px;border:1px solid #c9a15d;
+  border-radius:5px;background:#5b4829;color:#ffe3a9;font-size:9px;white-space:nowrap;
+  vertical-align:middle;
+}
+#page-guilds .guild-squad-card.is-player-squad{border:2px solid #d9ae5e;background:#302f2a}
+#page-guilds .guild-squad-card.is-player-squad strong{color:#ffe3a9}
+
+/* V13.12.7 — Notifications : un véritable fil déroulant, lisible au premier regard. */
+#page-journal .panel{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#page-journal .panel-heading{flex:0 0 auto;margin-bottom:12px}
+#page-journal .notification-feed{display:flex;flex-direction:column;gap:8px;overflow-y:auto;overflow-x:hidden;max-height:min(590px,61vh);min-height:120px;padding:2px 9px 5px 1px;scrollbar-width:thin;scrollbar-color:#64819d #102033;overscroll-behavior:contain}
+#page-journal .notification-feed::-webkit-scrollbar{width:9px}
+#page-journal .notification-feed::-webkit-scrollbar-track{background:#102033;border-radius:8px}
+#page-journal .notification-feed::-webkit-scrollbar-thumb{background:#64819d;border-radius:8px;border:2px solid #102033}
+#page-journal .notification-feed .event{flex:0 0 auto;grid-template-columns:37px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;border-left:3px solid var(--event);border-radius:10px}
+#page-journal .event .event-icon{height:34px;width:34px;font-size:17px}
+#page-journal .event .event-category{font-size:10px;letter-spacing:.45px;margin-bottom:4px}
+#page-journal .event strong{font-size:12px;line-height:1.35}
+#page-journal .event p{font-size:11.5px;line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+#page-journal .event time{font-size:10px;min-width:77px;color:#c3d0de;align-self:start;padding-top:4px}
+body.desktop-mode #page-journal .notification-feed{max-height:none;flex:1;min-height:0}
+@media(max-width:650px){#page-journal .notification-feed .event{grid-template-columns:32px minmax(0,1fr)}#page-journal .event time{grid-column:2;justify-self:start;padding-top:0}}
+
+/* Chronicles V14.1 — classement et fiches publiques des guildes */
+#rankingAdventurersView[hidden],#rankingGuildsView[hidden]{display:none!important}
+.guild-ranking-panel{padding:18px 20px}
+.guild-ranking-head,.guild-ranking-row{display:grid;grid-template-columns:65px minmax(0,1fr) 65px 100px 115px;align-items:center;gap:12px}
+.guild-ranking-head{padding:11px 12px;border-bottom:1px solid #43576e;color:#aabbd0;font-size:10px;font-weight:800;letter-spacing:.5px}
+.guild-ranking-row{padding:14px 12px;border-bottom:1px solid #304055;cursor:pointer;transition:background .15s ease}
+.guild-ranking-row:nth-child(even){background:#192639}
+.guild-ranking-row:hover,.guild-ranking-row:focus-visible{background:#30435a;outline:1px solid #b8a076}
+.guild-ranking-row.is-mine{background:#403627;border:1px solid #b6965b;border-radius:9px}
+.guild-ranking-place,.guild-ranking-rep{color:#ebc98b}.guild-ranking-name{min-width:0}
+.guild-ranking-name strong,.guild-ranking-name small{display:block;overflow-wrap:anywhere}
+.guild-ranking-name strong{font-size:13px}.guild-ranking-name small{margin-top:5px;font-size:11px;color:#a7bad0}
+.guild-ranking-head>span:nth-child(n+3),.guild-ranking-level,.guild-ranking-members,.guild-ranking-rep{text-align:center}
+.guild-ranking-rep{font-size:13px}
+.public-guild-dialog{width:min(720px,100%)}#publicGuildContent{padding:24px 28px 27px}
+.public-guild-header{display:flex;align-items:center;gap:18px}.public-guild-crest{display:grid;place-items:center;flex:0 0 70px;width:70px;height:70px;border:1px solid #9c855b;border-radius:15px;color:#e8c78e;background:#27354b;font-size:38px}
+.public-guild-header h2{font:700 30px Georgia,serif;margin:4px 0 8px}.public-guild-header p{margin:0;color:#c5d4e5;font-size:12px}
+.public-guild-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 8px}
+.public-guild-facts>div{padding:14px;border:1px solid #354d65;border-radius:10px;background:#19283d}
+.public-guild-facts small{display:block;color:#9eb4c9;font-size:10px}.public-guild-facts strong{display:block;color:#f0d29a;font-size:22px;margin-top:8px}
+.public-guild-note{color:#aabed1;font-size:11px;margin:10px 0 20px}
+.public-guild-record{display:flex;flex-wrap:wrap;gap:9px;padding:14px 0;border-top:1px solid #354b63;border-bottom:1px solid #354b63;font-size:12px}
+.public-guild-record span{padding-right:15px;color:#aebfd0}.public-guild-record b{color:#f1d09a}
+#publicGuildContent h3{font:700 19px Georgia,serif;margin:22px 0 10px}
+.public-guild-roster{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:280px;overflow-y:auto;scrollbar-width:thin}
+.public-guild-member{display:flex;align-items:center;gap:11px;min-width:0;padding:9px;border:1px solid #344960;border-radius:9px;background:#18283d;cursor:pointer}
+.public-guild-member:hover,.public-guild-member:focus-visible{background:#2b4057;outline:1px solid #d3b478}
+.public-guild-member strong,.public-guild-member small{display:block}.public-guild-member strong{font-size:12px}.public-guild-member small{font-size:10px;color:#b2c6d9;margin-top:3px}
+.public-guild-member img{width:40px;height:40px;object-fit:cover;border-radius:8px}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:650px){.guild-ranking-head,.guild-ranking-row{grid-template-columns:36px minmax(0,1fr) 35px 52px 73px;gap:4px;padding:10px 3px;font-size:10px}.guild-ranking-name strong{font-size:11px}.guild-ranking-name small{font-size:9px}.guild-ranking-rep{font-size:10px}.guild-ranking-panel{padding:10px}#publicGuildContent{padding:16px}.public-guild-roster{grid-template-columns:1fr}.public-guild-header h2{font-size:24px}}
+
+/* V14.1.3 — service Comptable, sans modifier les anciens panneaux. */
+.accountant-panel{margin-bottom:16px;border-color:#60768a!important;background:linear-gradient(135deg,#182b3d,#132235)!important}
+.accountant-panel .panel-heading{margin-bottom:8px}
+.accountant-panel .muted{font-size:12px;line-height:1.55;margin:0 0 12px}
+.accountant-panel .accountant-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:8px 0}
+.accountant-panel .accountant-actions>strong{color:#e7cd9e;font-size:12px}
+.accountant-panel .accountant-actions button{font-size:12px;padding:9px 14px}
+.accountant-panel #accountantControls>small{display:block;color:#a9c1d6;font-size:11px;margin:7px 0 2px}
+.accountant-panel #accountantStatus.accountant-active{color:#91edc0;border-color:#42866a;background:#16392d}
+.accountant-panel [hidden]{display:none!important}
+
+/* V14.2.2 — Quatrième panoplie à effet collectif sur les blessures. */
+.shop-set-label.set-guerisseur{border-color:#56ac85;color:#abefc9}
+
+
+/* V14.3.1 — Classe et rang lisibles, sans confusion avec les informations secondaires. */
+.class-rank-pair{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0}
+.class-rank-pair .class-label{color:#e9f0f9;font-size:inherit;font-weight:750}
+.rank-token.rank-emphasis{display:inline-flex;justify-content:center;align-items:center;min-width:32px;height:auto;min-height:28px;padding:4px 7px;font-size:13px;font-weight:950;letter-spacing:.7px;line-height:1.2;white-space:nowrap;text-transform:uppercase;box-shadow:inset 0 1px 0 #ffffff20,0 0 0 1px #0003}
+/* Chaque rang possède déjà une couleur distincte, renforcée dans ses badges. */
+.rank-emphasis.rank-E{background:#35495f;border-color:#8c9db2;color:#fff}
+.rank-emphasis.rank-D{background:#1f7051;border-color:#62c29a;color:#f0fff6}
+.rank-emphasis.rank-C{background:#205c91;border-color:#70b8ec;color:#fff}
+.rank-emphasis.rank-B{background:#803779;border-color:#da8bd4;color:#fff}
+.rank-emphasis.rank-A{background:#a14837;border-color:#f0a080;color:#fff}
+.rank-emphasis.rank-S{background:#6743a3;border-color:#c3a1ff;color:#fff}
+.header-class-rank .class-rank-pair{gap:7px;flex-wrap:nowrap}
+.header-class-rank .class-rank-pair .class-label{font-size:11px;white-space:nowrap}
+.header-class-rank .rank-emphasis{min-width:28px;min-height:24px;padding:3px 6px;font-size:12px}
+.head-indicators .header-class-rank #sideClass{max-width:none;overflow:visible;text-overflow:clip;white-space:normal}
+.cv-heading .cv-class-rank{margin:4px 0 13px;gap:14px}
+.cv-heading .cv-class-rank .class-label{font-size:17px}
+.cv-heading .cv-class-rank .rank-emphasis{min-width:40px;min-height:34px;font-size:16px;padding:5px 10px}
+.npc-profile-heading .profile-role-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.npc-profile-heading .role-secondary{color:#b6c6d7;font-size:12px}
+.public-guild-class-rank{display:flex!important;align-items:center;gap:8px;flex-wrap:wrap}
+.public-guild-class-rank .class-label{font-weight:700;color:#afc8dc}
+.public-guild-class-rank .rank-emphasis{min-height:22px;min-width:27px;padding:3px 7px;font-size:12px}
+.guild-member>.rank-emphasis{min-width:32px;flex:0 0 auto}
+.team-member .team-member-identity{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.team-member .team-member-identity strong{font-size:11px;color:#f3f5f8;font-weight:800;white-space:normal}
+.team-member .team-member-identity small{font-size:10px;color:#aebfd2;white-space:normal}
+.team-member .team-member-stats{flex:0 0 auto;display:flex;align-items:center;gap:8px}
+.team-member .team-member-stats .rank-emphasis{min-width:28px;min-height:24px;font-size:12px;padding:3px 6px}
+.team-member .team-member-stats b{font-size:11px;color:#f3d9a8;white-space:nowrap}
+.save-card .save-character-meta{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.save-card .save-character-meta .class-label{font-weight:700;color:#cad9e9}
+.save-card .save-character-meta .rank-emphasis{min-height:23px;min-width:28px;padding:3px 6px;font-size:12px}
+.save-card .save-character-name{font-weight:800;color:#f1f4f8}
+.ranking-row>.rank-emphasis{justify-self:center;min-width:32px;min-height:26px;padding:4px 6px;font-size:13px}
+@media(max-width:750px){.team-member .team-member-stats{gap:5px}.team-member .team-member-stats .rank-emphasis{min-width:26px;font-size:11px}}
+
+
+/* V14.3.2 — Vie de la guilde : historique autonome, coloré et scrollable. */
+#page-guilds .guild-activity-panel .panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#page-guilds .guild-activity-count{font-size:10px;color:#9fb6cd;white-space:nowrap}
+#page-guilds .guild-activity{display:grid;grid-auto-rows:max-content;align-content:start;gap:7px;
+  max-height:430px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+  scrollbar-color:#6b89a3 #15273c;padding:2px 7px 2px 1px}
+#page-guilds:not(.guild-independent) .guild-activity{max-height:440px;overflow-y:auto}
+#page-guilds .guild-activity-row{
+  --guild-event:#99acc0;--guild-event-bg:rgba(153,172,192,.08);
+  display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:10px;
+  padding:10px 11px;margin:0;min-width:0;
+  border:1px solid color-mix(in srgb,var(--guild-event) 49%,#31485e);
+  border-radius:9px;background:var(--guild-event-bg)
+}
+#page-guilds .guild-activity-icon{
+  display:grid;place-items:center;height:30px;width:30px;border-radius:7px;
+  background:color-mix(in srgb,var(--guild-event) 17%,#13273a);
+  border:1px solid var(--guild-event);color:#fff;font-weight:900;font-size:16px
+}
+#page-guilds .guild-activity-copy{min-width:0}
+#page-guilds .guild-activity-kind{
+  display:block;color:var(--guild-event);font-size:9px;font-weight:900;
+  letter-spacing:.4px;line-height:1.4
+}
+#page-guilds .guild-activity-row p{margin:3px 0 0;line-height:1.4;font-size:11px;color:#d5e0ec;overflow-wrap:anywhere}
+#page-guilds .guild-activity-time{font-size:9px;color:#9fb3c7;text-align:right;white-space:nowrap}
+#page-guilds .guild-activity-row.guild-activity-success{--guild-event:#44da91;--guild-event-bg:rgba(68,218,145,.13)}
+#page-guilds .guild-activity-row.guild-activity-failure{--guild-event:#ff777d;--guild-event-bg:rgba(255,119,125,.12)}
+#page-guilds .guild-activity-row.guild-activity-depart{--guild-event:#45c2fa;--guild-event-bg:rgba(69,194,250,.11)}
+#page-guilds .guild-activity-row.guild-activity-hire{--guild-event:#b29af8;--guild-event-bg:rgba(178,154,248,.13)}
+#page-guilds .guild-activity-row.guild-activity-departure{--guild-event:#f3a665;--guild-event-bg:rgba(243,166,101,.12)}
+#page-guilds .guild-activity-row.guild-activity-arena,
+#page-guilds .guild-activity-row.guild-activity-upgrade{--guild-event:#ebc476;--guild-event-bg:rgba(235,196,118,.12)}
+#page-guilds .guild-activity-row.guild-activity-warning{--guild-event:#ff886a;--guild-event-bg:rgba(255,136,106,.13)}
+#page-guilds .guild-activity-row.guild-activity-finance{--guild-event:#cfb37d;--guild-event-bg:rgba(207,179,125,.09)}
+@media(max-width:660px){#page-guilds .guild-activity-panel .panel-heading{flex-wrap:wrap}#page-guilds .guild-activity-row{grid-template-columns:30px minmax(0,1fr)}#page-guilds .guild-activity-time{grid-column:2;text-align:left}}

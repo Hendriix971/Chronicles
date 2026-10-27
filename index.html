@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#0e1421" name="theme-color"/>
+<title>Chronicles — V15.13</title>
+<link href="css/style.css" rel="stylesheet"/><link href="css/desktop.css" rel="stylesheet"/><link href="css/guild-v156.css" rel="stylesheet"/><link href="css/dungeon-v157.css" rel="stylesheet"/><link href="css/speed-v159.css" rel="stylesheet"/><link href="css/ranking-v1510.css" rel="stylesheet"/><link href="css/mail-v1511.css" rel="stylesheet"/><link href="css/fix-v1512.css" rel="stylesheet"/><link href="css/contract-v1513.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app-shell" hidden="" id="app">
+<header class="desktop-header">
+<div class="header-upper">
+<div class="game-wordmark"><span class="wordmark-symbol">✦</span><div><strong>CHRONICLES</strong><small>ÉDITION V15.13 · SIMULATION D’AVENTURIER</small></div></div>
+<div aria-label="État de votre aventurier" class="head-indicators">
+<div><small>AVENTURIER</small><strong id="sideName">Aventurier</strong></div>
+<div class="header-class-rank"><small>CLASSE / RANG</small><div id="sideClass" class="class-rank-pair"><span class="class-label">Assassin</span><span class="rank-token rank-E rank-emphasis">RANG E</span></div></div>
+<div><small>OR</small><strong id="headerGold">0</strong></div>
+<div><small>RÉPUTATION</small><strong id="headerRep">0</strong></div>
+<div class="header-guild"><small>GUILDE</small><strong id="headerGuild">Indépendant</strong></div>
+<div class="header-condition"><small>ÉTAT</small><strong class="condition-pill ready" id="headerCondition" title="Votre aventurier est disponible">✓ Prêt à partir</strong></div>
+</div>
+<div class="header-tools"><span class="clock-pill" id="clockText">Jour 1 · 08:00</span><div class="audio-controls"><button class="header-tool sound-tool" id="audioBtn" type="button" aria-expanded="false" aria-controls="audioPanel" title="Paramètres du son">🔊 Sons</button><div class="audio-panel" id="audioPanel" hidden role="group" aria-label="Réglages audio"><strong>Ambiance sonore</strong><label class="audio-enable"><input type="checkbox" id="audioEnabled" checked> Activer les sons</label><label class="audio-volume-label" for="audioVolume">Volume <output id="audioVolumeValue">40 %</output></label><input type="range" id="audioVolume" min="0" max="100" step="5" value="40" aria-label="Volume des effets sonores"><button class="audio-preview" type="button" id="audioTest">♪ Tester un son</button><small>Effets de RPG discrets · aucun fichier externe</small></div></div><div class="sim-speed-control" role="group" aria-label="Vitesse de simulation" title="Accélère tout le monde : guildes, donjons, économie et temps du jeu">
+    <span class="sim-speed-label" aria-hidden="true">⏩ Vitesse</span>
+    <button type="button" class="sim-speed-button active" data-sim-speed="1" aria-pressed="true" title="Vitesse normale">×1</button>
+    <button type="button" class="sim-speed-button" data-sim-speed="2" aria-pressed="false" title="Simulation deux fois plus rapide">×2</button>
+    <button type="button" class="sim-speed-button" data-sim-speed="5" aria-pressed="false" title="Simulation cinq fois plus rapide">×5</button>
+    <button type="button" class="sim-speed-button" data-sim-speed="10" aria-pressed="false" title="Simulation dix fois plus rapide">×10</button>
+    <button type="button" class="sim-speed-button" data-sim-speed="20" aria-pressed="false" title="Simulation vingt fois plus rapide">×20</button>
+   </div><button aria-pressed="false" class="header-tool pause-tool" id="pauseBtn" title="Mettre le jeu en pause" type="button">⏸ Pause</button><button class="header-tool" id="saveBtn" title="Sauvegarder">↧ Sauver</button><button class="header-tool" id="homeBtn" title="Menu principal">⌂ Menu</button></div>
+</div>
+<nav aria-label="Navigation principale" class="tab-ribbon">
+<button class="nav-btn active" data-page="dashboard">◈ Fiche personnage</button>
+<button class="nav-btn" data-page="inventory">◫ Inventaire</button>
+<button class="nav-btn" data-page="shop">⚒ Boutique</button>
+<button class="nav-btn" data-page="association">⚔ Donjon</button>
+<button class="nav-btn" data-page="guilds">♜ Guilde</button>
+<button class="nav-btn" data-page="finance">◈ Finances</button>
+<button class="nav-btn" data-page="bank">▣ Banque</button>
+<button class="nav-btn" data-page="debts">▣ Charges et dettes</button>
+<button class="nav-btn" data-page="mail">✉ Messagerie <span class="tab-count" hidden="" id="mailUnread">0</span></button>
+<button class="nav-btn" data-page="journal">▤ Notifications</button>
+<button class="nav-btn" data-page="ranking">♛ Classement</button>
+</nav>
+</header>
+<div class="world-desk" id="worldDesk" aria-label="Ville vivante en trois dimensions">
+  <div id="threeWorld"></div>
+  <div id="worldFallback" class="world-fallback" hidden>Three.js n’est pas disponible. Le jeu reste jouable dans les fenêtres. La carte 3D nécessite une connexion Internet pour charger Three.js.</div>
+  <div class="world-badge"><strong>VILLE DES AVENTURIERS</strong><span id="worldActivity">50 aventuriers · 0 expédition</span></div>
+  <aside class="world-ranking" id="worldRanking" aria-label="Classements des aventuriers">
+    <div class="world-ranking-head"><strong>Classement des aventuriers</strong><small id="worldRankingPlace">#—</small></div>
+    <div class="world-ranking-tabs" id="worldRankingMetrics" role="group" aria-label="Choisir un classement">
+      <button class="selected" type="button" data-world-ranking="power" aria-pressed="true">⚡ Puissance</button>
+      <button type="button" data-world-ranking="rep" aria-pressed="false">✦ Réputation</button>
+      <button type="button" data-world-ranking="gold" aria-pressed="false">◈ Richesse</button>
+    </div>
+    <div class="world-ranking-caption"><span>#</span><span>Aventurier</span><span>Rang</span><span id="worldRankingColumn">Puissance</span></div>
+    <div id="worldRankingEntries" aria-live="polite"></div>
+    <div class="world-ranking-foot"><span id="worldRankingSummary">Votre position : —</span><button type="button" id="worldRankingFull">Voir tout ↗</button></div>
+  </aside>
+  <div class="world-map-controls"><button id="mapZoomIn" title="Zoom avant">＋</button><button id="mapZoomOut" title="Zoom arrière">−</button><button id="mapReset" title="Réinitialiser la vue">⌖</button></div>
+  <div class="world-tip">Molette : zoom · Glisser : tourner la carte · Équipes réelles de trois</div>
+</div>
+<main class="main-content" id="windowDesktop"><div class="pause-notice" hidden="" id="pauseNotice" role="status">⏸ <strong>JEU EN PAUSE</strong> — Le temps et toutes les activités sont figés. Consultez librement les fenêtres, puis cliquez sur Reprendre.</div>
+<span hidden="" id="sideAvatar">A</span><span hidden="" id="currentPageName">FICHE PERSONNAGE</span>
+<section class="page active" id="page-dashboard"><div class="cv-layout cv-v151">
+  <div class="cv-profile-top">
+    <div class="cv-portrait-control">
+      <div class="cv-avatar" id="cvAvatar" aria-label="Portrait de votre personnage">⚔</div>
+      <div class="cv-portrait-buttons" aria-label="Changer votre portrait">
+        <button id="portraitPrev" type="button" title="Portrait précédent" aria-label="Portrait précédent">‹</button>
+        <button id="portraitNext" type="button" title="Portrait suivant" aria-label="Portrait suivant">›</button>
+      </div>
+    </div>
+    <div class="cv-profile-main">
+      <div class="cv-compact-section-title cv-person-head"><h2>Dossier de l'aventurier</h2></div>
+      <dl class="cv-data-grid" aria-label="Identité et statistiques de l'aventurier">
+        <div class="cv-data-line"><dt>Nom :</dt><dd id="cvName">Aventurier</dd></div>
+        <div class="cv-data-line"><dt>Classe :</dt><dd id="cvClassRank">Assassin</dd></div>
+        <div class="cv-data-line cv-rank-line"><dt>Rang :</dt><dd><span id="cvInlineRank">E</span><span class="cv-mini-progression" title="Progression vers le rang suivant"><span class="cv-mini-bar"><span id="cvXpBar"></span></span><span id="cvExperience">0 %</span></span></dd></div>
+        <div class="cv-data-line"><dt>Guilde :</dt><dd id="cvGuild">Indépendant</dd></div>
+        <div class="cv-data-line"><dt>Puissance :</dt><dd id="cvPower">0</dd></div>
+        <div class="cv-data-line"><dt>Réputation :</dt><dd id="cvRep">0</dd></div>
+        <div class="cv-data-line"><dt>Patrimoine net :</dt><dd id="cvWealth">0 or</dd></div>
+        <div class="cv-data-line"><dt>Guérison :</dt><dd id="cvRecovery">—</dd></div>
+        <div class="cv-data-line"><dt>Protection équipée :</dt><dd id="cvInjuryProtection">—</dd></div>
+        <div class="cv-data-line"><dt>État :</dt><dd id="cvStatus">Disponible</dd></div>
+      </dl>
+      <p class="cv-context-note">La protection équipée réduit le risque de blessure de l'équipe ; le risque final dépend aussi du donjon et de sa synergie.</p>
+    </div>
+  </div>
+  <section class="cv-compact-section cv-career" aria-labelledby="cvCareerTitle">
+    <div class="cv-compact-section-title"><h2 id="cvCareerTitle">Bilan de carrière</h2></div>
+    <div class="cv-data-grid cv-career-grid">
+      <div class="cv-data-line"><span>Expéditions :</span><strong id="cvRaidsTotal">—</strong></div>
+      <div class="cv-data-line"><span>Réussies :</span><strong id="cvRaidsWon">—</strong></div>
+      <div class="cv-data-line"><span>Échouées :</span><strong id="cvRaidsLost">—</strong></div>
+      <div class="cv-data-line"><span>Blessures subies :</span><strong id="cvInjuries">—</strong></div>
+    </div>
+  </section>
+  <section class="cv-compact-section cv-rank-record" aria-labelledby="cvRankRecordTitle">
+    <div class="cv-compact-section-title"><h2 id="cvRankRecordTitle">Donjons par rang</h2></div>
+    <table class="cv-rank-table" aria-label="Victoires et défaites par rang de donjon">
+      <thead><tr><th scope="col">Rang du donjon</th><th scope="col">Réussis</th><th scope="col">Échoués</th><th scope="col">Total</th></tr></thead>
+      <tbody id="cvRankRows"></tbody>
+      <tfoot><tr><th scope="row">Total depuis V15.2</th><td id="cvRankWonTotal">—</td><td id="cvRankLostTotal">—</td><td id="cvRankAllTotal">—</td></tr></tfoot>
+    </table>
+  </section>
+  <section class="cv-compact-section cv-standings" aria-labelledby="cvRankingTitle">
+    <div class="cv-compact-section-title"><h2 id="cvRankingTitle">Classements</h2></div>
+    <div class="cv-standings-inline">
+      <div><span>Puissance :</span><strong id="cvRankPower">—</strong></div>
+      <div><span>Réputation :</span><strong id="cvRankRep">—</strong></div>
+      <div><span>Richesse :</span><strong id="cvRankGold">—</strong></div>
+    </div>
+  </section>
+</div>
+<div class="legacy-dashboard">
+<div class="page-intro"><div><p class="eyebrow">DOSSIER PERSONNEL</p><h1>Fiche personnage<span class="gold-dot">.</span></h1><p>Votre identité, vos caractéristiques et votre équipement actuel.</p></div><span class="version-tag">FICHE D’AVENTURIER</span></div>
+<div class="hero-panel"><div class="hero-glow"></div><div class="hero-left"><p class="eyebrow">DOSSIER D’AVENTURIER</p><div class="hero-identity"><div class="hero-badge"><span id="heroRankBadge">E</span><small>RANG</small></div><div><p class="hero-prelabel">VOTRE PERSONNAGE</p><h2 id="heroName">Votre nom</h2><p id="heroDetails">Assassin · Homme</p></div></div><div class="hero-foot" id="heroAffiliation">Association des aventuriers <span>•</span> Aventurier indépendant</div></div><div class="hero-right"><div class="shield-figure"><div class="shield-ornament">✧</div><div class="shield-letter" id="shieldRank">E</div><div class="shield-caption" id="shieldCaption">AVENTURIER DÉBUTANT</div></div></div></div>
+<div class="stat-grid"><div class="stat-card"><div class="stat-top"><span>PUISSANCE</span><i>⚡</i></div><strong id="powerStat">0</strong><small>Statistique de combat</small></div><div class="stat-card"><div class="stat-top"><span>OR DISPONIBLE</span><i>◈</i></div><strong id="goldStat">0 <small>or</small></strong><small>Portefeuille personnel</small></div><div class="stat-card"><div class="stat-top"><span>RÉPUTATION</span><i>✦</i></div><strong id="repStat">0</strong><small>Renommée de l'aventurier</small></div><div class="stat-card"><div class="stat-top"><span>EXPÉRIENCE</span><i>⌁</i></div><strong id="xpStat">0 <small>XP</small></strong><small id="xpNote">Rang suivant : D</small><div class="stat-progress"><span id="xpProgress"></span></div></div></div>
+<div aria-live="polite" class="injury-panel" hidden="" id="injuryDashboard"><div><strong>✚ Convalescence en cours</strong><p>Votre aventurier est blessé. Les raids sont bloqués jusqu'à la fin de la récupération.</p></div><div class="injury-timer" id="injuryDashTimer">38,0 s</div><div class="injury-track"><div class="injury-fill" id="injuryDashBar"></div></div></div>
+<div class="columns-bottom"><div class="panel"><div class="panel-heading"><div><p class="eyebrow">ACTIVITÉ</p><h3>Votre prochaine expédition</h3></div><span class="small-tag green" id="dashMissionAvailability">DISPONIBLE</span></div><div class="action-content"><div class="quest-symbol">⚔</div><div class="quest-text"><strong>Raid d'initiation — Rang E</strong><p id="dashNextMissionDescription">Un raid accessible aux aventuriers indépendants, entièrement financé par l'Association.</p><div class="meta-line"><span>◷ 8 secondes</span><span>◈ Gratuit</span><span>◇ Rang E</span></div></div></div><button class="primary-btn full-width" id="fromDashToRaid">Voir les expéditions <span>→</span></button></div><div class="panel"><div class="panel-heading"><div><p class="eyebrow">PATRIMOINE</p><h3>Votre logement</h3></div><span class="small-tag">PROPRIÉTAIRE</span></div><div class="home-display"><div class="home-icon">⌂</div><div><strong id="dashHomeName">Studio délabré</strong><p id="dashHomeQuality">Qualité I / V</p></div></div><div class="home-rule"><span>Temps de convalescence</span><strong id="dashHomeRecovery">38 secondes</strong></div><p class="muted tiny home-explainer" id="dashHomeExplain">La qualité de la résidence contrôle la convalescence.</p><button class="secondary-btn full-width" id="dashToHousing">Voir les logements →</button></div></div>
+<div class="panel season-tracker" hidden="" id="seasonTracker">
+<div class="panel-heading"><div><p class="eyebrow">MODE DE PARTIE</p><h3 id="seasonModeName">PARTIE LIBRE</h3></div><strong id="seasonProgressValue">Sans limite</strong></div>
+<p class="muted" id="seasonProgressDescription"></p>
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="stat-progress season-track" role="progressbar"><span id="seasonProgressBar"></span></div>
+<p class="tiny muted" id="seasonProgressMeta"></p>
+</div>
+<div class="panel ambition-panel"><div class="panel-heading"><div><p class="eyebrow">AMBITION PERSONNELLE</p><h3>Votre objectif de carrière</h3></div><span class="small-tag">OBJECTIF LIBRE</span></div><p class="muted">Choisissez ce que vous souhaitez accomplir. Votre ambition ne modifie ni vos statistiques ni votre rémunération.</p><div class="ambition-buttons" id="ambitionOptions"><button aria-pressed="true" class="ambition-button selected" data-ambition="power" type="button">⚡ Puissance</button><button aria-pressed="false" class="ambition-button" data-ambition="rep" type="button">✦ Réputation</button><button aria-pressed="false" class="ambition-button" data-ambition="gold" type="button">◈ Richesse</button></div><div class="ambition-detail"><div><p class="eyebrow">AMBITION CHOISIE</p><h3 id="ambitionTitle">Puissance</h3><p id="ambitionDescription">Devenez le plus puissant aventurier.</p></div><strong id="ambitionPosition">#42</strong></div><div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="stat-progress ambition-track" role="progressbar"><span id="ambitionProgress"></span></div><p class="tiny muted" id="ambitionCurrent">Votre progression par rapport au premier.</p></div>
+<div class="quick-cards"><button class="quick-card" id="dashShop"><span class="quick-icon">⚒</span><span><b>Améliorer l'équipement</b><small id="loadoutSummary">0 / 3 objets équipés</small></span><span aria-hidden="true">→</span></button><button class="quick-card" id="dashRanking"><span class="quick-icon">♛</span><span><b>Classement de puissance</b><small id="dashPosition">—</small></span><span aria-hidden="true">→</span></button></div>
+<div class="footer-hint">✦ <span>Gagnez de l'XP pour passer de E à S, équipez votre aventurier et défiez le classement. Les guildes et les aventuriers autonomes évoluent dans le monde en parallèle de votre carrière.</span></div>
+</div></section><section class="page" id="page-inventory"><div class="page-intro"><div><p class="eyebrow">VOS POSSESSIONS</p><h1>Inventaire<span class="gold-dot">.</span></h1></div></div><div class="inventory-workspace" id="inventoryPanels">
+<section class="inventory-section inventory-gear-panel" aria-label="Équipement porté">
+<div class="panel-heading"><div><p class="eyebrow">ÉQUIPEMENT PORTÉ</p></div><span class="small-tag green" id="shopGold">0 OR</span></div>
+<div class="equip-slots" id="equipSlots"></div>
+<div class="equip-summary"><span>Puissance de base <strong id="basePowerStat">—</strong></span><span>Bonus de l'équipement <strong id="gearPowerStat">+0</strong></span><span class="equip-total">Puissance totale <strong id="totalPowerStat">—</strong></span></div>
+</section>
+<section class="inventory-section inventory-bag-panel" aria-label="Sac d'aventurier">
+<div class="panel-heading"><div><p class="eyebrow">SAC D'AVENTURIER</p></div><span class="small-tag" id="inventoryCount">0 OBJET</span></div>
+<div class="inventory-list" id="inventoryList"></div>
+
+</section>
+</div></section>
+<section class="page" id="page-association">
+<div class="page-intro"><div><p class="eyebrow">ASSOCIATION DES AVENTURIERS</p><h1>Donjons et expéditions<span class="gold-dot">.</span></h1></div><span class="version-tag">SERVICE PUBLIC · BUTIN PARTAGÉ</span></div>
+<div class="guild-quest" id="guildQuest"></div><div class="guild-raid-overview" hidden="" id="guildRaidPanels"><div class="panel"><div class="panel-heading"><div><p class="eyebrow">MISSIONS DE LA GUILDE</p><h3>Expéditions en cours</h3></div></div><div class="guild-current-raid" id="guildCurrentRaid"></div></div><div class="panel"><div class="panel-heading"><div><p class="eyebrow">ÉQUIPES PERMANENTES</p><h3>Escouades d’expédition</h3></div></div><div class="guild-roster" id="guildSquadRoster"></div></div></div><div class="association-banner"><div class="association-emblem">⚔</div><div><p class="eyebrow">RAIDS OUVERTS · RANGS E ET D</p><h2>Votre équipe d’expédition</h2><p>Indépendant : choisissez un portail et lancez une expédition avec l'Association. En guilde : le chef choisit, finance et lance automatiquement les raids de vos escouades.</p></div></div>
+<div class="raid-layout"><div class="panel raid-panel"><div class="panel-heading"><div><p class="eyebrow" id="portalPanelHeading">CHOIX DU PORTAIL</p><h3 id="dungeonName">Donjon de rang E</h3></div><span class="rank-badge" id="dungeonBadge">E</span></div>
+<div class="dungeon-switch"><button class="dungeon-choice selected" data-rank="E" type="button">Rang E <small>8 s</small></button><button class="dungeon-choice" data-rank="D" type="button">Rang D <small>11 s</small></button><button class="dungeon-choice" data-rank="C" hidden="" type="button">Rang C <small>15 s</small></button><button class="dungeon-choice" data-rank="B" hidden="" type="button">Rang B <small>22 s</small></button><button class="dungeon-choice" data-rank="A" hidden="" type="button">Rang A <small>30 s</small></button><button class="dungeon-choice" data-rank="S" hidden="" type="button">Rang S <small>38 s</small></button></div>
+<div class="guild-raid-details" id="guildRaidDetails" hidden></div></div>
+<div class="panel expedition-panel"><div class="panel-heading"><div><p class="eyebrow">COMPOSITION DU GROUPE</p><h3>Équipe d’expédition</h3></div><span class="small-tag" id="raidStatus">EN ATTENTE</span></div>
+<div class="dungeon-team-scroll-area" aria-label="Membres de l'équipe"><div class="team-preview"><div class="team-heading"><strong>Trois aventuriers</strong><span id="teamSynergy">—</span></div><div class="team-members" id="teamMembers"></div><div class="team-footer"><span>Puissance collective</span><strong id="teamPower">—</strong></div><p class="tiny muted" id="teamAvailability">Choix parmi les aventuriers libres du monde.</p></div><div class="association-world" id="associationWorld"></div></div></div></div>
+<div class="dungeon-action-bar" aria-label="Préparation et lancement de l’expédition"><div class="dungeon-action-status"><div class="dungeon-summary" aria-live="polite"><div class="dungeon-summary-head"><strong id="dungeonSummaryTitle">Donjon E · Association</strong><span id="dungeonSummaryState">EN ATTENTE</span></div><p id="dungeonSummaryDetails">Choisissez un portail pour préparer votre expédition.</p></div>
+<div class="raid-injury" hidden="" id="injuryRaid" role="status"><strong>✚ Aventurier blessé</strong><span>Retour au combat dans <b id="injuryRaidTimer">38,0 s</b></span><div class="injury-track"><div class="injury-fill" id="injuryRaidBar"></div></div></div></div><div class="dungeon-action-controls"><button class="primary-btn full-width" id="launchBtn">Lancer l’expédition <span>⚔</span></button><p id="rewardExplanation" hidden></p></div></div>
+<section class="ongoing-expeditions" aria-label="Expéditions en cours"><div class="ongoing-expeditions-head"><h3>Expéditions en cours</h3><span id="activeExpeditionCount">0/1</span></div><div class="ongoing-expeditions-list" id="ongoingExpeditions"><p class="ongoing-empty">Aucune expédition en cours.</p></div></section>
+</section>
+<section class="page" id="page-guilds">
+<div class="page-intro"><div><p class="eyebrow">UN MONDE QUI VIT SANS VOUS</p><h1>Guilde<span class="gold-dot">.</span></h1></div><span class="version-tag" id="guildPageTag">ANNUAIRE &amp; EFFECTIFS</span></div>
+<div class="guild-stats" hidden=""><div><small>GUILDES ACTIVES</small><strong id="guildCount">9</strong></div><div><small>AVENTURIERS EMPLOYÉS</small><strong id="guildAdventurerCount">—</strong></div><div><small>INDÉPENDANTS</small><strong id="freeAgentsCount">—</strong></div><div><small>RAIDS SIMULTANÉS</small><strong id="guildActiveRaids">—</strong></div></div>
+<div class="panel guild-directory" id="guildDirectory"><div class="panel-heading"><div><p class="eyebrow">LES ORGANISATIONS</p><h3>Les guildes du monde</h3></div><label class="shop-select-label" for="guildFilter">Comportement <select id="guildFilter"><option value="all">Toutes</option><option value="prudente">Prudentes</option><option value="audacieuse">Audacieuses</option><option value="équilibrée">Équilibrées</option><option value="recruteuse">Recruteuses</option></select></label></div><div class="guild-cards" id="guildCards"></div></div>
+<div class="guild-details-grid" id="guildDetailsGrid">
+ <div class="panel guild-inspector">
+  <header class="guild-v156-summary" aria-label="Fiche de la guilde">
+   <div class="guild-v156-identity">
+    <div class="guild-detail-crest" id="guildDetailCrest" aria-hidden="true">✦</div>
+    <div class="guild-v156-heading">
+     <p class="eyebrow">DOSSIER DE GUILDE</p>
+     <h3 id="guildDetailTitle">—</h3>
+     <div class="guild-v156-identity-facts" id="guildDetailLeader">—</div>
+    </div>
+   </div>
+   <div class="guild-detail-metrics" aria-label="Statistiques de guilde">
+    <div><small>TRÉSORERIE</small><strong id="guildDetailGold">—</strong></div>
+    <div><small>RÉPUTATION</small><strong id="guildDetailRep">—</strong></div>
+    <div><small>MEMBRES</small><strong id="guildDetailCapacity">—</strong></div>
+    <div class="guild-v156-record"><small>EXPÉDITIONS</small><strong id="guildDetailRecord">—</strong></div>
+   </div>
+  </header>
+  <nav class="guild-compact-tabs" role="tablist" aria-label="Rubriques de la guilde">
+   <button type="button" role="tab" id="guildTabMembers" aria-selected="true" aria-controls="guildPaneMembers" class="guild-compact-tab active" data-guild-tab="members">Membres</button>
+   <button type="button" role="tab" id="guildTabContract" aria-selected="false" aria-controls="guildPaneContract" class="guild-compact-tab" data-guild-tab="contract">Mon contrat</button>
+   <button type="button" role="tab" id="guildTabNews" aria-selected="false" aria-controls="guildPaneNews" class="guild-compact-tab" data-guild-tab="news">Vie de la guilde</button>
+  </nav>
+  <div class="guild-v156-body" id="guildV156Body" aria-label="Informations de la guilde" tabindex="0">
+   <section id="guildPaneMembers" class="guild-compact-pane active" role="tabpanel" aria-labelledby="guildTabMembers" data-guild-pane="members"><div class="guild-roster" id="guildRoster"></div></section>
+   <section id="guildPaneContract" class="guild-compact-pane" role="tabpanel" aria-labelledby="guildTabContract" data-guild-pane="contract"><div class="guild-career" id="guildCareer"></div></section>
+   <section id="guildPaneNews" class="guild-activity-panel" role="tabpanel" aria-labelledby="guildTabNews" data-guild-pane="news">
+    <div class="guild-v156-newsbar">
+     <div class="guild-v156-filters" role="group" aria-label="Filtrer les événements de guilde">
+      <button type="button" class="guild-v156-filter active" data-guild-filter="all" aria-pressed="true">Tout</button>
+      <button type="button" class="guild-v156-filter" data-guild-filter="expeditions" aria-pressed="false">Expéditions</button>
+      <button type="button" class="guild-v156-filter" data-guild-filter="finances" aria-pressed="false">Finances</button>
+      <button type="button" class="guild-v156-filter" data-guild-filter="arena" aria-pressed="false">Arène</button>
+      <button type="button" class="guild-v156-filter" data-guild-filter="members" aria-pressed="false">Membres</button>
+     </div>
+     <span class="guild-activity-count" id="guildActivityCount" aria-live="off">0 événement</span>
+    </div>
+    <div class="guild-activity" id="guildActivity" aria-label="Historique chronologique des événements"></div>
+   </section>
+  </div>
+  <div class="guild-finance" hidden id="guildDetailMoney"></div>
+ </div>
+</div>
+<div class="panel guild-world-news" hidden="" id="guildWorldNews"><div class="panel-heading"><div><p class="eyebrow">ÉVÉNEMENTS DU MONDE</p><h3>Fil d'actualité des guildes</h3></div></div><div class="guild-world-feed" id="guildWorldFeed"></div></div>
+</section>
+<section class="page" id="page-shop">
+<div class="page-intro"><div><p class="eyebrow">MARCHAND DE L'ASSOCIATION</p><h1>Boutique</h1></div></div><div aria-label="Transactions du marchand" class="merchant-switch" role="tablist"><button aria-selected="true" class="merchant-tab active" data-shop-mode="buy" id="merchantBuy" role="tab" type="button">Acheter</button><button aria-selected="false" class="merchant-tab" data-shop-mode="sell" id="merchantSell" role="tab" type="button">Vendre</button><span id="merchantBalance">0 or disponibles</span></div>
+<div class="panel shop-panel" id="merchantCatalogPanel"><div class="panel-heading"><div><p class="eyebrow">CATALOGUE DU MARCHAND</p></div><label class="shop-select-label" for="shopFilter">Afficher <select id="shopFilter"><option value="all">Tous les rangs</option><option selected="" value="available">Accessibles</option><option value="E">Rang E</option><option value="D">Rang D</option><option value="C">Rang C</option><option value="B">Rang B</option><option value="A">Rang A</option><option value="S">Rang S</option></select></label><label class="shop-select-label" for="shopSetFilter">Panoplie <select id="shopSetFilter"><option value="all">Toutes</option><option value="duelliste">Duelliste</option><option value="templier">Templier</option><option value="arcaniste">Arcaniste</option><option value="guerisseur">Guérisseur</option></select></label></div><div class="shop-grid" id="shopCatalog"></div></div><div class="panel shop-panel" hidden="" id="merchantSellPanel"><div class="panel-heading"><div><p class="eyebrow">REVENTE AU MARCHAND</p></div></div><div class="merchant-sell-list" id="shopSellList"></div></div>
+</section>
+<section class="page" id="page-ranking">
+
+<div class="ambition-buttons ranking-metric-buttons" id="rankingMetrics"><button aria-pressed="true" class="ambition-button selected" data-ranking-metric="power" type="button">⚡ Puissance</button><button aria-pressed="false" class="ambition-button" data-ranking-metric="rep" type="button">✦ Réputation</button><button aria-pressed="false" class="ambition-button" data-ranking-metric="gold" type="button">◈ Richesse</button><button aria-pressed="false" class="ambition-button" data-ranking-metric="guilds" type="button">♜ Guildes</button></div><div id="rankingAdventurersView">
+<div class="ranking-intro"><div><span>VOTRE POSITION</span><strong id="playerPlacement">—</strong><small id="playerPlacementDetail">—</small></div><div><span>AVENTURIERS RECENSÉS</span><strong id="rankingPopulation">—</strong><small>Population active</small></div><div><span id="rankingLeaderLabel">PLUS HAUTE PUISSANCE</span><strong id="rankingTopPower">—</strong><small id="rankingUnit">puissance</small></div></div>
+<div class="panel"><div class="panel-heading"><div><p class="eyebrow">CLASSEMENT GÉNÉRAL</p><h3>Rivaux et classement de <span id="rankingMetricName">puissance</span></h3></div><label class="shop-select-label" for="rankingFilter">Afficher <select id="rankingFilter"><option value="all">Tous les aventuriers</option><option value="near">Autour de moi</option><option value="E">Rang E</option><option value="D">Rang D</option><option value="C">Rang C</option><option value="B">Rang B</option><option value="A">Rang A</option><option value="S">Rang S</option></select></label></div>
+<div class="ranking-head"><span>POSITION / AVENTURIER</span><span>RANG</span><span id="rankingColumnName">PUISSANCE</span></div><div class="ranking-rows" id="rankingRows"></div></div>
+</div>
+<div id="rankingGuildsView" hidden>
+  <div class="panel guild-ranking-panel"><div class="panel-heading"><div><p class="eyebrow">CLASSEMENT PUBLIC</p><h3>Guildes du monde</h3></div><span class="small-tag"><span id="guildRankingCount">9</span> GUILDES</span></div>
+    <p class="tiny muted" id="guildRankingMine">Vous êtes indépendant</p>
+    <div class="guild-ranking-head"><span>POSITION</span><span>GUILDE / CHEF</span><span>NIV.</span><span>MEMBRES</span><span>RÉPUTATION</span></div>
+    <div id="guildRankingRows" class="guild-ranking-rows"></div>
+
+  </div>
+</div>
+</section>
+<section class="page" id="page-journal"><div class="page-intro"><div><p class="eyebrow">VOTRE AVENTURE</p><h1>Notifications<span class="gold-dot">.</span></h1><p>Les nouvelles de votre aventurier, classées de la plus récente à la plus ancienne.</p></div></div><div class="panel"><div class="panel-heading"><div><p class="eyebrow">JOURNAL PERSONNEL</p><h3>Dernières nouvelles</h3></div><span class="small-tag" id="eventCount">0 ÉVÉNEMENT</span></div><div class="events notification-feed" id="events" role="list" aria-label="Notifications de votre aventurier"></div></div></section>
+<section class="page" id="page-mail">
+<div class="mail-layout">
+  <aside class="panel mail-inbox" aria-label="Boîte de réception">
+    <div class="panel-heading"><div><p class="eyebrow">CORRESPONDANCE</p><h3>Boîte de réception</h3></div><span class="small-tag" id="mailCount">0 MESSAGE</span></div>
+    <div class="mail-tools">
+      <label><input id="mailSelectAll" type="checkbox"/> Tout sélectionner</label>
+      <button class="small-action secondary" id="mailReadAll" type="button">Tout marquer comme lu</button>
+      <button class="small-action secondary" id="mailDeleteSelected" type="button">Supprimer la sélection</button>
+      <button class="small-action secondary" id="mailDeleteAll" type="button">Tout supprimer</button>
+    </div>
+    <div class="mail-list" id="mailList" role="list" aria-label="Courriers reçus"></div>
+  </aside>
+  <article class="panel mail-reader" aria-label="Lecture du courrier">
+    <div class="mail-reader-tools"><button class="small-action secondary" id="mailToggleRead" type="button">Marquer comme non lu</button><button class="small-action secondary" id="mailDeleteCurrent" type="button">Supprimer ce message</button></div>
+    <div class="mail-content" id="mailContent"><div class="shop-empty">Sélectionnez un message pour le lire.</div></div>
+  </article>
+</div>
+</section>
+<section class="page" id="page-finance">
+<div class="page-intro"><div><p class="eyebrow">PATRIMOINE IMMOBILIER</p><h1>Logements et finances<span class="gold-dot">.</span></h1><p>Résidence, biens de rapport, investissements et petits boulots.</p></div><span class="version-tag">PATRIMOINE · V14.1</span></div><div aria-label="Rubriques de finances" class="merchant-switch finance-switch" role="tablist"><button class="merchant-tab" data-finance-mode="housing" role="tab" type="button">Immobilier</button><button aria-selected="true" class="merchant-tab active" data-finance-mode="investments" role="tab" type="button">Investissements</button><button class="merchant-tab" data-finance-mode="jobs" role="tab" type="button">Petits boulots</button></div>
+<div class="housing-summary-grid" data-finance-panel="housing" hidden="">
+<div class="panel housing-current"><p class="eyebrow">VOTRE RÉSIDENCE</p><h2 id="financeHomeName">Studio délabré</h2><p class="muted" id="financeHomeQuality">Qualité 1 / V · Résidence principale</p><div class="home-rule"><span>✚ Convalescence</span><strong id="financeRecovery">38 secondes</strong></div><div class="home-rule"><span>Valeur de revente</span><strong id="financeResale">0 or</strong></div><div class="home-rule"><span>Or disponible</span><strong id="financeWallet">0 or</strong></div><div class="home-rule"><span>Patrimoine net</span><strong id="financeNetWealth">0 or</strong></div></div>
+<details class="housing-how"><summary>Comment fonctionne le changement de logement ?</summary><p class="eyebrow">COMMENT ÇA FONCTIONNE</p><h3>Changer de logement</h3><p class="muted">Vous possédez toujours une seule résidence principale. En sélectionnant une autre habitation, la précédente est automatiquement revendue à 75 % de son prix d’achat et son montant est déduit du prix de la nouvelle.</p><p class="muted">Une meilleure résidence accélère la récupération des blessures, de 38 à 16 secondes. Aucun bonus de puissance, fatigue ou énergie.</p><p class="tiny muted">L'entretien et la taxe immobilière sont facturés tous les deux jours du monde. Les investissements sont distincts de votre résidence et génèrent des revenus nets ; la banque et les emprunts sont disponibles dans cette version.</p></details>
+</div>
+<div class="panel investment-section" data-finance-panel="investments"><div class="panel-heading"><div><p class="eyebrow">PATRIMOINE DE RAPPORT · V12</p><h3>Mes investissements</h3></div><span class="small-tag">LOYERS NETS</span></div>
+<p class="muted">Achetez des biens supplémentaires sans quitter votre résidence principale. Chacun verse un revenu net fixe <strong>tous les deux jours du monde</strong>, même si vous participez à des donjons. Les frais de gestion sont déjà compris dans ce revenu. Aucun versement pendant que le jeu est fermé.</p>
+<div class="investment-metrics"><div><small>BIENS POSSÉDÉS</small><strong id="investmentCount">0</strong></div><div><small>VALEUR DE REVENTE</small><strong id="investmentResaleTotal">0 or</strong></div><div><small>REVENU NET / CYCLE</small><strong id="investmentCycleIncome">0 or</strong></div><div><small>LOYERS CUMULÉS</small><strong id="investmentEarnedTotal">0 or</strong></div></div>
+<div class="asset-grid" id="investmentPortfolio"></div></div>
+<div class="panel investment-section" data-finance-panel="investments"><div class="panel-heading"><div><p class="eyebrow">PLACEMENTS IMMOBILIERS ET COMMERCIAUX</p><h3>Marché des investissements</h3></div><span class="small-tag">3 BIENS MAX. PAR TYPE</span></div><p class="muted">Les investissements se revendent à 75 % de leur prix d'achat. Il est possible d'en posséder jusqu'à 12. Le marché ne dépend pas des guildes.</p><div class="asset-grid" id="investmentMarket"></div></div>
+<div class="panel investment-section" data-finance-panel="investments"><div class="panel-heading"><div><p class="eyebrow">ÉCRITURES DU PATRIMOINE</p><h3>Historique des investissements</h3></div></div><div class="bill-history" id="investmentHistory"></div></div>
+<div class="panel jobs-panel" data-finance-panel="jobs" hidden=""><div class="panel-heading"><div><p class="eyebrow">REVENUS COMPLÉMENTAIRES</p><h3>Petits boulots</h3></div><span class="small-tag">ACTIFS · V12</span></div><p class="muted">Livraison, cueillette ou aide au marchand : gagnez un peu d'or sans partir en donjon. Un seul travail à la fois, réservé aux aventuriers disponibles.</p><div class="job-progress" hidden="" id="jobProgressBox"><div class="job-progress-head"><strong id="jobCurrentName">Petit boulot en cours</strong><span id="jobCountdown">—</span></div><div class="stat-progress"><span id="jobProgressBar"></span></div></div><div class="job-list" id="jobCards"></div></div>
+<div class="panel" data-finance-panel="housing" hidden=""><div class="panel-heading"><div><p class="eyebrow">MARCHÉ IMMOBILIER</p><h3>Marché de l’immobilier</h3></div><span class="small-tag">5 QUALITÉS</span></div><div class="housing-catalog" id="housingCatalog"></div></div>
+</section><section class="page" id="page-bank"><div class="page-intro"><div><p class="eyebrow">BANQUE DES AVENTURIERS</p><h1>Banque<span class="gold-dot">.</span></h1><p>Gérez votre épargne, vos prêts et vos opérations bancaires.</p></div></div><div class="panel banking-panel"><div class="panel-heading"><div><p class="eyebrow">COMPTE PERSONNEL · V12</p><h3>Banque des aventuriers</h3></div><span class="small-tag">ÉPARGNE &amp; CRÉDITS</span></div>
+<p class="muted">Déposez de l'or sur votre compte, retirez-le à volonté et percevez 0,5 % d'intérêts tous les deux jours du monde (arrondis à l'or inférieur). Les prêts sont limités à un seul à la fois.</p>
+<div class="bank-metrics"><div><small>COMPTE BANCAIRE</small><strong id="bankBalance">0 or</strong></div><div><small>OR EN BOURSE</small><strong id="bankPocket">0 or</strong></div><div><small>PRÊT RESTANT</small><strong id="bankLoanAmount">0 or</strong></div><div><small>PROCHAINS INTÉRÊTS</small><strong id="bankNextInterest">—</strong></div></div>
+<div class="bank-transfer"><label for="bankAmount">Montant à déposer ou retirer (or)</label><div class="bank-transfer-row"><input id="bankAmount" inputmode="numeric" min="1" placeholder="Ex. 150" step="1" type="number"/><div class="bank-button-row" id="bankTransferButtons"><button class="primary-btn" id="bankDeposit" type="button">Déposer</button><button class="secondary-btn" id="bankWithdraw" type="button">Retirer</button></div></div></div>
+<div class="panel-heading bank-subtitle"><div><p class="eyebrow">OFFRES DE FINANCEMENT</p><h3>Emprunter à la banque</h3></div></div>
+<p class="muted tiny">Coût forfaitaire 12 % du montant reçu, remboursable sous 7 jours du monde ; pénalité unique de 10 % du solde en cas de retard. Les sommes dues entrent dans le recouvrement des dettes.</p>
+<div class="bank-offers" id="bankLoanOffers"></div>
+<div class="bank-loan-repay" hidden="" id="bankLoanRepay"><strong>Remboursement de votre prêt</strong><small id="bankLoanDue">—</small><div class="bank-transfer-row"><input id="repayAmount" inputmode="numeric" min="1" placeholder="Montant à rembourser" step="1" type="number"/><button class="primary-btn" id="bankRepay">Rembourser</button></div></div>
+<div class="panel-heading bank-subtitle"><div><p class="eyebrow">RELEVÉ DE COMPTE</p><h3>Dernières opérations</h3></div></div><div class="bill-history" id="bankHistory"></div>
+</div></section>
+<section class="page" id="page-debts"><div class="page-intro"><div><p class="eyebrow">SUIVI ADMINISTRATIF</p><h1>Charges et dettes<span class="gold-dot">.</span></h1><p>Payez les factures de votre résidence avant leurs échéances. Des pénalités s'appliquent aux retards.</p></div><span class="version-tag">ÉCONOMIE · V14.1</span></div>
+<div class="panel enforcement-panel"><div class="panel-heading"><div><p class="eyebrow">SITUATION ADMINISTRATIVE · V12</p><h3>Recouvrement et endettement</h3></div><span class="small-tag" id="debtProcedureStage">Situation normale</span></div><p class="muted" id="debtProcedureDetail">Aucun impayé en retard.</p><div class="debt-loan-summary"><span>Crédit bancaire restant</span><strong id="loanDebtTotal">0 or</strong><small id="loanDebtDetail">Aucun emprunt en cours.</small></div><p class="tiny muted">Après 2 jours de retard : avertissement ; 7 jours : mise en demeure ; 14 jours : dernier avis ; 21 jours : recouvrement forcé. Les avoirs bancaires et les biens peuvent être saisis. Si cela ne suffit pas, la perte du logement et de l'autorisation d'exercer met fin à la partie. Les raids de l'Association restent possibles jusqu'à la saisie.</p></div>
+<div class="panel accountant-panel" id="accountantPanel"><div class="panel-heading"><div><p class="eyebrow">GESTION AUTOMATIQUE · SERVICE PERSONNEL</p><h3>Comptable</h3></div><span class="small-tag" id="accountantStatus">SERVICE DISPONIBLE</span></div>
+<p class="muted">Le Comptable règle vos factures de logement et vos remboursements contractuels de guilde <strong>une heure du monde avant l’échéance</strong>, tant que vos fonds suffisent. Pas d’emprunt ni de remboursement automatique des crédits. Les factures impayées restent soumises aux pénalités habituelles.</p>
+<div id="accountantPurchase" class="accountant-actions"><strong>Engagement définitif : <span id="accountantPrice">1 500 or</span> · aucun abonnement</strong><button id="accountantHire" type="button" class="primary-btn">Engager le Comptable</button></div>
+<div id="accountantControls" hidden><div class="accountant-actions"><button type="button" id="accountantToggle" class="primary-btn">Désactiver les prélèvements</button><button type="button" id="accountantBankToggle" class="secondary-btn" aria-pressed="false">Compte bancaire non autorisé</button></div><small id="accountantAccountInfo">Prélèvements uniquement dans la bourse.</small></div>
+</div>
+<div class="charge-summary"><div class="panel"><p class="eyebrow">TOTAL À PAYER</p><h2 id="chargesBalance">0 or</h2><p class="muted" id="chargesCount">0 facture</p></div><div class="panel"><p class="eyebrow">SITUATION</p><h2 id="chargesLate">0 en retard</h2><p class="muted">Pénalité unique de 10 % par facture en retard</p></div><div class="panel"><p class="eyebrow">PROCHAINE FACTURATION</p><h2 id="chargesNext">—</h2><p class="muted">Un cycle de deux jours du monde</p></div></div>
+<div class="panel"><div class="panel-heading"><div><p class="eyebrow">FACTURES ET ÉCHÉANCES</p><h3>Charges à payer</h3></div><button class="primary-btn" id="payAllBills" type="button">Tout régler</button></div><div class="bill-list" id="billList"></div><p class="tiny muted">Une facture d'entretien et une taxe immobilière sont émises chaque cycle selon votre résidence au moment de l'émission. Délai de paiement : un jour du monde. Après des impayés prolongés, une procédure graduelle de recouvrement peut aboutir à la saisie des biens et à une fin de carrière si les actifs sont insuffisants.</p></div>
+<div class="panel"><div class="panel-heading"><div><p class="eyebrow">ARCHIVES</p><h3>Paiements effectués</h3></div></div><div class="bill-history" id="billHistory"></div></div>
+</section>
+</main>
+</div>
+
+<!-- V14.1.1 — Fiche publique des guildes : informations visibles par tous uniquement. -->
+<div id="publicGuildOverlay" class="npc-profile-overlay" role="presentation" hidden>
+  <section class="npc-profile-dialog public-guild-dialog" role="dialog" aria-modal="true" aria-labelledby="publicGuildName">
+    <header class="npc-profile-topbar"><span>CHRONICLES · FICHE PUBLIQUE</span><button type="button" id="publicGuildClose" aria-label="Fermer la fiche de guilde">×</button></header>
+    <div id="publicGuildContent"></div>
+    <span id="publicGuildName" class="visually-hidden">Guilde</span>
+  </section>
+</div>
+<!-- V13.12 — Fiche consultable des aventuriers persistants (aucune action de gestion). -->
+<div id="npcProfileOverlay" class="npc-profile-overlay" role="presentation" hidden>
+  <section class="npc-profile-dialog" role="dialog" aria-modal="true" aria-labelledby="npcProfileName" tabindex="-1">
+    <header class="npc-profile-topbar"><span>FICHE D’AVENTURIER · MONDE PERSISTANT</span><button type="button" id="npcProfileClose" aria-label="Fermer la fiche" title="Fermer">×</button></header>
+    <div id="npcProfileContent"></div>
+  </section>
+</div>
+<div class="welcome-overlay" id="welcome">
+<div class="welcome-background"><div class="orb o1"></div><div class="orb o2"></div></div>
+<div class="welcome-card welcome-card-wide">
+<div class="welcome-title">
+<div class="brand-mark big">✦</div>
+<p class="eyebrow">GÉRER SES PARTIES • VERSION 15.4</p>
+<h1>Chronicles</h1>
+<p>Chaque partie est un univers indépendant. Reprenez une aventure ou repartez du jour 1.</p>
+</div>
+<div class="welcome-actions" id="welcomeActions">
+<div class="save-head"><h2>Mes parties</h2><span class="small-tag" id="saveCount">0 PARTIE</span></div>
+<div aria-live="polite" class="save-list" id="saveList"></div>
+<button class="primary-btn full-width" id="newCareer">+ Créer une nouvelle partie</button>
+<div class="import-actions">
+<button class="secondary-btn" id="importFileBtn" type="button">↥ Importer un fichier JSON</button>
+<button class="secondary-btn" id="pasteImportBtn" type="button">▤ Coller une sauvegarde</button>
+</div>
+<input accept=".json,application/json" hidden="" id="saveFile" type="file"/>
+<div class="import-paste" hidden="" id="pasteImportArea">
+<label for="pasteSaveData">Collez ici la sauvegarde JSON de votre ancienne V1 ou d'une partie exportée.</label>
+<textarea id="pasteSaveData" placeholder='{ "version": 1, "player": ... }' rows="4"></textarea>
+<div class="form-buttons"><button class="secondary-btn" id="cancelPaste" type="button">Annuler</button><button class="primary-btn" id="confirmPaste" type="button">Importer la partie</button></div>
+</div>
+<p class="tiny muted centered">Sauvegardes locales : vérifiez le jour, le rang et votre or après une migration. Pour une sécurité maximale, exportez votre partie en JSON avant de changer de version.</p><p class="tiny muted centered migration-tip">Pour récupérer une partie V1.1 qui n'apparaît pas ici : ouvrez l'ancienne V1.1, exportez sa partie en JSON, puis importez le fichier ici. L'ancienne partie n'est jamais effacée. Chronicles V14.3 récupère aussi les sauvegardes V14.2.1 conservées en IndexedDB, ainsi que celles des versions plus anciennes, puis récupère la progression la plus avancée accessible de chaque partie. Les anciens fichiers restent intacts. Sinon, exportez votre ancienne sauvegarde en JSON puis importez-la ici.</p>
+<details class="legacy-help"><summary>Retrouver ma sauvegarde de la V1</summary>
+<p>Si l'ancienne partie est accessible ici, elle est importée automatiquement sans supprimer l'originale. Si elle n'apparaît pas, votre navigateur peut isoler le stockage des différents fichiers HTML.</p>
+<p>Dans l'ancienne V1 : ouvrez la console du navigateur (F12), saisissez <code>copy(localStorage.getItem(['chroniques', 'chas' + 'seur', 'v1', 'save'].join('_')))</code>, puis revenez ici et cliquez sur « Coller une sauvegarde ». Vos données V1 d'origine restent intactes.</p>
+</details>
+<p class="storage-warning" hidden="" id="storageWarning">Impossible d'accéder au stockage local : les parties ne pourront pas être sauvegardées. Autorisez le stockage dans votre navigateur.</p>
+</div>
+<form hidden="" id="characterForm">
+<h2>Créer une nouvelle partie</h2>
+<p class="muted">Elle commencera au jour 1, avec son propre aventurier et ses propres données.</p>
+<label for="partyName">Nom de la partie</label>
+<input autocomplete="off" id="partyName" maxlength="36" minlength="1" placeholder="Partie 1" required="" type="text"/>
+<label for="playerName">Pseudo de l'aventurier</label>
+<input autocomplete="off" id="playerName" maxlength="22" minlength="2" placeholder="Ex. : Arven" required="" type="text"/>
+<label for="playerClass">Classe</label>
+<select id="playerClass"><option value="Assassin">Assassin · DPS</option><option value="Guerrier">Guerrier · DPS</option><option value="Gardien">Gardien · Tank</option><option value="Mage">Mage · DPS</option><option value="Soigneur">Soigneur · Heal</option></select>
+<label for="gameMode">Mode de jeu</label>
+<select id="gameMode"><option value="free">Partie libre · sans limite</option><option value="season">Saison · 365 jours</option></select>
+<p class="tiny muted" id="modeHelp">Aucune limite de jours. Votre aventure évolue librement.</p>
+<div hidden="" id="seasonObjectiveWrap"><label for="seasonObjective">Objectif de cette saison</label>
+<select id="seasonObjective"><option value="power">Devenir le plus puissant</option><option value="rep">Devenir le plus réputé</option><option value="gold">Devenir le plus riche</option></select>
+<p class="tiny muted">L'objectif est définitif pour cette saison. À la fin de l'année, votre classement sera comparé à celui des autres aventuriers.</p></div>
+<label>Personnage</label>
+<div class="gender-options"><label><input checked="" name="gender" type="radio" value="Homme"/> Homme</label><label><input name="gender" type="radio" value="Femme"/> Femme</label></div>
+<div class="creation-portrait"><img id="creationPortraitPreview" src="assets/portraits/male_01.webp" alt="Aperçu du portrait choisi"/><div><label for="creationPortraitSelect">Portrait de votre aventurier</label><select id="creationPortraitSelect" aria-label="Choisir votre portrait"></select><small>25 portraits selon le sexe choisi · modifiable ensuite sur votre fiche.</small></div></div>
+<div class="form-buttons"><button class="secondary-btn" id="cancelForm" type="button">Retour</button><button class="primary-btn" type="submit">Créer cette partie →</button></div>
+</form>
+</div>
+<p class="welcome-copy">Chaque partie possède son propre calendrier, inventaire et historique.</p>
+</div>
+<div aria-label="Fin de carrière" aria-modal="true" class="gameover-overlay" hidden="" id="gameOverOverlay" role="alertdialog"><div class="gameover-panel"><div class="gameover-icon">⚖</div><p class="eyebrow">PROCÉDURE DE SURENDETTEMENT</p><h2>Fin de carrière</h2><p>Vos dettes sont restées impayées malgré les avertissements. Vos biens et votre logement ont été saisis ; l'Association a retiré votre autorisation d'exercer.</p><div class="gameover-facts"><span>Dette encore impayée</span><strong id="gameOverDebt">0 or</strong></div><p class="tiny muted" id="gameOverDay"></p><p class="tiny muted">Votre partie est conservée pour consultation et export, mais ne peut plus progresser. Créez une nouvelle partie depuis le menu.</p><button class="primary-btn full-width" id="gameOverMenu" type="button">Retour au menu des parties</button></div></div>
+<div aria-label="Bilan de fin de saison" aria-modal="true" class="gameover-overlay season-end-overlay" hidden="" id="seasonEndOverlay" role="alertdialog">
+<div class="gameover-panel season-end-panel"><div class="gameover-icon">✦</div>
+<p class="eyebrow">BILAN DE SAISON · 365 JOURS</p><h2 id="seasonEndHeadline">Fin de saison</h2>
+<p id="seasonEndObjective">Ambition</p>
+<div class="season-final-score"><span>Votre classement final</span><strong id="seasonEndPlace">#1 / 42</strong><small id="seasonEndScore">0 points</small></div>
+<p class="tiny muted" id="seasonEndCareer"></p>
+<h3>Podium du monde</h3><div class="season-podium" id="seasonPodium"></div>
+<p class="tiny muted">La saison est achevée : son calendrier est figé. La partie reste consultable dans le menu et exportable.</p>
+<button class="primary-btn full-width" id="seasonEndMenu" type="button">Retour aux parties</button>
+</div>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.150.1/three.min.js"></script>
+<script src="js/world.js"></script>
+<script src="js/desktop.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

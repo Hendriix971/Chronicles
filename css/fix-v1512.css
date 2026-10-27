@@ -1,0 +1,15 @@
+/* Chronicles V15.12 — ajuster la table des 9 guildes aux vraies hauteurs
+   du navigateur (barre d'onglets, d'adresse, Windows), sans réduire les textes. */
+@media (min-width: 1060px) and (min-height: 790px) {
+  body.desktop-mode #page-ranking .guild-ranking-row {
+    /* À 1080 px, garder la présentation V15.10 ; sous 1080,
+       éviter le petit défilement des neuvièmes lignes. */
+    height:clamp(45px,calc((100dvh - 520px) / 9),62px);
+    min-height:0;
+    padding:4px 16px;
+  }
+  body.desktop-mode #page-ranking .guild-ranking-name small {
+    margin-top:2px;
+    line-height:1.15;
+  }
+}

@@ -1,0 +1,250 @@
+/* Chronicles V15.6 — refonte responsive exclusivement de l'onglet Guilde.
+   Une fenêtre large, un en-tête fixe et UN SEUL conteneur de défilement.
+   Aucune autre page ou mécanique du jeu n'est modifiée. */
+
+/* L'annuaire des indépendants garde sa disposition et ses boutons V15.4. */
+#page-guilds:not(.guild-independent) .page-intro,
+#page-guilds:not(.guild-independent) #guildPageTag {display:none!important}
+#page-guilds:not(.guild-independent) #guildDetailsGrid {min-width:0}
+#page-guilds:not(.guild-independent) #guildDetailsGrid>.guild-inspector {min-width:0}
+
+/* Fenêtre desktop : responsive, aussi grande que la zone de jeu le permet. */
+body.desktop-mode .main-content>#page-guilds.cw-open {
+  display:flex!important;flex-direction:column;
+  width:min(1740px,calc(100vw - 54px));
+  height:calc(100dvh - 170px);
+  max-height:calc(100dvh - 154px);
+  padding:0 26px 18px;
+  overflow:hidden!important;
+}
+body.desktop-mode #page-guilds .cw-titlebar {
+  flex:0 0 73px;min-height:73px;
+  margin:0 -26px 0;padding:13px 23px 10px;
+  position:relative;top:auto;
+}
+body.desktop-mode #page-guilds.guild-independent {overflow-y:auto!important}
+body.desktop-mode #page-guilds.guild-independent .cw-titlebar {position:sticky;top:0;z-index:10}
+body.desktop-mode #page-guilds.guild-independent .page-intro{display:none}
+
+body.desktop-mode #page-guilds:not(.guild-independent) #guildDetailsGrid {
+  display:block!important;margin:0!important;
+  flex:1 1 auto;min-height:0;overflow:hidden;
+}
+body.desktop-mode #page-guilds:not(.guild-independent) .guild-inspector {
+  display:flex!important;flex-direction:column;align-items:stretch!important;
+  height:100%;min-height:0;min-width:0;
+  padding:0!important;margin:0;
+  overflow:hidden;border:0;background:transparent;box-shadow:none;
+}
+#page-guilds .guild-v156-summary {
+  display:grid;grid-template-columns:minmax(360px,.96fr) minmax(0,1.65fr);
+  gap:26px;align-items:center;
+  flex:0 0 auto;padding:23px 15px 22px;
+  border-bottom:1px solid #334b62;
+}
+#page-guilds .guild-v156-identity{display:flex;align-items:center;gap:19px;min-width:0}
+#page-guilds .guild-detail-crest {
+  width:83px;height:83px;flex:0 0 83px;
+  border-radius:15px;font-size:41px;background:linear-gradient(145deg,#243c58,#152435);
+  border-color:#a48a5e;
+}
+#page-guilds .guild-v156-heading{min-width:0;flex:1}
+#page-guilds .guild-v156-heading .eyebrow {font-size:10px;margin:0 0 3px;color:#dbb881}
+#page-guilds .guild-v156-heading h3 {font-family:Georgia,serif;font-size:clamp(22px,1.9vw,28px);color:#f3e7d8;line-height:1.17;margin:0 0 12px;white-space:normal}
+#page-guilds .guild-v156-identity-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}
+#page-guilds .guild-v156-identity-facts>div {display:flex;gap:7px;align-items:baseline;min-width:0;line-height:1.35}
+#page-guilds .guild-v156-identity-facts>div:first-child{grid-column:1/-1}
+#page-guilds .guild-v156-identity-facts span {color:#9eb7ca;font-size:12px;flex-shrink:0}
+#page-guilds .guild-v156-identity-facts strong{color:#ebd0a6;font-size:13px;overflow-wrap:anywhere}
+#page-guilds:not(.guild-independent) .guild-detail-metrics {
+  display:grid!important;grid-column:auto;grid-row:auto;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+  margin:0;min-width:0;
+}
+#page-guilds:not(.guild-independent) .guild-detail-metrics>div {
+  display:flex;flex-direction:column;justify-content:center;
+  min-width:0;min-height:84px;
+  padding:13px 15px;border-radius:10px;
+  border:1px solid #324b65;background:#14263b;
+}
+#page-guilds .guild-detail-metrics small{font-size:10px;letter-spacing:1.15px;color:#a9bdd0}
+#page-guilds:not(.guild-independent) .guild-detail-metrics strong{
+  margin-top:8px;font-size:clamp(14px,1.15vw,19px);
+  font-variant-numeric:tabular-nums;color:#f1d5a8;
+  white-space:normal;overflow-wrap:anywhere;
+}
+#page-guilds #guildDetailRecord{display:flex;flex-direction:column;gap:3px;margin-top:5px!important}
+#page-guilds #guildDetailRecord span{font-size:12px;line-height:1.25;color:#bdcfdd;font-weight:500;white-space:nowrap}
+#page-guilds #guildDetailRecord b{font-size:14px;color:#efd3a0;margin-right:3px}
+
+#page-guilds:not(.guild-independent) .guild-compact-tabs {
+  display:flex!important;flex:0 0 auto;align-self:stretch;
+  grid-column:auto;grid-row:auto;
+  gap:9px;margin:0!important;padding:16px 14px 13px;
+  border-bottom:1px solid #3c536a;
+}
+#page-guilds .guild-compact-tab {
+  min-width:155px;border:1px solid #476079;
+  padding:11px 21px;background:#172c42;
+  color:#c0d2e3;font-size:13.5px;border-radius:8px;
+  transition:background .12s;
+}
+#page-guilds .guild-compact-tab:hover{background:#284665}
+#page-guilds .guild-compact-tab.active {background:#345473;color:white;border-color:#c4a16b;box-shadow:inset 0 -2px #c4a16b}
+
+/* Le corps est le SEUL endroit qui défile : pas de scroll des fiches internes. */
+#page-guilds:not(.guild-independent) .guild-v156-body {
+  flex:1 1 auto;min-height:0;min-width:0;
+  overflow-x:hidden;overflow-y:auto;
+  overscroll-behavior:contain;scrollbar-gutter:stable;
+  scrollbar-color:#607e9c #112037;
+  padding:19px 14px 24px;
+  background:linear-gradient(160deg,#101e30,#0c1a2b);
+  border-radius:0 0 11px 11px;
+}
+#page-guilds:not(.guild-independent) .guild-v156-body>[data-guild-pane]{display:none!important;min-height:100%}
+#page-guilds:not(.guild-independent) .guild-v156-body>[data-guild-pane].active{display:block!important}
+#page-guilds:not(.guild-independent) #guildRoster {
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));
+  align-content:start;gap:12px;
+  max-height:none!important;overflow:visible!important;
+}
+#page-guilds:not(.guild-independent) .guild-member {
+  display:flex;align-items:center;gap:13px;
+  min-width:0;min-height:98px;
+  padding:13px 14px;border-radius:10px;
+  background:#14273d;border:1px solid #344d66;
+  cursor:pointer;
+}
+#page-guilds:not(.guild-independent) .guild-member:hover,
+#page-guilds:not(.guild-independent) .guild-member:focus-visible{background:#1e3650;outline:1px solid #bb9d6e}
+#page-guilds:not(.guild-independent) .guild-member.is-player{background:#33352b;border-color:#b29361}
+#page-guilds:not(.guild-independent) .guild-member .guild-portrait {
+  width:68px;height:68px;flex:0 0 68px;object-fit:cover;
+  border-radius:9px;
+}
+#page-guilds:not(.guild-independent) .guild-member>div {min-width:0;flex:1}
+#page-guilds:not(.guild-independent) .guild-member strong {font-size:14px;line-height:1.32;color:#f0f4f9}
+#page-guilds:not(.guild-independent) .guild-member small {
+  font-size:12px;line-height:1.5;margin-top:6px;color:#aec2d5;overflow-wrap:anywhere;
+}
+#page-guilds:not(.guild-independent) .guild-member>.rank-emphasis{min-width:34px;flex:0 0 auto}
+
+/* Contrat : deux vrais pans de lecture, sur toute la zone disponible. */
+#page-guilds:not(.guild-independent) .guild-career {
+  height:auto;min-height:100%;max-height:none!important;
+  padding:0!important;overflow:visible!important;
+  background:none;border:0;box-shadow:none;
+}
+#page-guilds .guild-v156-career-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;min-height:100%}
+#page-guilds .guild-v156-career-card {
+  background:#15283d;border:1px solid #38536b;border-radius:12px;
+  padding:22px 25px;min-width:0;
+}
+#page-guilds .guild-v156-career-card h4{
+  font-size:18px!important;color:#f0d8ab;margin:0 0 16px!important;
+  padding-bottom:13px;border-bottom:1px solid #435b72;
+}
+#page-guilds .guild-v156-data-line {
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  min-height:47px;border-bottom:1px solid #30465b;padding:13px 0;
+  line-height:1.5;
+}
+#page-guilds .guild-v156-data-line span{font-size:13px;color:#b4c9dd;flex:0 0 40%}
+#page-guilds .guild-v156-data-line strong{
+  font-size:13px;color:#f3d8aa;text-align:right;overflow-wrap:anywhere;flex:1;
+}
+#page-guilds .guild-v156-contract-note {font-size:12px;color:#a9bed0;margin:23px 0 0;line-height:1.6}
+#page-guilds .guild-v156-career-card .career-actions {
+  display:flex;flex-wrap:wrap;gap:11px;margin-top:25px;
+}
+#page-guilds .guild-v156-career-card .career-actions button {min-width:0;font-size:12px;padding:12px 16px}
+
+/* Journal chronologique : UNE colonne. Les filtres restent sous les onglets. */
+#page-guilds:not(.guild-independent) .guild-activity-panel {
+  padding:0!important;margin:0;border:0;background:transparent;box-shadow:none;
+  min-height:100%;grid-column:auto;grid-row:auto;
+}
+#page-guilds .guild-v156-newsbar {
+  position:sticky;top:-19px;z-index:3;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  padding:8px 6px 14px;margin:-8px -2px 15px;
+  border-bottom:1px solid #364d62;background:#101e30;
+}
+#page-guilds .guild-v156-filters{display:flex;gap:8px;flex-wrap:wrap}
+#page-guilds .guild-v156-filter{
+  padding:9px 17px;min-height:36px;
+  background:#192d44;border:1px solid #466179;border-radius:8px;
+  font-size:12px;color:#c7d8e8;cursor:pointer;font-weight:750;
+}
+#page-guilds .guild-v156-filter:hover{background:#2b4967}
+#page-guilds .guild-v156-filter.active{background:#365575;border-color:#d1ad76;color:white}
+#page-guilds .guild-activity-count{font-size:11px;white-space:nowrap;color:#9db7ce}
+#page-guilds:not(.guild-independent) .guild-activity {
+  display:grid;grid-template-columns:minmax(0,1fr)!important;
+  grid-auto-rows:max-content;align-content:start;gap:10px;
+  max-height:none!important;height:auto!important;
+  padding:0 5px 4px 0!important;
+  overflow:visible!important;
+}
+#page-guilds .guild-activity-row{
+  display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:15px;
+  min-height:83px;align-items:center;padding:14px 17px;
+  border-radius:10px;
+}
+#page-guilds .guild-activity-icon{width:39px;height:39px;border-radius:9px;font-size:19px}
+#page-guilds .guild-activity-kind{font-size:11px;letter-spacing:.6px}
+#page-guilds .guild-activity-row p{font-size:13px;line-height:1.5;margin-top:5px}
+#page-guilds .guild-activity-time{font-size:11px;white-space:nowrap;padding-left:8px}
+#page-guilds .guild-v156-empty{padding:42px 15px;text-align:center}
+#page-guilds:not(.guild-independent) .guild-explainer,
+#page-guilds:not(.guild-independent) .guild-finance{display:none!important}
+
+@media(max-width:1450px){
+ #page-guilds .guild-v156-summary{gap:16px;grid-template-columns:minmax(300px,.95fr) minmax(0,1.65fr)}
+ #page-guilds:not(.guild-independent) .guild-detail-metrics{gap:8px}
+ #page-guilds:not(.guild-independent) .guild-detail-metrics>div{padding:12px 10px}
+ #page-guilds:not(.guild-independent) .guild-member{padding:11px;gap:9px}
+ #page-guilds:not(.guild-independent) .guild-member .guild-portrait{width:58px;height:58px;flex-basis:58px}
+}
+@media(max-width:1160px){
+ #page-guilds .guild-v156-summary{grid-template-columns:1fr;gap:15px;padding:15px 10px}
+ #page-guilds:not(.guild-independent) .guild-detail-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+ #page-guilds:not(.guild-independent) #guildRoster{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #page-guilds .guild-v156-career-card{padding:16px}
+}
+@media(max-width:770px){
+ body.desktop-mode .main-content>#page-guilds.cw-open{width:calc(100vw - 16px);height:calc(100dvh - 153px);padding:0 12px 12px}
+ body.desktop-mode #page-guilds .cw-titlebar{margin:0 -12px 0;flex-basis:69px;min-height:69px;padding:12px}
+ #page-guilds .guild-detail-crest{width:55px;height:55px;flex-basis:55px;font-size:26px}
+ #page-guilds .guild-v156-heading h3{font-size:22px;margin-bottom:7px}
+ #page-guilds:not(.guild-independent) .guild-detail-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #page-guilds:not(.guild-independent) .guild-detail-metrics>div{min-height:60px;padding:9px}
+ #page-guilds:not(.guild-independent) .guild-compact-tabs{padding:10px 5px;gap:4px}
+ #page-guilds .guild-compact-tab{min-width:0;flex:1;padding:10px 5px;font-size:12px}
+ #page-guilds:not(.guild-independent) .guild-v156-body{padding:13px 8px 15px}
+ #page-guilds:not(.guild-independent) #guildRoster{grid-template-columns:1fr;gap:9px}
+ #page-guilds .guild-v156-career-columns{grid-template-columns:1fr;gap:12px}
+ #page-guilds .guild-activity-row{grid-template-columns:34px minmax(0,1fr);gap:9px;padding:11px}
+ #page-guilds .guild-activity-icon{width:31px;height:31px;font-size:16px}
+ #page-guilds .guild-activity-time{grid-column:2;text-align:left;padding-left:0}
+ #page-guilds .guild-v156-newsbar{top:-13px;gap:9px;margin-top:-4px;padding-bottom:10px}
+ #page-guilds .guild-v156-filter{padding:7px 9px;font-size:11px}
+}
+
+/* Le bandeau de pause ne couvre pas le bouton de fermeture Guilde. */
+body.desktop-mode .main-content:has(> #page-guilds.cw-open) > .pause-notice {display:none!important}
+
+/* V15.8 — Correctif de l’annuaire des aventuriers indépendants.
+   V15.6 appliquait overflow:hidden!important avec une spécificité supérieure
+   à la règle overflow-y:auto; les neuf guildes restaient donc invisibles
+   à la molette et aux barres de défilement.
+   Défilement UNIQUE de la fenêtre, titre épinglé ; n'affecte pas la fiche
+   de guilde d'un joueur membre. */
+body.desktop-mode .main-content > #page-guilds.cw-open.guild-independent {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}

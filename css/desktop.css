@@ -1,0 +1,317 @@
+/* V13.3.1 — carte 3D plein écran, classements et panneaux inspirés de Guild Master. */
+body.desktop-mode{overflow:hidden}
+.desktop-mode .app-shell{position:fixed;inset:0;min-height:0;display:block;overflow:hidden}
+.desktop-mode .desktop-header{position:absolute;inset:0 0 auto;height:76px;z-index:65;box-shadow:0 6px 24px #050d18ba}
+.desktop-mode .header-upper{height:76px;min-height:76px;padding:8px 15px;gap:11px}
+.desktop-mode .game-wordmark{min-width:224px;gap:8px}.desktop-mode .game-wordmark strong{font-size:14px}.desktop-mode .game-wordmark small{font-size:9px}.desktop-mode .wordmark-symbol{font-size:23px}
+.desktop-mode .head-indicators{min-width:0;gap:7px;flex-wrap:nowrap}.desktop-mode .head-indicators>div{padding-left:8px;min-width:0}.desktop-mode .head-indicators strong{font-size:11px;max-width:125px}
+.desktop-mode .head-indicators small{font-size:8px}.desktop-mode .header-tools{gap:5px}.desktop-mode .header-tool{padding:8px 9px}.desktop-mode .clock-pill{padding:7px 9px;font-size:10px}
+.desktop-mode .tab-ribbon{position:fixed;inset:auto 0 0;height:68px;z-index:110;display:flex;align-items:center;gap:5px;padding:5px 12px;background:linear-gradient(#202f42f5,#111c2cfb);border-top:1px solid #526681;border-bottom:none;box-shadow:0 -8px 26px #0008;overflow-x:auto;overflow-y:hidden}
+.desktop-mode .tab-ribbon .nav-btn{border:1px solid #475c74;border-radius:9px;white-space:nowrap;min-height:44px;padding:9px 11px;background:#192a3f;color:#dce7f1;font-size:11px;font-weight:750;justify-content:center;flex:1;min-width:max-content}
+.desktop-mode .tab-ribbon .nav-btn:hover{background:#354d67;color:white}
+.desktop-mode .tab-ribbon .nav-btn.active{padding:9px 11px}
+.desktop-mode .tab-ribbon .nav-btn.cw-task-front{background:#294664;border-color:#9cbad7;color:#fff}
+.desktop-mode .world-desk{position:absolute;inset:76px 0 68px;z-index:1;overflow:hidden;background:radial-gradient(ellipse at center,#739ba4,#172e40);user-select:none}
+.desktop-mode #threeWorld{position:absolute;inset:0}.desktop-mode #threeWorld canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}.desktop-mode #threeWorld canvas:active{cursor:grabbing}
+.desktop-mode .world-badge{position:absolute;top:18px;left:18px;z-index:4;display:grid;gap:5px;background:#142436df;border:1px solid #658097aa;border-radius:10px;padding:10px 13px;pointer-events:none;box-shadow:0 8px 25px #0a182b77}
+.desktop-mode .world-badge strong{font-size:11px;letter-spacing:1px;color:#ffda9e}.desktop-mode .world-badge span{color:#deedf4;font-size:10px}
+.desktop-mode .world-tip{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);color:#edf1f7;font-size:11px;background:#122337c9;border:1px solid #64748a66;border-radius:30px;padding:9px 16px;white-space:nowrap;pointer-events:none}
+.desktop-mode .world-map-controls{position:absolute;left:18px;bottom:16px;display:flex;flex-direction:row;gap:5px;z-index:4}
+.desktop-mode .world-map-controls button{width:35px;height:35px;background:#22354dcf;color:#fff;border:1px solid #8599b0;border-radius:9px;font-size:21px}.desktop-mode .world-map-controls button:hover{background:#48617e}
+.desktop-mode .world-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:35px;text-align:center;color:#f3d9ae;background:radial-gradient(ellipse,#375777,#1b293f 70%);font-size:16px;line-height:1.6}
+.desktop-mode #worldFallback[hidden]{display:none!important}
+/* Tableau compact toujours présent sur la carte. Ces valeurs proviennent des vrais PNJ. */
+.desktop-mode .world-ranking{position:absolute;right:14px;top:13px;z-index:5;width:min(328px,calc(100% - 28px));background:#101c2bec;border:1px solid #52677e;border-radius:12px;box-shadow:0 10px 28px #0710208a;color:#ebf2fa;overflow:hidden;user-select:text}
+.desktop-mode .world-ranking-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:11px 12px 8px}
+.desktop-mode .world-ranking-head strong{font-family:Georgia,serif;font-size:16px;font-weight:750}
+.desktop-mode .world-ranking-head small{color:#eac07c;font-size:10px;font-weight:800}
+.desktop-mode .world-ranking-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:0 10px 8px}
+.desktop-mode .world-ranking-tabs button{color:#abbdd2;background:#1d3046;border:1px solid #334b65;border-radius:6px;padding:7px 2px;font-size:10px;font-weight:800;min-width:0}
+.desktop-mode .world-ranking-tabs button.selected,.desktop-mode .world-ranking-tabs button[aria-pressed="true"]{background:#365c82;border-color:#92bbdd;color:white}
+.desktop-mode .world-ranking-caption{display:grid;grid-template-columns:27px minmax(0,1fr) 46px 71px;gap:5px;padding:7px 11px;background:#1b2d41;color:#a8bed4;font-size:8px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
+.desktop-mode .world-ranking-entry{display:grid;grid-template-columns:27px minmax(0,1fr) 46px 71px;align-items:center;gap:5px;border-bottom:1px solid #33415188;padding:7px 11px;font-size:10px}
+.desktop-mode .world-ranking-entry strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px}
+.desktop-mode .world-ranking-entry .wr-position{color:#a8b8ca}
+.desktop-mode .world-ranking-entry .wr-rank{color:#dfc49a;text-align:center}
+.desktop-mode .world-ranking-entry .wr-score{color:#e7f1fc;text-align:right;font-variant-numeric:tabular-nums}
+.desktop-mode .world-ranking-entry.is-player{background:#2f4254;border-top:1px solid #b79860;border-bottom-color:#b79860}
+.desktop-mode .world-ranking-foot{display:flex;align-items:center;justify-content:space-between;gap:7px;padding:8px 11px;color:#aabed1;font-size:10px}
+.desktop-mode .world-ranking-foot button{border:0;background:none;color:#e2c18a;font-weight:800;font-size:10px;padding:2px;text-align:right}
+.desktop-mode .world-ranking-foot button:hover{text-decoration:underline;color:#fff}
+/* Grand panneau central : une seule fenêtre ouverte, comme Guild Master. */
+.desktop-mode .desktop-shade{position:fixed;inset:0;z-index:80;background:#02091599;backdrop-filter:blur(2px)}
+.desktop-mode .desktop-shade[hidden]{display:none!important}
+.desktop-mode .main-content{position:absolute;inset:76px 0 68px;z-index:90;width:100%;max-width:none;margin:0;padding:0!important;pointer-events:none;overflow:visible}
+.desktop-mode .main-content>.page{position:absolute;display:none!important;left:50%;top:50%;transform:translate(-50%,-50%);width:min(970px,calc(100vw - 46px));height:min(690px,calc(100vh - 177px));min-width:0;min-height:0;max-width:none!important;margin:0;padding:0 21px 23px;background:#0d1b2bf8;border:1px solid #627c96;border-radius:16px;box-shadow:0 26px 85px #000c;overflow-x:hidden;overflow-y:auto;resize:none;pointer-events:auto;overscroll-behavior:contain;scrollbar-color:#4e6984 #101e2e}
+.desktop-mode .main-content>.page.cw-open{display:block!important}
+.desktop-mode .cw-titlebar{min-height:92px;margin:0 -21px 17px;padding:16px 19px 15px 20px;background:#0d1b2b;display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid #283b4e;position:sticky;top:0;z-index:12;cursor:default;user-select:none}
+.desktop-mode .cw-titletext{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.desktop-mode .cw-overline{font-size:9px;letter-spacing:1.8px;font-weight:900;color:#d3ae79}
+.desktop-mode .cw-titletext strong{font-family:Georgia,serif;font-size:29px;line-height:1.2;text-transform:uppercase;letter-spacing:.5px;color:#edf3fc}
+.desktop-mode .cw-close{display:grid;place-items:center;flex-shrink:0;width:37px;height:37px;border:1px solid #aa5665;border-radius:9px;background:#a43f50;color:white;font-size:26px;font-weight:800;line-height:1}
+.desktop-mode .cw-close:hover{background:#d15b68}
+.desktop-mode .page .page-intro{margin-top:12px}
+.desktop-mode .page .cv-layout{margin-top:0}
+.desktop-mode .page .panel{background:#122238;border-color:#354d66}
+.desktop-mode .page .page-intro h1{font-family:Georgia,serif}
+.desktop-mode .pause-notice{position:absolute;top:12px;right:12px;width:min(350px,85%);z-index:115;pointer-events:none}
+.desktop-mode .toast{z-index:130;bottom:76px}.desktop-mode .audio-panel{z-index:300}
+.desktop-mode #welcome{z-index:400}
+.desktop-mode .gameover-overlay,.desktop-mode .season-end-overlay{z-index:500}
+@media(max-width:900px){.desktop-mode .game-wordmark small{display:none}.desktop-mode .game-wordmark{min-width:170px}.desktop-mode .head-indicators .header-guild,.desktop-mode .head-indicators>div:nth-child(4){display:none}.desktop-mode .header-upper{flex-wrap:nowrap}.desktop-mode .main-content>.page{width:calc(100vw - 30px)}}
+@media(max-width:600px){.desktop-mode .header-upper{gap:5px}.desktop-mode .game-wordmark{min-width:0;max-width:150px}.desktop-mode .game-wordmark strong{font-size:11px}.desktop-mode .head-indicators>div:not(.header-condition){display:none}.desktop-mode .header-tool{font-size:10px;padding:7px 6px}.desktop-mode .clock-pill{display:none}.desktop-mode .world-badge{top:8px;left:8px;padding:8px}.desktop-mode .world-tip{display:none}.desktop-mode .world-ranking{right:8px;top:70px;width:min(290px,calc(100vw - 16px))}.desktop-mode .main-content>.page{width:calc(100vw - 12px);height:calc(100vh - 156px);padding:0 12px 14px}.desktop-mode .cw-titlebar{margin:0 -12px 12px;padding:14px 13px;min-height:77px}.desktop-mode .cw-titletext strong{font-size:23px}.desktop-mode .main-content>.page .page-intro{flex-wrap:wrap}}
+/* La barre des tâches reste cliquable même lorsque le voile modal est affiché. */
+.desktop-mode .desktop-header{z-index:auto}
+.desktop-mode .header-upper{position:relative;z-index:65}
+/* Les commandes essentielles (pause / sauvegarde / menu) restent utilisables. */
+.desktop-mode .header-upper{z-index:101}
+/* Le titre figure déjà dans l'en-tête des grandes fenêtres. */
+.desktop-mode .page .page-intro{margin:0 0 16px}
+.desktop-mode .page .page-intro h1,.desktop-mode .page .page-intro .eyebrow{display:none}
+.desktop-mode .page .page-intro p:not(.eyebrow){font-size:12px;line-height:1.5;margin:0}
+
+/* V13.9 — Le portrait a sa propre colonne : ne pas laisser la puissance revenir à la ligne. */
+body.desktop-mode .world-ranking-entry,body.desktop-mode .world-ranking-caption{grid-template-columns:25px 25px minmax(0,1fr) 37px 71px;gap:5px}
+body.desktop-mode .world-ranking-entry .wr-score{white-space:nowrap;grid-column:5}
+body.desktop-mode .world-ranking-entry .wr-rank{grid-column:4}
+body.desktop-mode .world-ranking-caption span:nth-child(2){grid-column:2 / span 2}
+
+/* V14.1.2 — Fiche personnage agrandie : afficher toutes les infos sans scroll sur écran desktop standard. */
+.desktop-mode .main-content>#page-dashboard{
+  width:min(1080px,calc(100vw - 36px));
+  height:min(840px,calc(100vh - 110px));
+}
+.desktop-mode #page-dashboard .cv-layout{
+  width:min(100%,1040px);
+  margin:0 auto 18px;
+  padding:2px 18px 12px;
+}
+.desktop-mode #page-dashboard .cv-title{
+  gap:30px;
+  padding:18px 0 22px;
+}
+.desktop-mode #page-dashboard .cv-avatar{
+  width:132px;
+  height:132px;
+  border-radius:20px;
+}
+.desktop-mode #page-dashboard .cv-portrait-buttons button{
+  min-width:38px;
+  line-height:24px;
+}
+.desktop-mode #page-dashboard .cv-heading h1{
+  font-size:42px;
+}
+.desktop-mode #page-dashboard .cv-heading>p:not(.eyebrow){
+  font-size:16px;
+  margin-bottom:10px;
+}
+.desktop-mode #page-dashboard .cv-facts{
+  padding:22px 0 16px;
+  gap:22px;
+}
+.desktop-mode #page-dashboard .cv-facts strong{
+  font-size:20px;
+}
+.desktop-mode #page-dashboard .cv-xp{
+  padding:6px 0 18px;
+}
+.desktop-mode #page-dashboard .cv-equipment,
+.desktop-mode #page-dashboard .cv-ranking{
+  padding:18px 0 10px;
+}
+.desktop-mode #page-dashboard .cv-section-title h2,
+.desktop-mode #page-dashboard .cv-ranking h2{
+  margin-bottom:10px;
+}
+.desktop-mode #page-dashboard .cv-equipment .profile-gear-slot{
+  padding-top:12px;
+  padding-bottom:10px;
+}
+.desktop-mode #page-dashboard .cv-equipment .profile-gear-slot button{
+  margin-top:10px;
+}
+.desktop-mode #page-dashboard .cv-ranking-list{
+  gap:14px;
+}
+.desktop-mode #page-dashboard .cv-ranking-list strong{
+  font-size:18px;
+}
+@media(max-width:1200px){
+  .desktop-mode .main-content>#page-dashboard{
+    width:min(1020px,calc(100vw - 28px));
+    height:min(800px,calc(100vh - 118px));
+  }
+  .desktop-mode #page-dashboard .cv-avatar{
+    width:118px;
+    height:118px;
+  }
+}
+
+/* V15.0 — essai visuel de fiche inspirée des doubles listes Dofus / jeux de gestion.
+   Tous les styles sont limites a la fiche joueur : aucun impact sur les autres panneaux. */
+.desktop-mode .main-content>#page-dashboard{
+  width:min(1010px,calc(100vw - 38px));
+  height:min(680px,calc(100vh - 177px));
+  padding:0 26px 24px;
+}
+.desktop-mode #page-dashboard .cw-titlebar{margin:0 -26px 14px;min-height:81px;padding:13px 21px 12px}
+.desktop-mode #page-dashboard .cv-layout.cv-v15{width:100%;max-width:none;margin:0;padding:4px 7px 15px}
+.desktop-mode #page-dashboard .cv-profile-top{display:grid;grid-template-columns:200px minmax(0,1fr);gap:30px;align-items:start;padding:13px 0 22px;border-bottom:1px solid #304356}
+.desktop-mode #page-dashboard .cv-portrait-control{width:200px;margin:0}
+.desktop-mode #page-dashboard .cv-avatar{width:200px;height:200px;border-radius:13px;background:#1d2d40;border:1px solid #596f85}
+.desktop-mode #page-dashboard .cv-portrait-buttons{justify-content:center;margin-top:7px;display:flex;gap:7px}
+.desktop-mode #page-dashboard .cv-portrait-buttons button{height:24px;min-width:35px;line-height:18px}
+.desktop-mode #page-dashboard .cv-profile-main{min-width:0;padding-top:1px}
+.desktop-mode #page-dashboard .cv-identity-compact{padding:0 0 12px;margin:0 0 9px;border-bottom:1px solid #33485c}
+.desktop-mode #page-dashboard .cv-identity-compact .eyebrow{font-size:9px;letter-spacing:1.6px;margin:0 0 5px;color:#d6ad72}
+.desktop-mode #page-dashboard .cv-identity-compact h1{font-size:30px;line-height:1.1;margin:0 0 11px;color:#f2e5d3;font-weight:800}
+.desktop-mode #page-dashboard .cv-identity-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px}
+.desktop-mode #page-dashboard .cv-class-rank{gap:7px}
+.desktop-mode #page-dashboard .cv-identity-divider{height:17px;width:1px;background:#455a71}
+.desktop-mode #page-dashboard .cv-affiliation{font-size:12px;color:#a8bcd1}
+.desktop-mode #page-dashboard .cv-affiliation strong{color:#f1cf95;font-size:12px}
+.desktop-mode #page-dashboard .cv-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;row-gap:0}
+.desktop-mode #page-dashboard .cv-detail-row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:37px;padding:7px 1px;border-bottom:1px solid #26394c;font-variant-numeric:tabular-nums}
+.desktop-mode #page-dashboard .cv-detail-row span{font-size:12px;color:#b9c8d8;overflow-wrap:anywhere}
+.desktop-mode #page-dashboard .cv-detail-row strong{font-size:13px;font-weight:750;color:#ecd1a5;white-space:nowrap;text-align:right}
+.desktop-mode #page-dashboard .cv-xp{padding:12px 0 0;border:0}
+.desktop-mode #page-dashboard .cv-xp .stat-progress{height:5px;margin:0;background:#273749}
+.desktop-mode #page-dashboard.cv-max-rank .cv-xp{display:block}
+.desktop-mode #page-dashboard .cv-compact-section{padding-top:21px}
+.desktop-mode #page-dashboard .cv-compact-section-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:7px;border-bottom:1px solid #465c72}
+.desktop-mode #page-dashboard .cv-compact-section-title h2{font-size:15px;font-weight:800;color:#ecf1f7;margin:0}
+.desktop-mode #page-dashboard .cv-compact-section-title span{font-size:10px;color:#819db7}
+.desktop-mode #page-dashboard .cv-compact-section .cv-detail-row{min-height:35px}
+.desktop-mode #page-dashboard .cv-equipment[hidden]{display:none!important}
+@media(max-width:760px){
+ .desktop-mode #page-dashboard .cv-profile-top{grid-template-columns:1fr;gap:13px;justify-items:center}
+ .desktop-mode #page-dashboard .cv-profile-main{width:100%}
+ .desktop-mode #page-dashboard .cv-detail-grid{grid-template-columns:1fr}
+ .desktop-mode #page-dashboard .cv-compact-section{padding-top:15px}
+ .desktop-mode #page-dashboard .cv-compact-section-title span{display:none}
+}
+
+/* V15.0 — conserver le portrait de 200px et la progression lisible a tous les rangs. */
+.desktop-mode #page-dashboard .cv-portrait-control{flex-shrink:0}
+.desktop-mode #page-dashboard .cv-profile-top{min-width:0}
+.desktop-mode #page-dashboard .cv-xp .stat-progress span{display:block;height:100%}
+@media(max-width:760px){.desktop-mode #page-dashboard .cv-profile-top{grid-template-columns:1fr}.desktop-mode #page-dashboard .cv-profile-main{min-width:0}}
+
+
+/* V15.1 — Fiche de presentation en doubles listes, portrait 200 x 200.
+   Toutes ces regles restent scopees a #page-dashboard. */
+.desktop-mode .main-content>#page-dashboard{
+  width:min(1210px,calc(100vw - 38px));
+  height:min(740px,calc(100vh - 156px));
+  padding:0 23px 17px;
+}
+.desktop-mode #page-dashboard .cw-titlebar{min-height:73px;margin:0 -23px 10px;padding:12px 19px 10px}
+.desktop-mode #page-dashboard .cv-layout.cv-v151{margin:0;width:100%;max-width:none;padding:0 4px 4px}
+.desktop-mode #page-dashboard .cv-profile-top{grid-template-columns:200px minmax(0,1fr);gap:26px;padding:7px 0 10px;border-bottom:1px solid #334a60}
+.desktop-mode #page-dashboard .cv-portrait-control{width:200px;max-width:200px}
+.desktop-mode #page-dashboard .cv-avatar{width:200px;height:200px}
+.desktop-mode #page-dashboard .cv-person-head{margin:0 0 4px}
+.desktop-mode #page-dashboard .cv-compact-section-title{padding-bottom:5px;min-height:24px}
+.desktop-mode #page-dashboard .cv-compact-section-title h2{font-size:14px}
+.desktop-mode #page-dashboard .cv-compact-section-title span{font-size:11px}
+.desktop-mode #page-dashboard .cv-data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:25px;row-gap:0;margin:0;padding:0}
+.desktop-mode #page-dashboard .cv-data-line{display:flex;align-items:center;gap:10px;justify-content:space-between;min-height:32px;padding:4px 2px;border-bottom:1px solid #304052aa;font-variant-numeric:tabular-nums}
+.desktop-mode #page-dashboard .cv-data-line dt,.desktop-mode #page-dashboard .cv-data-line>span{font-size:12.5px;color:#b4c7d8;font-weight:500}
+.desktop-mode #page-dashboard .cv-data-line dd{margin:0;font-size:13px;color:#f2d3a1;font-weight:750;text-align:right;min-width:0}
+.desktop-mode #page-dashboard .cv-data-line>strong{font-size:13px;color:#f2d3a1;font-weight:750}
+.desktop-mode #page-dashboard .cv-data-line dd:where(#cvName){font-size:15px;color:#fff}
+.desktop-mode #page-dashboard .cv-rank-line dd{display:flex;align-items:center;gap:9px}
+.desktop-mode #page-dashboard .cv-mini-progression{display:inline-flex;align-items:center;gap:7px}
+.desktop-mode #page-dashboard .cv-mini-progression>#cvExperience{font-size:11px;min-width:38px;color:#b9c8dc}
+.desktop-mode #page-dashboard .cv-mini-bar{width:76px;height:6px;display:inline-block;background:#1c3446;border-radius:5px;overflow:hidden;border:1px solid #496075}
+.desktop-mode #page-dashboard .cv-mini-bar>span{display:block;height:100%;width:0;background:#ddb572;border-radius:4px}
+.desktop-mode #page-dashboard .cv-context-note{font-size:10.5px;line-height:1.2;color:#90abc5;margin:7px 0 0}
+.desktop-mode #page-dashboard .cv-compact-section{padding-top:9px}
+.desktop-mode #page-dashboard .cv-career .cv-data-line{min-height:27px;padding:3px 2px}
+.desktop-mode #page-dashboard .cv-rank-table{width:100%;margin-top:5px;border-collapse:collapse;table-layout:fixed;color:#c1d1e0;font-size:12px;font-variant-numeric:tabular-nums}
+.desktop-mode #page-dashboard .cv-rank-table th,.desktop-mode #page-dashboard .cv-rank-table td{padding:4px 12px;border-bottom:1px solid #2b3d50;text-align:right;line-height:1.1}
+.desktop-mode #page-dashboard .cv-rank-table th:first-child{text-align:left;width:44%}
+.desktop-mode #page-dashboard .cv-rank-table thead th{color:#a1b7cc;font-size:11px;font-weight:700}
+.desktop-mode #page-dashboard .cv-rank-table tbody th{font-weight:500}
+.desktop-mode #page-dashboard .cv-rank-table tfoot{background:#1a2d42;color:#f3d6a4;font-weight:800}
+.desktop-mode #page-dashboard .cv-rank-table .cv-rank-legacy{color:#91acc3;font-style:italic}
+.desktop-mode #page-dashboard .cv-rank-pill{display:inline-flex;justify-content:center;align-items:center;border:1px solid #708199;border-radius:4px;min-width:23px;min-height:18px;font-weight:800;font-size:11px;font-style:normal}
+.desktop-mode #page-dashboard .cv-rank-pill.rank-E{color:#bdc9db}.desktop-mode #page-dashboard .cv-rank-pill.rank-D{color:#76cfb0}.desktop-mode #page-dashboard .cv-rank-pill.rank-C{color:#a6c5ff}.desktop-mode #page-dashboard .cv-rank-pill.rank-B{color:#e0aeec}.desktop-mode #page-dashboard .cv-rank-pill.rank-A{color:#ffa78b}.desktop-mode #page-dashboard .cv-rank-pill.rank-S{color:#dec7fa}
+.desktop-mode #page-dashboard .cv-standings-inline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:6px}
+.desktop-mode #page-dashboard .cv-standings-inline>div{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;border-bottom:1px solid #304052;padding:5px 1px}
+.desktop-mode #page-dashboard .cv-standings-inline span{color:#b4c7d8}
+.desktop-mode #page-dashboard .cv-standings-inline strong{color:#f2d3a1}
+@media(max-width:780px){
+  .desktop-mode #page-dashboard .cv-profile-top{grid-template-columns:200px minmax(0,1fr);gap:14px}
+  .desktop-mode #page-dashboard .cv-data-grid{grid-template-columns:1fr}
+  .desktop-mode #page-dashboard .cv-standings-inline{grid-template-columns:1fr;gap:0}
+  .desktop-mode #page-dashboard .cv-rank-table th,.desktop-mode #page-dashboard .cv-rank-table td{padding:5px 6px}
+}
+@media(max-width:530px){.desktop-mode #page-dashboard .cv-profile-top{grid-template-columns:1fr;justify-items:center}.desktop-mode #page-dashboard .cv-profile-main{width:100%}}
+/* V15.1 : utiliser la hauteur disponible du bureau sans scroll a 1649x928. */
+.desktop-mode .main-content>#page-dashboard{height:min(790px,calc(100vh - 148px))}
+
+
+/* V15.3 — fenêtres Inventaire et Boutique : privilégier l'espace d'écran.
+   Ne modifie ni les inventaires, ni les objets, ni la logique marchande.
+   On utilise la largeur et la hauteur disponibles avant de recourir au défilement. */
+@media (min-width: 901px) {
+  body.desktop-mode .main-content > #page-inventory,
+  body.desktop-mode .main-content > #page-shop {
+    width: min(1320px, calc(100vw - 40px));
+    height: min(820px, calc(100dvh - 158px));
+    max-width: none !important;
+    min-width: 0;
+    min-height: 0;
+  }
+  /* Une présentation plus aérée, sans changer la taille du texte. */
+  body.desktop-mode #page-inventory .inventory-workspace { max-width: none; }
+  body.desktop-mode #page-inventory .inventory-bag-panel .inventory-list { column-gap: 32px; }
+  body.desktop-mode #page-shop .shop-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* Écrans intermédiaires : deux à trois articles par ligne selon la place réelle. */
+@media (min-width: 901px) and (max-width: 1299px) {
+  body.desktop-mode #page-shop .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* Ne jamais rogner les fiches ou masquer des commandes sur écrans étroits. */
+@media (max-width: 900px) {
+  body.desktop-mode .main-content > #page-inventory,
+  body.desktop-mode .main-content > #page-shop {
+    width: calc(100vw - 24px);
+    height: calc(100dvh - 158px);
+    max-width: none !important;
+  }
+  body.desktop-mode #page-shop .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  body.desktop-mode .main-content > #page-inventory,
+  body.desktop-mode .main-content > #page-shop {
+    width: calc(100vw - 12px);
+    height: calc(100dvh - 156px);
+  }
+  body.desktop-mode #page-shop .shop-grid { grid-template-columns: 1fr; }
+}
+/* Le bandeau de pause reste indiqué dans l'en-tête (Reprendre) :
+   ne pas le superposer au bouton Fermer de ces deux grandes fenêtres. */
+body.desktop-mode .main-content:has(> #page-inventory.cw-open) > .pause-notice,
+body.desktop-mode .main-content:has(> #page-shop.cw-open) > .pause-notice {
+  display: none !important;
+}
+/* Quelques pixels de marge en moins suffisent pour voir les six objets sans scroll. */
+@media (min-width: 901px) {
+  body.desktop-mode .main-content > #page-inventory { padding-bottom: 12px; }
+}
+
+/* V15.4 — suppression des phrases d'aide redondantes, sans vide résiduel. */
+/* L'en-tête de la fenêtre desktop fournit déjà le titre Inventaire/Boutique. */
+body.desktop-mode #page-inventory > .page-intro,
+body.desktop-mode #page-shop > .page-intro {display:none!important}
+/* Un seul libellé par section : les en-têtes se calquent sur leur contenu. */
+body.desktop-mode #page-inventory .inventory-section .panel-heading {margin-bottom:11px}
+body.desktop-mode #page-inventory .inventory-section .panel-heading .eyebrow,
+body.desktop-mode #merchantCatalogPanel > .panel-heading .eyebrow,
+body.desktop-mode #merchantSellPanel > .panel-heading .eyebrow {margin:0}
+body.desktop-mode #page-shop .merchant-switch {margin-top:0;margin-bottom:13px}
+body.desktop-mode #merchantCatalogPanel > .panel-heading,
+body.desktop-mode #merchantSellPanel > .panel-heading {margin-bottom:13px}

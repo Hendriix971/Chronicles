@@ -1,0 +1,150 @@
+/* Chronicles V15.11 — Fenêtre Messagerie : lecture d'un document sur une vraie page. */
+body.desktop-mode .main-content>#page-mail.cw-open{
+ display:flex!important;flex-direction:column;
+ width:min(1740px,calc(100vw - 54px));
+ height:calc(100dvh - 170px);max-height:calc(100dvh - 154px);
+ padding:0 27px 21px;
+ overflow:hidden!important;
+}
+body.desktop-mode #page-mail .cw-titlebar{
+ flex:0 0 73px;min-height:73px;margin:0 -27px 0;
+ padding:13px 24px 10px;position:relative;top:auto;z-index:12;
+}
+body.desktop-mode #page-mail .mail-layout{
+ flex:1 1 auto;min-height:0;min-width:0;
+ display:grid;grid-template-columns:minmax(335px,410px) minmax(0,1fr);
+ gap:20px;padding-top:18px;align-items:stretch;
+}
+body.desktop-mode #page-mail .mail-layout>.panel{
+ display:flex;flex-direction:column;min-width:0;min-height:0;
+ margin:0;padding:0;
+ border:1px solid #38536d;border-radius:12px;
+ background:#12243a;overflow:hidden;
+}
+body.desktop-mode #page-mail .mail-inbox .panel-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ flex:0 0 auto;margin:0;padding:20px 20px 15px;
+ border-bottom:1px solid #304960;
+}
+body.desktop-mode #page-mail .mail-inbox .panel-heading h3{
+ margin:3px 0 0;font-size:19px;color:#f1f6fc;
+}
+body.desktop-mode #page-mail .mail-inbox .panel-heading .small-tag{white-space:nowrap;font-size:11px}
+body.desktop-mode #page-mail .mail-tools{
+ flex:0 0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ align-items:stretch;gap:8px;margin:0;padding:15px 20px;
+ border-bottom:1px solid #2e455c;
+}
+body.desktop-mode #page-mail .mail-tools label{
+ grid-column:1 / -1;margin:0;display:flex;align-items:center;
+ padding:3px 1px 5px;font-size:12px;
+}
+body.desktop-mode #page-mail .mail-tools .small-action{
+ margin:0;min-height:32px;min-width:0;padding:7px 8px;
+ font-size:11px;line-height:1.25;white-space:normal;text-align:center;
+}
+body.desktop-mode #page-mail #mailReadAll{grid-column:1 / -1}
+body.desktop-mode #page-mail #mailList{
+ display:block;flex:1 1 auto;min-height:0;min-width:0;
+ padding:14px 15px 21px;overflow-y:auto;overflow-x:hidden;
+ scrollbar-color:#6b88a6 #162a42;scrollbar-gutter:stable;
+ overscroll-behavior:contain;
+}
+body.desktop-mode #page-mail .mail-row{gap:10px;margin:0 0 10px;align-items:stretch}
+body.desktop-mode #page-mail .mail-row>input{margin:19px 0 0;align-self:flex-start;width:15px;height:15px}
+body.desktop-mode #page-mail .mail-item{
+ border:1px solid #38536c;background:#192c43;border-radius:9px;
+ padding:14px 15px;min-height:89px;
+ transition:border-color .12s,background .12s;
+}
+body.desktop-mode #page-mail .mail-item:hover{border-color:#7598b9;background:#213750}
+body.desktop-mode #page-mail .mail-item.active{border-color:#d0a965;background:#263a50;box-shadow:inset 3px 0 #d7b578}
+body.desktop-mode #page-mail .mail-item small{font-size:11px;line-height:1.4;margin:0 0 7px}
+body.desktop-mode #page-mail .mail-item strong{font-size:13px;line-height:1.42;overflow-wrap:break-word}
+body.desktop-mode #page-mail .mail-item em{font-size:11px;margin-top:8px}
+body.desktop-mode #page-mail .mail-reader-tools{
+ flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;
+ flex-wrap:wrap;gap:9px;margin:0;padding:15px 22px;
+ border-bottom:1px solid #344d65;
+}
+body.desktop-mode #page-mail .mail-reader-tools button{font-size:12px;min-height:35px;padding:8px 12px}
+body.desktop-mode #page-mail #mailContent{
+ flex:1 1 auto;min-height:0;min-width:0;
+ overflow-y:auto;overflow-x:hidden;
+ padding:26px clamp(24px,3vw,48px) 40px;
+ scrollbar-color:#6b88a6 #172b41;scrollbar-gutter:stable;
+ overscroll-behavior:contain;
+}
+body.desktop-mode #page-mail .mail-sender{font-size:13px}
+body.desktop-mode #page-mail .mail-content>h3{font-size:25px;line-height:1.3;margin:6px 0 14px;color:#f4f7fd}
+body.desktop-mode #page-mail .mail-content>p{font-size:14px;line-height:1.6;margin:17px 0 23px}
+body.desktop-mode #page-mail .mail-content>time{font-size:12px}
+body.desktop-mode #page-mail .contract-paper{
+ box-sizing:border-box;max-width:940px;width:100%;
+ margin:20px auto 20px;
+ padding:clamp(26px,3vw,48px) clamp(28px,3.2vw,56px);
+ border-radius:8px;
+}
+body.desktop-mode #page-mail .contract-head{gap:20px;padding-bottom:22px}
+body.desktop-mode #page-mail .contract-head h3{font-size:30px;line-height:1.2}
+body.desktop-mode #page-mail .contract-head p{font-size:15px!important}
+body.desktop-mode #page-mail .contract-section{padding:16px 0}
+body.desktop-mode #page-mail .contract-section b{font-size:17px}
+body.desktop-mode #page-mail .contract-section p{font-size:15px!important;line-height:1.69!important;margin:9px 0 0!important}
+body.desktop-mode #page-mail .contract-signatures{gap:35px;margin-top:34px}
+body.desktop-mode #page-mail .contract-status{max-width:940px;margin:16px auto;font-size:14px}
+body.desktop-mode #page-mail .contract-actions{max-width:940px;margin:15px auto 0;gap:14px}
+body.desktop-mode #page-mail .contract-actions button{min-height:45px;font-size:14px}
+body.desktop-mode #page-mail .contract-bargaining{max-width:940px;margin:18px auto 14px;padding:20px}
+body.desktop-mode #page-mail .contract-bargaining p{font-size:13px}
+@media(max-width:1060px){
+ body.desktop-mode .main-content>#page-mail.cw-open{width:calc(100vw - 28px);padding:0 15px 15px}
+ body.desktop-mode #page-mail .cw-titlebar{margin:0 -15px;padding:13px 18px 10px}
+ body.desktop-mode #page-mail .mail-layout{grid-template-columns:minmax(250px,32%) minmax(0,1fr);gap:12px;padding-top:12px}
+ body.desktop-mode #page-mail .mail-inbox .panel-heading{padding:15px 12px 12px}
+ body.desktop-mode #page-mail .mail-inbox .panel-heading h3{font-size:16px}
+ body.desktop-mode #page-mail .mail-inbox .panel-heading .small-tag{font-size:9px}
+ body.desktop-mode #page-mail .mail-tools{padding:10px 12px;gap:6px}
+ body.desktop-mode #page-mail .mail-tools .small-action{font-size:10px}
+ body.desktop-mode #page-mail #mailList{padding:9px 8px 13px}
+ body.desktop-mode #page-mail .mail-item{padding:10px;min-height:69px}
+ body.desktop-mode #page-mail .mail-reader-tools{padding:10px 12px}
+ body.desktop-mode #page-mail #mailContent{padding:15px 17px 20px}
+ body.desktop-mode #page-mail .contract-paper{padding:25px 26px}
+ body.desktop-mode #page-mail .contract-section p{font-size:13.5px!important}
+}
+@media(max-width:700px){
+ body.desktop-mode .main-content>#page-mail.cw-open{width:calc(100vw - 12px);height:calc(100dvh - 150px);padding:0 10px 10px}
+ body.desktop-mode #page-mail .cw-titlebar{margin:0 -10px;min-height:64px;flex-basis:64px;padding:10px 13px}
+ body.desktop-mode #page-mail .mail-layout{display:flex;flex-direction:column;gap:8px;padding-top:8px}
+ body.desktop-mode #page-mail .mail-layout>.mail-inbox{flex:0 0 auto;height:208px}
+ body.desktop-mode #page-mail .mail-layout>.mail-reader{flex:1 1 auto;min-height:0}
+ body.desktop-mode #page-mail .mail-inbox .panel-heading{padding:8px 11px 6px}
+ body.desktop-mode #page-mail .mail-inbox .panel-heading h3{font-size:13px}
+ body.desktop-mode #page-mail .mail-tools{grid-template-columns:repeat(4,1fr);gap:4px;padding:6px 9px}
+ body.desktop-mode #page-mail .mail-tools label{grid-column:1 / -1;font-size:10px;padding:0}
+ body.desktop-mode #page-mail #mailReadAll{grid-column:span 2}
+ body.desktop-mode #page-mail #mailDeleteSelected{grid-column:span 1}
+ body.desktop-mode #page-mail #mailDeleteAll{grid-column:span 1}
+ body.desktop-mode #page-mail .mail-tools .small-action{min-height:25px;font-size:9px;padding:4px}
+ body.desktop-mode #page-mail #mailList{padding:7px}
+ body.desktop-mode #page-mail .mail-row{margin-bottom:5px}
+ body.desktop-mode #page-mail .mail-row>input{margin-top:9px}
+ body.desktop-mode #page-mail .mail-item{min-height:45px;padding:7px 9px}
+ body.desktop-mode #page-mail .mail-item small{font-size:9px;margin-bottom:3px}
+ body.desktop-mode #page-mail .mail-item strong{font-size:11px}
+ body.desktop-mode #page-mail .mail-item em{display:none}
+ body.desktop-mode #page-mail .mail-reader-tools{padding:6px;gap:5px}
+ body.desktop-mode #page-mail .mail-reader-tools button{min-height:28px;padding:5px;font-size:10px}
+ body.desktop-mode #page-mail #mailContent{padding:12px 12px 20px}
+ body.desktop-mode #page-mail .mail-content>h3{font-size:17px}
+ body.desktop-mode #page-mail .contract-head{gap:8px}
+ body.desktop-mode #page-mail .contract-head .contract-seal{width:40px;height:40px;font-size:18px}
+ body.desktop-mode #page-mail .contract-head h3{font-size:21px}
+ body.desktop-mode #page-mail .contract-head p{font-size:12px!important}
+ body.desktop-mode #page-mail .contract-paper{padding:16px}
+ body.desktop-mode #page-mail .contract-section{padding:10px 0}
+ body.desktop-mode #page-mail .contract-section b{font-size:14px}
+ body.desktop-mode #page-mail .contract-section p{font-size:12.5px!important}
+ body.desktop-mode #page-mail .contract-signatures{grid-template-columns:1fr;gap:12px}
+}

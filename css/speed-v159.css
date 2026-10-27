@@ -1,0 +1,22 @@
+/* Chronicles V15.9 — Contrôle de vitesse de simulation (aucune règle des autres pages modifiée). */
+.sim-speed-control{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid #3f536b;border-radius:9px;background:#101f30;flex-shrink:0;white-space:nowrap}
+.sim-speed-label{font-size:10px;font-weight:850;letter-spacing:.2px;color:#b6c8dc;padding:0 7px 0 6px}
+.sim-speed-button{min-width:34px;height:29px;padding:3px 7px;border:1px solid transparent;border-radius:6px;background:#203148;color:#c6d5e5;font-size:11px;font-weight:850;line-height:1;transition:background-color .13s,border-color .13s}
+.sim-speed-button:hover:not(:disabled){background:#37516d;color:#fff}
+.sim-speed-button.active,.sim-speed-button[aria-pressed="true"]{border-color:#d1aa71;background:#57442c;color:#ffe1ab}
+.sim-speed-button:disabled{opacity:.52}
+@media(max-width:1600px){.sim-speed-label{display:none}}
+@media(max-width:900px){body.desktop-mode .header-upper{gap:6px}.sim-speed-control{gap:1px;padding:2px}.sim-speed-button{min-width:30px;padding:4px;font-size:10px}}
+@media(max-width:650px){.sim-speed-button{min-width:27px;height:27px}body.desktop-mode .header-tools{gap:3px}}
+/* Sous 900 px, le bandeau d'identité complet n'a pas la place d'être lisible
+   en plus des commandes : préserver les commandes de jeu sans débordement. */
+@media(max-width:900px){body.desktop-mode .head-indicators{display:none}body.desktop-mode .header-tools{margin-left:auto}}
+
+/* V15.10 : cinq vitesses ; priorité au contrôle de l'horloge et de la pause. */
+.sim-speed-button{min-width:33px}
+.sim-speed-button[data-sim-speed="10"],.sim-speed-button[data-sim-speed="20"]{min-width:36px}
+@media(max-width:1710px){body.desktop-mode .game-wordmark{min-width:170px;max-width:200px}body.desktop-mode .game-wordmark small{font-size:8px}body.desktop-mode .head-indicators{gap:4px}body.desktop-mode .head-indicators>div{padding-left:6px}body.desktop-mode .header-upper{gap:6px}}
+@media(max-width:1510px){body.desktop-mode .game-wordmark{min-width:150px;max-width:168px}body.desktop-mode .game-wordmark small{display:none}body.desktop-mode .head-indicators .header-guild{display:none}body.desktop-mode .header-tools{gap:3px}body.desktop-mode .header-tool{padding:7px 7px}.sim-speed-control{gap:1px;padding:2px}.sim-speed-button{min-width:29px;padding:4px 5px}.sim-speed-button[data-sim-speed="10"],.sim-speed-button[data-sim-speed="20"]{min-width:33px}}
+@media(max-width:1170px){body.desktop-mode .head-indicators>div:nth-child(4){display:none}body.desktop-mode .clock-pill{display:none}}
+@media(max-width:900px){body.desktop-mode .game-wordmark{min-width:145px}body.desktop-mode .sim-speed-button{min-width:27px;height:28px;padding:4px}.sim-speed-button[data-sim-speed="10"],.sim-speed-button[data-sim-speed="20"]{min-width:29px}}
+@media(max-width:660px){body.desktop-mode .game-wordmark{display:none}body.desktop-mode .header-tools{width:100%;justify-content:space-between}body.desktop-mode .sim-speed-button{font-size:9px}}

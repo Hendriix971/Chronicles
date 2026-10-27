@@ -1,0 +1,88 @@
+/* Chronicles V15.13 — document de guilde condensé, intégralité des six articles conservée.
+   La présentation compacte ne touche ni aux clauses, ni aux montants, ni à la simulation. */
+
+/* Le papier indique déjà émetteur, titre et date : supprimer les doubles
+   en-têtes et la phrase générique qui obligeaient à faire défiler. */
+body.desktop-mode #page-mail .mail-content:has(> .contract-paper)>.mail-sender,
+body.desktop-mode #page-mail .mail-content:has(> .contract-paper)>time,
+body.desktop-mode #page-mail .mail-content:has(> .contract-paper)>p,
+body.desktop-mode #page-mail .mail-content:has(> .contract-paper)>h3{
+ display:none;
+}
+body.desktop-mode #page-mail .contract-paper{
+ width:100%;max-width:1080px;
+ margin:12px auto 12px;
+ padding:20px 28px 18px;
+}
+body.desktop-mode #page-mail .contract-head{
+ gap:14px;padding-bottom:11px;
+}
+body.desktop-mode #page-mail .contract-head .contract-seal{
+ width:42px;height:42px;font-size:20px;
+}
+body.desktop-mode #page-mail .contract-head h3{
+ font-size:23px;line-height:1.17;margin:2px 0;
+}
+body.desktop-mode #page-mail .contract-head p{font-size:13px!important}
+body.desktop-mode #page-mail .contract-head small{font-size:9px}
+body.desktop-mode #page-mail .contract-folio{
+ padding:6px 0 2px;font-size:10px;
+}
+body.desktop-mode #page-mail .contract-articles{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:24px;align-items:start;
+}
+body.desktop-mode #page-mail .contract-column{
+ min-width:0;
+}
+body.desktop-mode #page-mail .contract-section{
+ padding:9px 0;
+}
+body.desktop-mode #page-mail .contract-section b{
+ font-size:15px;line-height:1.26;
+}
+body.desktop-mode #page-mail .contract-section p{
+ font-size:13.5px!important;line-height:1.4!important;
+ margin:4px 0 0!important;
+}
+body.desktop-mode #page-mail .contract-signatures{
+ gap:26px;margin-top:15px;
+}
+body.desktop-mode #page-mail .contract-signatures>div{
+ padding-top:7px;gap:2px;
+}
+body.desktop-mode #page-mail .contract-signatures strong{
+ font-size:18px;
+}
+body.desktop-mode #page-mail .contract-signatures small,
+body.desktop-mode #page-mail .contract-signatures span{font-size:10px}
+body.desktop-mode #page-mail .contract-actions{
+ max-width:1080px;margin:8px auto 0;
+}
+body.desktop-mode #page-mail .contract-actions button{
+ min-height:40px;
+}
+body.desktop-mode #page-mail .contract-bargaining,
+body.desktop-mode #page-mail .contract-status{
+ max-width:1080px;margin:9px auto;
+}
+body.desktop-mode #page-mail #mailContent:has(.contract-paper){
+ padding-top:14px;padding-bottom:18px;
+}
+/* Passer à une seule colonne lorsque le texte deviendrait trop étroit.
+   Priorité à la lisibilité plutôt qu'à un écrasement artificiel. */
+@media(max-width:1150px){
+ body.desktop-mode #page-mail .contract-articles{
+  grid-template-columns:1fr;gap:0;
+ }
+ body.desktop-mode #page-mail .contract-paper{
+  max-width:820px;padding:20px 24px;
+ }
+}
+@media(max-width:700px){
+ body.desktop-mode #page-mail .contract-paper{padding:14px}
+ body.desktop-mode #page-mail .contract-articles{grid-template-columns:1fr}
+ body.desktop-mode #page-mail .contract-section p{font-size:13px!important}
+ body.desktop-mode #page-mail .contract-head h3{font-size:19px}
+ body.desktop-mode #page-mail .contract-signatures{grid-template-columns:1fr;gap:8px}
+}
